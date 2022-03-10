@@ -22,24 +22,5 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    @Override
-    protected void onResume() {
-        super.onResume();
 
-        btnLogin.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent log = new Intent(view.getContext(),LogScreenActivity.class);
-                startActivity(log);
-            }
-        });
-
-        btnSignin.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent reg = new Intent(view.getContext(),RegisterScreenActivity.class);
-                startActivity(reg);
-            }
-        });
-    }
 }
