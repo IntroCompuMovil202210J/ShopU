@@ -9,4 +9,5 @@
     <color name="white">#FFFFFFFF</color>
     <color name="piel">#ECAA9D</color>
     <color name="barra_busqueda">#EFEFEF</color>
+    <color name="categorias">#C4C4C4</color>
 </resources>
