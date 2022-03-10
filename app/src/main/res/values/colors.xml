@@ -10,4 +10,11 @@
     <color name="piel">#ECAA9D</color>
     <color name="barra_busqueda">#EFEFEF</color>
     <color name="categorias">#C4C4C4</color>
+    <color name="grayBackground_Andres">#C4C4C4</color>
+    <color name="grayerBackground_Andres">#969696</color>
+    <color name="bluecolor_Andres">#1A1D62</color>
+    <color name="piel_blur">#40ECAA9D</color>
+    <color name="gris">#808080</color>
+    <color name="white_blur">#B3FFFFFF</color>
+
 </resources>
