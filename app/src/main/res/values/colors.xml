@@ -9,5 +9,6 @@
     <color name="white">#FFFFFFFF</color>
     <color name="piel">#ECAA9D</color>
     <color name="grayBackground_Andres">#C4C4C4</color>
+    <color name="grayerBackground_Andres">#969696</color>
     <color name="bluecolor_Andres">#1A1D62</color>
 </resources>

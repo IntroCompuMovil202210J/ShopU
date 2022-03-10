@@ -8,6 +8,7 @@
     android:background="@color/grayBackground_Andres"
     android:padding="10dp">
 
+
     <ImageView
         android:id="@+id/imgTopside"
         android:layout_width="338dp"
@@ -21,6 +22,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+
     <RelativeLayout
         android:id="@+id/rlyItemlist"
         android:layout_width="356dp"
@@ -33,8 +35,139 @@
         app:layout_constraintHorizontal_bias="0.49"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.704">
+        app:layout_constraintVertical_bias="0.704"
+        android:padding="20dp">
+
+        <LinearLayout
+            android:id="@+id/lyProduct_0"
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/res_roundedbutton"
+            android:backgroundTint="@color/grayBackground_Andres"
+            android:orientation="vertical">
+
+            <ImageView
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:background="@drawable/res_roundedbutton"
+                android:backgroundTint="@color/grayerBackground_Andres" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/lyProduct_1"
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:layout_below="@id/lyProduct_0"
+            android:layout_marginTop="10dp"
+            android:orientation="vertical"
+            android:background="@drawable/res_roundedbutton"
+            android:backgroundTint="@color/grayBackground_Andres">
+
+            <ImageView
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:background="@drawable/res_roundedbutton"
+                android:backgroundTint="@color/grayerBackground_Andres"
+                />
+
+        </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/lyProduct_2"
+                android:layout_width="match_parent"
+                android:layout_height="80dp"
+                android:layout_marginTop="10dp"
+                android:orientation="vertical"
+                android:layout_below="@id/lyProduct_1"
+                android:background="@drawable/res_roundedbutton"
+                android:backgroundTint="@color/grayBackground_Andres">
+
+                <ImageView
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:background="@drawable/res_roundedbutton"
+                    android:backgroundTint="@color/grayerBackground_Andres"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/lyProduct_3"
+                android:layout_width="match_parent"
+                android:layout_height="80dp"
+                android:layout_marginTop="10dp"
+                android:orientation="vertical"
+                android:layout_below="@id/lyProduct_2"
+                android:background="@drawable/res_roundedbutton"
+                android:backgroundTint="@color/grayBackground_Andres">
+
+                <ImageView
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:background="@drawable/res_roundedbutton"
+                    android:backgroundTint="@color/grayerBackground_Andres"
+                    />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/lyProduct_4"
+                android:layout_width="match_parent"
+                android:layout_height="80dp"
+                android:layout_marginTop="10dp"
+                android:orientation="vertical"
+                android:layout_below="@id/lyProduct_3"
+                android:background="@drawable/res_roundedbutton"
+                android:backgroundTint="@color/grayBackground_Andres">
+
+                <ImageView
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:background="@drawable/res_roundedbutton"
+                    android:backgroundTint="@color/grayerBackground_Andres"
+                    />
+            </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/lyProduct_5"
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:layout_marginTop="10dp"
+            android:orientation="vertical"
+            android:layout_below="@id/lyProduct_4"
+            android:background="@drawable/res_roundedbutton"
+            android:backgroundTint="@color/grayBackground_Andres">
+
+            <ImageView
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:background="@drawable/res_roundedbutton"
+                android:backgroundTint="@color/grayerBackground_Andres"
+                />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/lyProduct_6"
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:layout_marginTop="10dp"
+            android:orientation="vertical"
+            android:layout_below="@id/lyProduct_5"
+            android:background="@drawable/res_roundedbutton"
+            android:backgroundTint="@color/grayBackground_Andres">
+
+            <ImageView
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:background="@drawable/res_roundedbutton"
+                android:backgroundTint="@color/grayerBackground_Andres"
+                />
+        </LinearLayout>
+
+
     </RelativeLayout>
+
 
     <EditText
         android:id="@+id/editText"
@@ -49,7 +182,8 @@
         android:textColor="@color/white"
         android:textSize="13sp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"/>
+
 
     <Button
         android:layout_width="34dp"
@@ -61,6 +195,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/editText" />
+
 
     <TextView
         android:id="@+id/txtName"
@@ -79,6 +214,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.903"/>
+
 
     <TextView
         android:id="@+id/txtSectionName"
@@ -99,5 +235,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="1.0"/>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
