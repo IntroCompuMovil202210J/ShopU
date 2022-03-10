@@ -47,7 +47,8 @@
             android:backgroundTint="@color/grayBackground_Andres"
             android:orientation="vertical">
 
-            <ImageView
+            <ImageButton
+                android:id="@+id/ibnVerRuta"
                 android:layout_width="80dp"
                 android:layout_height="80dp"
                 android:background="@drawable/res_roundedbutton"
