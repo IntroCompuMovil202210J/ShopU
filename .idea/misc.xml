@@ -3,6 +3,11 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/Felipe/Desktop/CompuMovil proy/ShopU/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.189" />
+        <entry key="..\:/Users/Felipe/Desktop/CompuMovil proy/ShopU/app/src/main/res/drawable/ic_launcher_background.xml" value="0.189" />
+        <entry key="..\:/Users/Felipe/Desktop/CompuMovil proy/ShopU/app/src/main/res/drawable/res_roundedbutton.xml" value="0.189" />
+        <entry key="..\:/Users/Felipe/Desktop/CompuMovil proy/ShopU/app/src/main/res/layout/activity_main.xml" value="0.33589743589743587" />
+        <entry key="..\:/Users/Felipe/Desktop/CompuMovil proy/ShopU/app/src/main/res/layout/activity_seguimiento.xml" value="0.33589743589743587" />
         <entry key="..\:/Users/davis/OneDrive/Escritorio/Documentos/universidad/semestres/9o/movil/proyecto/ShopU/app/src/main/res/layout/activity_main.xml" value="0.23229166666666667" />
       </map>
     </option>
