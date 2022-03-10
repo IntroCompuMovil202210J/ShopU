@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/img_fondologin"
+    tools:context=".LogScreenActivity">
+
+    <ImageView
+        android:id="@+id/imgLogo_login"
+        android:layout_width="match_parent"
+        android:layout_height="360dp"
+        android:layout_marginBottom="40dp"
+        app:srcCompat="@drawable/img_logo" />
+
+    <EditText
+        android:id="@+id/etxtmail"
+        android:layout_width="match_parent"
+        android:gravity="center"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/imgLogo_login"
+        android:background="@drawable/textview_border"
+        android:backgroundTint="@color/piel_blur"
+        android:textColor="@color/white"
+        android:layout_marginLeft="50dp"
+        android:layout_marginRight="50dp"
+        android:layout_marginBottom="25dp"
+        android:hint="Ingresa el correo"
+        android:textColorHint="@color/gris"/>
+
+    <EditText
+        android:id="@+id/etxtpassword"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/etxtmail"
+        android:background="@drawable/textview_border"
+        android:backgroundTint="@color/piel_blur"
+        android:layout_marginLeft="50dp"
+        android:layout_marginRight="50dp"
+        android:layout_marginBottom="25dp"
+        android:hint="contraseña"
+        android:gravity="center"
+        android:textColorHint="@color/gris"
+        android:ems="10"
+        android:inputType="textPassword" />
+
+    <Button
+        android:id="@+id/btniniciarse"
+        android:layout_width="154dp"
+        android:layout_height="30dp"
+        android:layout_below="@+id/etxtpassword"
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/res_roundedbutton"
+        android:textColor="@color/black"
+        android:backgroundTint="@color/piel"
+        android:layout_marginBottom="20dp"
+        android:text="Iniciar Sesion" />
+
+    <TextView
+        android:id="@+id/txtrememberpassword"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:layout_below="@id/btniniciarse"
+        android:textColor="@color/white"
+        android:text="¿Olvidaste la contraseña? " />
+
+
+</RelativeLayout>
