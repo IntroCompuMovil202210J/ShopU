@@ -2,14 +2,16 @@ package com.example.shopu;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
 public class LogScreenActivity extends AppCompatActivity {
 
     EditText correo, contrasena;
-    Button btniniciarse;
+    Button btnIniciarse;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -18,6 +20,14 @@ public class LogScreenActivity extends AppCompatActivity {
 
         correo = findViewById(R.id.etxtmail);
         contrasena = findViewById(R.id.etxtpassword);
-        btniniciarse = findViewById(R.id.btniniciarse);
+        btnIniciarse = findViewById(R.id.btniniciarse);
+
+        btnIniciarse.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(v.getContext(), HomeActivity.class);
+                startActivity(i);
+            }
+        });
     }
 }

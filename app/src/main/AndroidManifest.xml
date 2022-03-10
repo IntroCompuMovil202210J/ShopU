@@ -19,7 +19,7 @@
             android:name=".LogScreenActivity"
             android:exported="false" />
         <activity
-            android:name=".SeguimientoActivity"
+            android:name=".EstablecimientoActivity"
             android:exported="false" />
         <activity
             android:name=".MainActivity"
