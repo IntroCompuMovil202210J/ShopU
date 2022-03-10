@@ -16,6 +16,15 @@
             android:name=".EstablecimientoActivity"
             android:exported="false" />
         <activity
+            android:name=".HomeActivity"
+            android:exported="false" />
+        <activity
+            android:name=".RegisterScreenActivity"
+            android:exported="false" />
+        <activity
+            android:name=".LogScreenActivity"
+            android:exported="false" />
+        <activity
             android:name=".SeguimientoActivity"
             android:exported="false" />
         <activity
