@@ -4,6 +4,237 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".EstablecimientoActivity">
+    tools:context=".SeguimientoActivity"
+    android:background="@color/grayBackground_Andres"
+    android:padding="10dp">
+
+
+    <ImageView
+        android:id="@+id/imgTopside"
+        android:layout_width="338dp"
+        android:layout_height="243dp"
+        android:layout_margin="24dp"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/topside_establishment"
+        android:scaleType="fitCenter"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.493"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+    <RelativeLayout
+        android:id="@+id/rlyItemlist"
+        android:layout_width="356dp"
+        android:layout_height="491dp"
+        android:layout_margin="20dp"
+        android:background="@drawable/res_roundedbutton"
+        android:backgroundTint="@color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.49"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.704"
+        android:padding="20dp">
+
+        <LinearLayout
+            android:id="@+id/lyProduct_0"
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/res_roundedbutton"
+            android:backgroundTint="@color/grayBackground_Andres"
+            android:orientation="vertical">
+
+            <ImageView
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:background="@drawable/res_roundedbutton"
+                android:backgroundTint="@color/grayerBackground_Andres" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/lyProduct_1"
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:layout_below="@id/lyProduct_0"
+            android:layout_marginTop="10dp"
+            android:orientation="vertical"
+            android:background="@drawable/res_roundedbutton"
+            android:backgroundTint="@color/grayBackground_Andres">
+
+            <ImageView
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:background="@drawable/res_roundedbutton"
+                android:backgroundTint="@color/grayerBackground_Andres"
+                />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/lyProduct_2"
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:layout_marginTop="10dp"
+            android:orientation="vertical"
+            android:layout_below="@id/lyProduct_1"
+            android:background="@drawable/res_roundedbutton"
+            android:backgroundTint="@color/grayBackground_Andres">
+
+            <ImageView
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:background="@drawable/res_roundedbutton"
+                android:backgroundTint="@color/grayerBackground_Andres"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/lyProduct_3"
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:layout_marginTop="10dp"
+            android:orientation="vertical"
+            android:layout_below="@id/lyProduct_2"
+            android:background="@drawable/res_roundedbutton"
+            android:backgroundTint="@color/grayBackground_Andres">
+
+            <ImageView
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:background="@drawable/res_roundedbutton"
+                android:backgroundTint="@color/grayerBackground_Andres"
+                />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/lyProduct_4"
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:layout_marginTop="10dp"
+            android:orientation="vertical"
+            android:layout_below="@id/lyProduct_3"
+            android:background="@drawable/res_roundedbutton"
+            android:backgroundTint="@color/grayBackground_Andres">
+
+            <ImageView
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:background="@drawable/res_roundedbutton"
+                android:backgroundTint="@color/grayerBackground_Andres"
+                />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/lyProduct_5"
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:layout_marginTop="10dp"
+            android:orientation="vertical"
+            android:layout_below="@id/lyProduct_4"
+            android:background="@drawable/res_roundedbutton"
+            android:backgroundTint="@color/grayBackground_Andres">
+
+            <ImageView
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:background="@drawable/res_roundedbutton"
+                android:backgroundTint="@color/grayerBackground_Andres"
+                />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/lyProduct_6"
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:layout_marginTop="10dp"
+            android:orientation="vertical"
+            android:layout_below="@id/lyProduct_5"
+            android:background="@drawable/res_roundedbutton"
+            android:backgroundTint="@color/grayBackground_Andres">
+
+            <ImageView
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:background="@drawable/res_roundedbutton"
+                android:backgroundTint="@color/grayerBackground_Andres"
+                />
+        </LinearLayout>
+
+
+    </RelativeLayout>
+
+
+    <EditText
+        android:id="@+id/editText"
+        android:layout_width="284dp"
+        android:layout_height="34dp"
+        android:layout_marginStart="28dp"
+        android:layout_marginBottom="16dp"
+        android:background="@drawable/res_roundedbutton"
+        android:backgroundTint="@color/bluecolor_Andres"
+        android:paddingLeft="10dp"
+        android:hint="buscar..."
+        android:textColor="@color/white"
+        android:textSize="13sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"/>
+
+
+    <Button
+        android:layout_width="34dp"
+        android:layout_height="34dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="16dp"
+        android:background="@drawable/res_roundedbutton"
+        android:backgroundTint="@color/bluecolor_Andres"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/editText" />
+
+
+    <TextView
+        android:id="@+id/txtName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="60dp"
+        android:layout_marginBottom="72dp"
+
+        android:text="Farmatodo"
+        android:textColor="@color/white"
+        android:textSize="17sp"
+        android:textStyle="bold"
+
+        app:layout_constraintBottom_toTopOf="@+id/rlyItemlist"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.903"/>
+
+
+    <TextView
+        android:id="@+id/txtSectionName"
+        android:layout_width="100dp"
+        android:layout_height="25dp"
+        android:layout_marginTop="104dp"
+        android:layout_marginBottom="19dp"
+        android:background="@drawable/res_roundedbutton"
+        android:backgroundTint="@color/white"
+        android:text="Productos"
+        android:textAlignment="center"
+        android:textColor="@color/black"
+        android:textSize="15sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/rlyItemlist"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.536"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0"/>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
