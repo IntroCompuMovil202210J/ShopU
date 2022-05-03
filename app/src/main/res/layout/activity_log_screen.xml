@@ -66,5 +66,4 @@
         android:textColor="@color/white"
         android:text="¿Olvidaste la contraseña? " />
 
-
 </RelativeLayout>
