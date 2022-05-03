@@ -10,7 +10,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.example.shopu.utils.UserFormVerifier;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -43,16 +42,12 @@ public class LogScreenActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
+        //TODO Generar sesion para el usuario que ingresa
         updateUI(mAuth.getCurrentUser());
     }
 
     private void signIn(String email, String password) {
-        if(validateForm(email, password))
-            signInFirebase(email, password);
-        else {
-            etxtEmail.setText("");
-            etxtPassword.setText("");
-        }
+        signInFirebase(email, password);
     }
 
     private void signInFirebase(String email, String password) {
@@ -76,16 +71,4 @@ public class LogScreenActivity extends AppCompatActivity {
         }
     }
 
-    private boolean validateForm(String email, String password) {
-        boolean flag = true;
-        if(UserFormVerifier.validateIfEmailEmpty(email)) {
-            etxtEmail.setError("Requerido");
-            flag = false;
-        }
-        if(UserFormVerifier.validateIfPasswordEmpty(password)) {
-            etxtPassword.setError("Requerido");
-            flag = false;
-        }
-        return flag;
-    }
 }
