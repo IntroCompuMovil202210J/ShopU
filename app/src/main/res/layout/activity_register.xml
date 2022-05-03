@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:padding="20dp"
     android:background="@drawable/img_fondologin"
     tools:context=".RegisterScreenActivity">
 
@@ -15,119 +16,104 @@
         app:srcCompat="@drawable/img_logo" />
 
     <EditText
-        android:id="@+id/etxtname"
+        android:id="@+id/etxtName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:layout_below="@+id/imgLogo_loginregister"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_marginBottom="15dp"
         android:background="@drawable/textview_border"
         android:backgroundTint="@color/white_blur"
+        android:hint="Nombre"
+        android:inputType="text"
         android:textAlignment="center"
-        android:layout_marginLeft="40dp"
-        android:layout_marginRight="40dp"
-        android:textSize="18dp"
-        android:layout_marginBottom="15dp"
-        android:hint="Nombre" />
+        android:textSize="18dp" />
 
     <EditText
-        android:id="@+id/etxtlastname"
-        android:layout_below="@+id/etxtname"
+        android:id="@+id/etxtLastName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_below="@+id/etxtName"
+        android:layout_marginBottom="15dp"
         android:background="@drawable/textview_border"
         android:backgroundTint="@color/white_blur"
+        android:hint="Apellido"
+        android:inputType="text"
         android:textAlignment="center"
-        android:layout_marginLeft="40dp"
-        android:layout_marginRight="40dp"
-        android:textSize="18dp"
-        android:layout_marginBottom="15dp"
-        android:hint="Apellido" />
+        android:textSize="18dp" />
 
     <EditText
-        android:id="@+id/etxtmailregister"
-        android:layout_below="@+id/etxtlastname"
+        android:id="@+id/etxtEmail"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_below="@+id/etxtLastName"
+        android:layout_marginBottom="15dp"
         android:background="@drawable/textview_border"
         android:backgroundTint="@color/white_blur"
+        android:hint="Correo"
+        android:inputType="textEmailAddress"
         android:textAlignment="center"
-        android:layout_marginLeft="40dp"
-        android:layout_marginRight="40dp"
-        android:textSize="18dp"
-        android:layout_marginBottom="15dp"
-        android:hint="Correo" />
+        android:textSize="18dp" />
 
     <EditText
-        android:id="@+id/etxtpasswordregister"
+        android:id="@+id/etxtPassword"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/etxtmailregister"
+        android:layout_below="@id/etxtEmail"
+        android:layout_marginBottom="15dp"
         android:background="@drawable/textview_border"
         android:backgroundTint="@color/white_blur"
-        android:layout_marginLeft="40dp"
-        android:layout_marginRight="40dp"
-        android:layout_marginBottom="15dp"
-        android:textSize="18dp"
+        android:ems="10"
         android:hint="Contraseña"
+        android:inputType="textPassword"
         android:textAlignment="center"
-        android:ems="10"
-        android:inputType="textPassword" />
+        android:textSize="18dp" />
 
     <EditText
-        android:id="@+id/etxtconfirmpassword"
+        android:id="@+id/etxtConfirmPassword"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/etxtpasswordregister"
+        android:layout_below="@id/etxtPassword"
+        android:layout_marginBottom="15dp"
         android:background="@drawable/textview_border"
         android:backgroundTint="@color/white_blur"
-        android:layout_marginLeft="40dp"
-        android:layout_marginRight="40dp"
-        android:layout_marginBottom="15dp"
+        android:ems="10"
         android:hint="Confirmar contraseña"
-        android:textSize="18dp"
+        android:inputType="textPassword"
         android:textAlignment="center"
-        android:ems="10"
-        android:inputType="textPassword" />
+        android:textSize="18dp" />
 
     <EditText
-        android:id="@+id/etxtphone"
-        android:layout_below="@+id/etxtconfirmpassword"
+        android:id="@+id/etxtPhone"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_below="@+id/etxtConfirmPassword"
+        android:layout_marginBottom="15dp"
         android:background="@drawable/textview_border"
         android:backgroundTint="@color/white_blur"
-        android:layout_marginLeft="40dp"
-        android:layout_marginRight="40dp"
-        android:layout_marginBottom="15dp"
-        android:textSize="18dp"
-        android:textAlignment="center"
+        android:hint="Celular"
         android:inputType="phone"
-        android:hint="Celular" />
+        android:textAlignment="center"
+        android:textSize="18dp" />
 
     <CheckBox
         android:id="@+id/checkTerms"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="40dp"
-        android:layout_marginRight="40dp"
-        android:text="Acepta Terminos y Condiciones"
-        android:textColor="@color/white"
+        android:layout_below="@+id/etxtPhone"
         android:layout_marginBottom="20dp"
-        android:layout_below="@+id/etxtphone"
-        />
+        android:text="Acepta Terminos y Condiciones"
+        android:textColor="@color/white" />
 
     <Button
-        android:id="@+id/btnSiginScreen"
+        android:id="@+id/btnSubmit"
         android:layout_width="154dp"
         android:layout_height="30dp"
         android:layout_below="@+id/checkTerms"
         android:layout_centerHorizontal="true"
-        android:background="@drawable/res_roundedbutton"
-        android:textColor="@color/black"
-        android:backgroundTint="@color/piel"
         android:layout_marginBottom="20dp"
-        android:text="Registrarse" />
-
-
-
+        android:background="@drawable/res_roundedbutton"
+        android:backgroundTint="@color/piel"
+        android:text="Registrarse"
+        android:textColor="@color/black" />
 
 </RelativeLayout>
