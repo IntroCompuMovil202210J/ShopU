@@ -1,13 +1,10 @@
 package com.example.shopu.model;
-
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 public class Cart {
 
-    private Map<Product,Integer> products;
+    private Map<String,Integer> products;
     private Long total;
 
     public Cart() {
@@ -15,16 +12,16 @@ public class Cart {
         this.total = 0l;
     }
 
-    public Cart(Map<Product,Integer> products, Long total) {
+    public Cart(Map<String,Integer> products, Long total) {
         this.products = products;
         this.total = total;
     }
 
-    public Map<Product,Integer> getProducts() {
+    public Map<String,Integer> getProducts() {
         return products;
     }
 
-    public void setProducts(Map<Product,Integer> products) {
+    public void setProducts(Map<String,Integer> products) {
         this.products = products;
     }
 
@@ -37,13 +34,13 @@ public class Cart {
     }
 
     public void addProduct(Product productToAdd,Integer number){
-        this.products.put(productToAdd,number);
+        this.products.put(productToAdd.getName(),number);
         this.total = calculateTotal();
     }
 
     public Long calculateTotal(){
         Long total = 0l;
-        for (Map.Entry<Product,Integer> entry : products.entrySet()){
+        for (Map.Entry<String,Integer> entry : products.entrySet()){
             total = total + entry.getValue();
         }
         return total;
