@@ -47,6 +47,7 @@ import java.util.List;
 
 public class HomeActivity extends AppCompatActivity {
 
+
     private GridView gvwEstablishments;
     private TextView txtAddress;
     private Button pharmacy,stationery,feeding,all;

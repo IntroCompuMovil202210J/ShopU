@@ -4,6 +4,7 @@ import java.util.List;
 
 public class Order {
 
+    private String id;
     private List<Product> products;
     private DeliveryMan deliveryMan;
     private Client client;
@@ -14,13 +15,14 @@ public class Order {
     public Order() {
     }
 
-    public Order(List<Product> products, DeliveryMan deliveryMan, Client client, Payment payment, Boolean completed, ChatMessage chat) {
+    public Order(List<Product> products, DeliveryMan deliveryMan, Client client, Payment payment, Boolean completed, ChatMessage chat, String id) {
         this.products = products;
         this.deliveryMan = deliveryMan;
         this.client = client;
         this.payment = payment;
         this.completed = completed;
         this.chat = chat;
+        this.id = id;
     }
 
     public List<Product> getProducts() {
@@ -69,6 +71,14 @@ public class Order {
 
     public void setChat(ChatMessage chat) {
         this.chat = chat;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 }
 

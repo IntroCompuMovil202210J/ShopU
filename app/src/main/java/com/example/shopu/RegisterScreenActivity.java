@@ -161,7 +161,7 @@ public class RegisterScreenActivity extends AppCompatActivity {
                 etxtLastName.getText().toString(),
                 etxtEmail.getText().toString(),
                 etxtPassword.getText().toString(),
-                etxtPhone.getText().toString(),null,null);
+                etxtPhone.getText().toString(),null,null,null);
     }
 
     private void createFirebaseAuthUser() {

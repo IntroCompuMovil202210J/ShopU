@@ -8,34 +8,31 @@
     tools:context=".HomeActivity">
 
 
-        <TextView
-            android:id="@+id/txtDireccion"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:drawableStart="@drawable/ic_location"
-            android:text="Ed. José Gabriel Maldonado"
-            android:textColor="@color/black"
-            android:textSize="18dp"
-            android:layout_weight="0.8"/>
-
-
-
+    <TextView
+        android:id="@+id/txtDireccion"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="0.8"
+        android:drawableStart="@drawable/ic_location"
+        android:text="Ed. José Gabriel Maldonado"
+        android:textColor="@color/black"
+        android:textSize="18dp" />
 
 
     <EditText
-        android:layout_marginTop="25dp"
-        android:paddingLeft="15dp"
-        android:paddingRight="15dp"
         android:id="@+id/etxtBuscar"
         android:layout_width="match_parent"
         android:layout_height="45dp"
         android:layout_below="@+id/txtDireccion"
+        android:layout_marginTop="25dp"
         android:background="@drawable/res_roundededittext"
         android:backgroundTint="@color/barra_busqueda"
         android:drawableEnd="@drawable/ic_search"
         android:hint="Buscar en ShopU..."
+        android:imeOptions="actionSend"
         android:inputType="text"
-        android:imeOptions="actionSend"/>
+        android:paddingLeft="15dp"
+        android:paddingRight="15dp" />
 
     <LinearLayout
         android:id="@+id/lytCategorias"
