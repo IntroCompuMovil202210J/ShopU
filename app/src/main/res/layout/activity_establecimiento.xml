@@ -24,6 +24,7 @@
 
 
     <RelativeLayout
+
         android:id="@+id/rlyItemlist"
         android:layout_width="356dp"
         android:layout_height="491dp"
@@ -38,134 +39,10 @@
         app:layout_constraintVertical_bias="0.704"
         android:padding="20dp">
 
-        <LinearLayout
-            android:id="@+id/lyProduct_0"
+        <ListView
+            android:id="@+id/lvwEstProducts"
             android:layout_width="match_parent"
-            android:layout_height="80dp"
-            android:layout_marginTop="10dp"
-            android:background="@drawable/res_roundedbutton"
-            android:backgroundTint="@color/grayBackground_Andres"
-            android:orientation="vertical">
-
-            <ImageButton
-                android:id="@+id/ibnVerRuta"
-                android:layout_width="80dp"
-                android:layout_height="80dp"
-                android:background="@drawable/res_roundedbutton"
-                android:backgroundTint="@color/grayerBackground_Andres" />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/lyProduct_1"
-            android:layout_width="match_parent"
-            android:layout_height="80dp"
-            android:layout_below="@id/lyProduct_0"
-            android:layout_marginTop="10dp"
-            android:orientation="vertical"
-            android:background="@drawable/res_roundedbutton"
-            android:backgroundTint="@color/grayBackground_Andres">
-
-            <ImageView
-                android:layout_width="80dp"
-                android:layout_height="80dp"
-                android:background="@drawable/res_roundedbutton"
-                android:backgroundTint="@color/grayerBackground_Andres"
-                />
-
-        </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/lyProduct_2"
-                android:layout_width="match_parent"
-                android:layout_height="80dp"
-                android:layout_marginTop="10dp"
-                android:orientation="vertical"
-                android:layout_below="@id/lyProduct_1"
-                android:background="@drawable/res_roundedbutton"
-                android:backgroundTint="@color/grayBackground_Andres">
-
-                <ImageView
-                    android:layout_width="80dp"
-                    android:layout_height="80dp"
-                    android:background="@drawable/res_roundedbutton"
-                    android:backgroundTint="@color/grayerBackground_Andres"/>
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/lyProduct_3"
-                android:layout_width="match_parent"
-                android:layout_height="80dp"
-                android:layout_marginTop="10dp"
-                android:orientation="vertical"
-                android:layout_below="@id/lyProduct_2"
-                android:background="@drawable/res_roundedbutton"
-                android:backgroundTint="@color/grayBackground_Andres">
-
-                <ImageView
-                    android:layout_width="80dp"
-                    android:layout_height="80dp"
-                    android:background="@drawable/res_roundedbutton"
-                    android:backgroundTint="@color/grayerBackground_Andres"
-                    />
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/lyProduct_4"
-                android:layout_width="match_parent"
-                android:layout_height="80dp"
-                android:layout_marginTop="10dp"
-                android:orientation="vertical"
-                android:layout_below="@id/lyProduct_3"
-                android:background="@drawable/res_roundedbutton"
-                android:backgroundTint="@color/grayBackground_Andres">
-
-                <ImageView
-                    android:layout_width="80dp"
-                    android:layout_height="80dp"
-                    android:background="@drawable/res_roundedbutton"
-                    android:backgroundTint="@color/grayerBackground_Andres"
-                    />
-            </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/lyProduct_5"
-            android:layout_width="match_parent"
-            android:layout_height="80dp"
-            android:layout_marginTop="10dp"
-            android:orientation="vertical"
-            android:layout_below="@id/lyProduct_4"
-            android:background="@drawable/res_roundedbutton"
-            android:backgroundTint="@color/grayBackground_Andres">
-
-            <ImageView
-                android:layout_width="80dp"
-                android:layout_height="80dp"
-                android:background="@drawable/res_roundedbutton"
-                android:backgroundTint="@color/grayerBackground_Andres"
-                />
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/lyProduct_6"
-            android:layout_width="match_parent"
-            android:layout_height="80dp"
-            android:layout_marginTop="10dp"
-            android:orientation="vertical"
-            android:layout_below="@id/lyProduct_5"
-            android:background="@drawable/res_roundedbutton"
-            android:backgroundTint="@color/grayBackground_Andres">
-
-            <ImageView
-                android:layout_width="80dp"
-                android:layout_height="80dp"
-                android:background="@drawable/res_roundedbutton"
-                android:backgroundTint="@color/grayerBackground_Andres"
-                />
-        </LinearLayout>
-
+            android:layout_height="match_parent" />
 
     </RelativeLayout>
 
@@ -236,6 +113,5 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="1.0"/>
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>
