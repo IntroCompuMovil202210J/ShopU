@@ -4,122 +4,44 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="16dp"
-    tools:context=".DeliveryHomeActivity">
+    android:orientation="vertical"
+    android:padding="8dp"
+    tools:context=".DeliveryHomeActivity"
 
 
+    >
 
+    <TextView
+        android:id="@+id/texto"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
 
-    <LinearLayout
-        android:id="@+id/lytCategorias"
-        android:layout_marginTop="15dp"
+        />
+
+    <Button
+
+        android:id="@+id/btnProfile"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-
-        android:orientation="horizontal">
-
-        <Button
-            android:id="@+id/btnCategoria1"
-            android:layout_width="wrap_content"
-            android:layout_height="30dp"
-            android:layout_marginRight="5dp"
-            android:layout_weight="1"
-            android:background="@drawable/res_roundedcategoria"
-            android:backgroundTint="@color/categorias" />
-
-        <Button
-            android:id="@+id/btnCategoria2"
-            android:layout_marginRight="5dp"
-            android:background="@drawable/res_roundedcategoria"
-            android:backgroundTint="@color/categorias"
-            android:layout_width="wrap_content"
-            android:layout_height="30dp"
-            android:layout_weight="1"/>
-
-        <Button
-            android:id="@+id/btnCategoria3"
-            android:layout_marginRight="5dp"
-            android:background="@drawable/res_roundedcategoria"
-            android:backgroundTint="@color/categorias"
-            android:layout_width="wrap_content"
-            android:layout_height="30dp"
-            android:layout_weight="1" />
-
-        <Button
-            android:id="@+id/btnCategoria4"
-            android:layout_marginRight="5dp"
-            android:background="@drawable/res_roundedcategoria"
-            android:backgroundTint="@color/categorias"
-            android:layout_width="wrap_content"
-            android:layout_height="30dp"
-            android:layout_weight="1" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/lytEstablecimientos"
-        android:layout_marginTop="20dp"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_below="@+id/lytCategorias"
-        android:orientation="horizontal">
-
-        <LinearLayout
-            android:id="@+id/lytEstablecimiento1"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginRight="15dp"
-            android:layout_weight="0.5"
-            android:orientation="vertical">
-            <Button
-                android:id="@+id/btnEstablecimiento1"
-                android:background="@drawable/img_farmatodo"
-                android:layout_width="match_parent"
-                android:layout_height="100dp" />
-
-            <TextView
-                android:id="@+id/txtEstablecimiento1"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textAlignment="center"
-                android:textStyle="bold"
-                android:text="30-34 min" />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/lytEstablecimiento2"
-            android:layout_weight="0.5"
-            android:layout_marginLeft="15dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
-            <Button
-                android:id="@+id/btnEstablecimiento2"
-                android:background="@drawable/res_roundedbutton"
-                android:backgroundTint="@color/categorias"
-                android:layout_width="match_parent"
-                android:layout_height="100dp" />
-
-            <TextView
-                android:id="@+id/txtEstablecimiento2"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textAlignment="center"
-                android:textStyle="bold"
-                android:text="30-34 min" />
-        </LinearLayout>
-
-    </LinearLayout>
-
-    <com.google.android.material.bottomnavigation.BottomNavigationView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
+        android:layout_below="@id/texto"
+        android:layout_marginTop="10dp"
         android:layout_marginBottom="15dp"
-        android:layout_marginRight="5dp"
-        android:layout_marginLeft="5dp"
-        app:itemRippleColor="@color/white"
-        app:itemTextColor="@color/white"
-        android:background="@drawable/res_roundednavbar"
-        app:menu="@menu/bottom_nav_menu"/>
+        android:background="@drawable/res_roundedbutton"
+        android:backgroundTint="@color/piel"
+        android:drawableLeft="@drawable/profile80"
+        android:text="Perfil"
+
+        />
+
+    <Button
+        android:id="@+id/btnOrders"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/btnProfile"
+        android:background="@drawable/res_roundedbutton"
+        android:backgroundTint="@color/piel"
+        android:drawableLeft="@drawable/pedido"
+        android:text="PEDIDOS" />
+
+
 </RelativeLayout>

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal"
+    android:padding="8dp"
+    >
+
+
+    <LinearLayout
+        android:id="@+id/relative"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:layout_weight="0.3"
+        android:orientation="vertical"
+
+        >
+
+        <TextView
+            android:id="@+id/txtOrder"
+            android:layout_width="match_parent"
+            android:layout_height="25dp"
+            android:gravity="center|left"
+            android:text="Pedido" />
+
+        <TextView
+            android:id="@+id/txtDirection"
+            android:text="Dirección"
+            android:layout_width="match_parent"
+            android:layout_height="20dp"
+            android:layout_below="@id/txtOrder" />
+
+
+
+    </LinearLayout>
+
+
+    <Button
+        android:id="@+id/selectOrder"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:layout_weight="0.7"
+        android:background="@drawable/res_roundedbutton"
+        android:backgroundTint="@color/piel"
+        android:text="Ingresar" />
+
+</LinearLayout>
