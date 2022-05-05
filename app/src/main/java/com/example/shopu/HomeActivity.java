@@ -19,6 +19,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.GridView;
@@ -28,6 +29,7 @@ import android.widget.Toast;
 import com.example.shopu.adapters.EstablishmentAdapter;
 import com.example.shopu.model.Establishment;
 import com.example.shopu.model.EstablishmentCategory;
+import com.example.shopu.model.Product;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -111,6 +113,7 @@ public class HomeActivity extends AppCompatActivity {
                 gvwEstablishments.setAdapter(estAdapter);
             }
         });
+
 
         menu.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
             @Override

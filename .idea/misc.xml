@@ -27,9 +27,9 @@
         <entry key="..\:/Users/davis/OneDrive/Escritorio/Documents/universidad/semestres/9o/movil/proyecto/source/app/src/main/res/layout/activity_log_screen.xml" value="0.25" />
         <entry key="..\:/Users/davis/OneDrive/Escritorio/Documents/universidad/semestres/9o/movil/proyecto/source/app/src/main/res/layout/activity_sigin_screen.xml" value="0.25" />
         <entry key="..\:/Users/davis/OneDrive/Escritorio/Documents/universidad/semestres/9o/movil/proyecto/source/app/src/main/res/menu/bottom_nav_menu.xml" value="0.25" />
-        <entry key="app/src/main/res/layout/activity_establecimiento.xml" value="0.22105458577473955" />
-        <entry key="app/src/main/res/layout/activity_home.xml" value="0.1" />
-        <entry key="app/src/main/res/layout/item_product.xml" value="0.29023566188582456" />
+        <entry key="app/src/main/res/drawable/res_roundedbutton.xml" value="0.1275" />
+        <entry key="app/src/main/res/layout/activity_establecimiento.xml" value="0.305993690851735" />
+        <entry key="app/src/main/res/layout/item_product.xml" value="0.21875" />
       </map>
     </option>
   </component>

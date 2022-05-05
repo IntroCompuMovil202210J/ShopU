@@ -25,8 +25,6 @@ public class ProductAdapter extends ArrayAdapter<Product> {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
 
-        System.out.println("heresdadasdasdasdasdss");
-
         if (convertView == null) {
             convertView = LayoutInflater.from(getContext()).inflate(R.layout.item_product, parent, false);
         }
@@ -36,9 +34,10 @@ public class ProductAdapter extends ArrayAdapter<Product> {
         TextView txtPrice = (TextView) convertView.findViewById(R.id.txtPriceP);
 
         Product product = this.products.get(position);
+
         txtName.setText(product.getName());
         txtDescrip.setText(product.getDescription());
-        txtPrice.setText(product.getPrice());
+        txtPrice.setText(product.getPrice().toString());
 
         return convertView;
     }

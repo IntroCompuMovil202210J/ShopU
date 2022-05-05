@@ -15,13 +15,13 @@
         android:layout_height="243dp"
         android:layout_margin="24dp"
         android:layout_marginTop="16dp"
-        android:background="@drawable/topside_establishment"
+        android:background="@drawable/res_roundedbutton"
+        android:backgroundTint="@color/piel"
         android:scaleType="fitCenter"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.493"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-
 
     <RelativeLayout
 
@@ -46,7 +46,6 @@
 
     </RelativeLayout>
 
-
     <EditText
         android:id="@+id/editText"
         android:layout_width="284dp"
@@ -54,7 +53,7 @@
         android:layout_marginStart="28dp"
         android:layout_marginBottom="16dp"
         android:background="@drawable/res_roundedbutton"
-        android:backgroundTint="@color/bluecolor_Andres"
+        android:backgroundTint="@color/piel"
         android:paddingLeft="10dp"
         android:hint="buscar..."
         android:textColor="@color/white"
@@ -62,14 +61,13 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"/>
 
-
     <Button
         android:layout_width="34dp"
         android:layout_height="34dp"
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="16dp"
         android:background="@drawable/res_roundedbutton"
-        android:backgroundTint="@color/bluecolor_Andres"
+        android:backgroundTint="@color/piel"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/editText" />
@@ -83,8 +81,8 @@
         android:layout_marginEnd="60dp"
         android:layout_marginBottom="72dp"
 
-        android:text="Farmatodo"
-        android:textColor="@color/white"
+        android:text="name..."
+        android:textColor="@color/black"
         android:textSize="17sp"
         android:textStyle="bold"
 
@@ -113,5 +111,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="1.0"/>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
