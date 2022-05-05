@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="32dp"
+    tools:context=".DeliveryProfileActivity">
+
+
+    <Button
+        android:id="@+id/logOut"
+        android:layout_width="match_parent"
+        android:layout_height="24dp"
+        android:background="@drawable/res_roundedbutton"
+        android:backgroundTint="@color/piel"
+        android:layout_below="@id/profit"
+        android:textSize="10dp"
+        android:text="Sing Out" />
+
+    <EditText
+        android:id="@+id/Dname"
+        android:layout_width="match_parent"
+        android:layout_marginBottom="24dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/custom_edit_text"
+        android:paddingStart="12dp"
+        android:layout_below="@+id/hintName"
+        android:hint="Nombre" />
+
+    <EditText
+        android:id="@+id/Dlastname"
+        android:layout_width="match_parent"
+        android:background="@drawable/custom_edit_text"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="24dp"
+        android:layout_marginTop="12dp"
+        android:paddingStart="12dp"
+        android:layout_below="@+id/Dname"
+        android:hint="Apellido" />
+
+    <TextView
+        android:id="@+id/Demail"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/custom_text_view"
+        android:textSize="18dp"
+        android:textColor="@color/black"
+        android:layout_marginBottom="24dp"
+        android:layout_marginTop="12dp"
+        android:paddingStart="12dp"
+        android:layout_below="@+id/Dlastname"
+        android:hint="E-mail" />
+
+    <EditText
+        android:id="@+id/Dphone"
+        android:layout_width="match_parent"
+        android:background="@drawable/custom_edit_text"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="24dp"
+        android:layout_marginTop="12dp"
+        android:paddingStart="12dp"
+        android:layout_below="@+id/Demail"
+        android:hint="Celular" />
+
+    <TextView
+        android:id="@+id/score"
+        android:layout_width="match_parent"
+        android:background="@drawable/custom_text_view"
+        android:textSize="18dp"
+        android:textColor="@color/black"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="24dp"
+        android:layout_marginTop="12dp"
+        android:paddingStart="12dp"
+        android:layout_below="@+id/Dphone"
+        android:hint="Puntaje" />
+
+    <TextView
+        android:id="@+id/profit"
+        android:layout_width="match_parent"
+        android:background="@drawable/custom_text_view"
+        android:textSize="18dp"
+        android:textColor="@color/black"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="24dp"
+        android:layout_marginTop="12dp"
+        android:paddingStart="12dp"
+        android:layout_below="@+id/score"
+        android:hint="Ganancias" />
+
+
+
+    <TextView
+        android:id="@+id/hintName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Nombre"
+        android:layout_marginBottom="8dp"
+        android:paddingStart="13dp"
+        android:textSize="10dp"
+        />
+    <TextView
+        android:id="@+id/hintLastName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Apellido"
+        android:paddingStart="13dp"
+        android:textSize="10dp"
+        android:layout_marginBottom="8dp"
+        android:layout_below="@+id/Dname"
+        />
+    <TextView
+        android:id="@+id/hintEmail"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="E-mail"
+        android:paddingStart="13dp"
+        android:textSize="10dp"
+        android:layout_marginBottom="4dp"
+        android:layout_below="@+id/Dlastname"
+        />
+    <TextView
+        android:id="@+id/hintPhone"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Celular"
+        android:paddingStart="13dp"
+        android:textSize="10dp"
+        android:layout_marginBottom="4dp"
+        android:layout_below="@id/Demail"
+        />
+
+    <TextView
+        android:id="@+id/hintScore"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Celular"
+        android:paddingStart="13dp"
+        android:textSize="10dp"
+        android:layout_marginBottom="4dp"
+        android:layout_below="@id/Dphone"
+        />
+    <TextView
+        android:id="@+id/hintProfit"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Celular"
+        android:paddingStart="13dp"
+        android:textSize="10dp"
+        android:layout_marginBottom="4dp"
+        android:layout_below="@id/score"
+        />
+
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:layout_marginBottom="15dp"
+        android:background="@drawable/res_roundednavbar"
+        app:itemRippleColor="@color/white"
+        app:itemTextColor="@color/white"
+        app:menu="@menu/bottom_nav_menu" />
+
+
+</RelativeLayout>

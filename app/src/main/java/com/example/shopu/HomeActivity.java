@@ -5,6 +5,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.view.View;
+import android.widget.Button;
 import android.widget.GridView;
 import android.widget.ImageButton;
 
@@ -18,26 +20,22 @@ import java.util.ArrayList;
 public class HomeActivity extends AppCompatActivity {
 
     GridView gvwEstablishments;
+    Button btnCategoria1;
     EstablishmentAdapter estAdapter;
     ArrayList<Establishment> establishments;
-    ImageButton logout;
-
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
+
         loadEstablishments();
         gvwEstablishments = findViewById(R.id.gvwEstablishments);
         estAdapter = new EstablishmentAdapter(this,establishments);
         gvwEstablishments.setAdapter(estAdapter);
 
-
-
     }
-
 
 
     public void loadEstablishments(){
