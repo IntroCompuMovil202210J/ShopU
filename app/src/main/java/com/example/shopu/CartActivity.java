@@ -91,6 +91,6 @@ public class CartActivity extends AppCompatActivity {
     private void publishOrder() {
         Double latitude = getIntent().getDoubleExtra("latitude", 0d);
         Double longitude = getIntent().getDoubleExtra("longitude", 0d);
-        db.getReference("orders").push().setValue(new Location(latitude,longitude));
+        db.getReference("orders").push().setValue(new Location(latitude, longitude));
     }
 }

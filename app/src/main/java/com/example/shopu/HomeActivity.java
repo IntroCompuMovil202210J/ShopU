@@ -20,6 +20,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.GridView;
@@ -31,6 +32,7 @@ import com.example.shopu.adapters.EstablishmentAdapter;
 import com.example.shopu.model.Cart;
 import com.example.shopu.model.Establishment;
 import com.example.shopu.model.EstablishmentCategory;
+import com.example.shopu.model.Product;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -47,7 +49,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class HomeActivity extends AppCompatActivity {
-
 
     private GridView gvwEstablishments;
     private TextView txtAddress;
