@@ -19,11 +19,14 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 public class RegisterScreenActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
-
     EditText etxtName, etxtLastName, etxtEmail, etxtPassword, etxtConfirmPassword, etxtPhone;
     CheckBox checkTerms;
     Button btnSubmit;
@@ -52,78 +55,99 @@ public class RegisterScreenActivity extends AppCompatActivity {
     }
 
     private void submit() {
-        validateInputs();
+        boolean validName = validateName(etxtName.getText().toString());
+        boolean validLastName = validateLastName(etxtLastName.getText().toString());
+        boolean validEmail = validateEmail(etxtEmail.getText().toString());
+        boolean validPassword = validatePassword(etxtPassword.getText().toString());
+        boolean validPasswordConfirmation = confirmPassword(etxtPassword.getText().toString(), etxtConfirmPassword.getText().toString());
+        boolean validPhone = validatePhone(etxtPhone.getText().toString());
+        if (validName && validLastName && validEmail && validPassword && validPasswordConfirmation && validPhone)
+            validateIfUsersAlreadyExists();
     }
 
-    private void validateInputs() {
-        validateNames(etxtName.getText().toString());
-        validateNames(etxtLastName.getText().toString());
-        validateEmail(etxtEmail.getText().toString());
-        validatePassword(etxtPassword.getText().toString());
-        confirmPassword(etxtPassword.getText().toString(), etxtConfirmPassword.getText().toString());
-        validatePhone(etxtPhone.getText().toString());
-        createFirebaseAuthUser();
-    }
-
-    private void validateNames(String name) {
-        if (!name.matches(Patterns.NAME_PATTERN)) {
-            etxtEmail.setError("Valor inválido");
-            etxtEmail.requestFocus();
-            return;
-        }
+    private boolean validateName(String name) {
+        boolean flag = true;
         if (name.isEmpty()) {
+            etxtName.setError("Por favor ingresa un valor");
+            etxtName.requestFocus();
+            flag = false;
+        }
+        if (!name.matches(Patterns.NAME_PATTERN)) {
+            etxtName.setError("Valor inválido");
+            etxtName.requestFocus();
+            flag = false;
+        }
+        return flag;
+    }
+
+    private boolean validateLastName(String lastName) {
+        boolean flag = true;
+        if (lastName.isEmpty()) {
             etxtEmail.setError("Por favor ingresa un valor");
             etxtEmail.requestFocus();
-            return;
+            flag = false;
         }
+        if (!lastName.matches(Patterns.NAME_PATTERN)) {
+            etxtLastName.setError("Valor inválido");
+            etxtLastName.requestFocus();
+            flag = false;
+        }
+        return flag;
     }
 
-    private void validateEmail(String email) {
-        if (!email.contains("@javeriana.edu.co")) {
-            etxtEmail.setError("Correo inválido");
-            etxtEmail.requestFocus();
-            return;
-        }
+    private boolean validateEmail(String email) {
+        boolean flag = true;
         if (email.isEmpty()) {
             etxtEmail.setError("Por favor ingresa un correo");
             etxtEmail.requestFocus();
-            return;
+            flag = false;
         }
+        if (!email.contains("@javeriana.edu.co")) {
+            etxtEmail.setError("Correo inválido");
+            etxtEmail.requestFocus();
+            flag = false;
+        }
+        return flag;
     }
 
-    private void validatePassword(String password) {
+    private boolean validatePassword(String password) {
+        boolean flag = true;
         if (password.isEmpty()) {
             etxtPassword.setError("Por favor ingresa una contraseña");
             etxtPassword.requestFocus();
-            return;
+            flag = false;
         }
         if (password.length() < 6) {
             etxtPassword.setError("La contraseña debe tener más de 6 caracteres");
             etxtPassword.requestFocus();
-            return;
+            flag = false;
         }
-
+        return flag;
     }
 
-    private void confirmPassword(String password, String confirmPassword) {
+    private boolean confirmPassword(String password, String confirmPassword) {
+        boolean flag = true;
+        if (confirmPassword.isEmpty()) {
+            etxtConfirmPassword.setError("Por favor ingresa una contraseña");
+            etxtConfirmPassword.requestFocus();
+            flag = false;
+        }
         if (!confirmPassword.equals(password)) {
             etxtConfirmPassword.setError("Las contraseñas deben ser iguales");
             etxtConfirmPassword.requestFocus();
-            return;
+            flag = false;
         }
-        if (confirmPassword.isEmpty()) {
-            etxtPassword.setError("Por favor ingresa una contraseña");
-            etxtPassword.requestFocus();
-            return;
-        }
+        return flag;
     }
 
-    private void validatePhone(String phone) {
+    private boolean validatePhone(String phone) {
+        boolean flag = true;
         if (phone.isEmpty()) {
-            etxtPassword.setError("Por favor ingresa un telefono");
-            etxtPassword.requestFocus();
-            return;
+            etxtPhone.setError("Por favor ingresa un telefono");
+            etxtPhone.requestFocus();
+            flag = false;
         }
+        return flag;
     }
 
     private User createUserObject() {
@@ -155,6 +179,28 @@ public class RegisterScreenActivity extends AppCompatActivity {
                     startActivity(new Intent(RegisterScreenActivity.this, HomeActivity.class));
                 else
                     Toast.makeText(RegisterScreenActivity.this, "Registro invalido", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    private void validateIfUsersAlreadyExists() {
+        DatabaseReference ref = FirebaseDatabase.getInstance().getReference("users");
+        ref.get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DataSnapshot> task) {
+                boolean flag = false;
+                if (task.isSuccessful())
+                    if (task.getResult().exists()) {
+                        for (DataSnapshot snapshot : task.getResult().getChildren()) {
+                            User user = snapshot.getValue(User.class);
+                            if (user.getEmail().equals(etxtEmail.getText().toString()) || user.getPhone().equals(etxtPhone.getText().toString()))
+                                flag = true;
+                        }
+                        if (flag)
+                            Toast.makeText(RegisterScreenActivity.this, "Usuario ya registrado", Toast.LENGTH_SHORT).show();
+                        else
+                            createFirebaseAuthUser();
+                    }
             }
         });
     }
