@@ -5,6 +5,9 @@ public class Location {
     private Double latitude;
     private Double longitude;
 
+    public Location (){
+
+    }
     public Location(Double latitude, Double longitude) {
         this.latitude = latitude;
         this.longitude = longitude;
@@ -24,5 +27,13 @@ public class Location {
 
     public void setLongitude(Double longitude) {
         this.longitude = longitude;
+    }
+
+    @Override
+    public String toString() {
+        return "Location{" +
+                "latitude=" + latitude +
+                ", longitude=" + longitude +
+                '}';
     }
 }

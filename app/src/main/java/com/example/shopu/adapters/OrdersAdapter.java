@@ -2,6 +2,7 @@ package com.example.shopu.adapters;
 
         import android.content.Context;
         import android.database.Cursor;
+        import android.util.Log;
         import android.view.LayoutInflater;
         import android.view.View;
         import android.view.ViewGroup;
@@ -11,20 +12,28 @@ package com.example.shopu.adapters;
         import android.widget.TextView;
         import com.example.shopu.R;
         import com.example.shopu.model.Establishment;
+        import com.example.shopu.model.Location;
         import com.example.shopu.model.Order;
+        import com.google.firebase.database.DataSnapshot;
+        import com.google.firebase.database.DatabaseError;
+        import com.google.firebase.database.DatabaseReference;
+        import com.google.firebase.database.FirebaseDatabase;
+        import com.google.firebase.database.ValueEventListener;
 
         import java.util.ArrayList;
         import java.util.List;
 
-public class OrdersAdapter extends ArrayAdapter<Order> {
+public class OrdersAdapter extends ArrayAdapter<Location> {
 
     List<Order> orders;
+    List<Location> locations;
+
     private final double RADIUS_OF_EARTH_KM = 6371.01;
 
-    public OrdersAdapter(Context context, ArrayList<Order> orders) {
+    public OrdersAdapter(Context context, List<Location> orders) {
         super(context, 0, orders);
 
-        this.orders = orders;
+        this.locations = orders;
     }
 
     @Override
@@ -40,11 +49,11 @@ public class OrdersAdapter extends ArrayAdapter<Order> {
         TextView txtDirec = (TextView) convertView.findViewById(R.id.txtDirection);
         Button boton = (Button) convertView.findViewById(R.id.selectOrder);
 
-        Order order = this.orders.get(position);
+        Location order = this.locations.get(position);
         // Populate the data into the template view using the data object
-        Double distancia = distance(order.getClient().getLocation().getLatitude(),order.getClient().getLocation().getLongitude(),order.getDeliveryMan().getLocation().getLatitude()
-        ,order.getDeliveryMan().getLocation().getLongitude());
-        txtOrden.setText(distancia.toString());
+        txtOrden.setText("orden");
+        txtDirec.setText(order.getLatitude().toString() +" - " + order.getLongitude().toString());
+
 
         boton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -54,21 +63,12 @@ public class OrdersAdapter extends ArrayAdapter<Order> {
         });
 
 
-
         // Return the completed view to render on screen
         return convertView;
     }
 
-    public double distance(double lat1, double long1, double lat2, double long2) {
-        double latDistance = Math.toRadians(lat1 - lat2);
-        double lngDistance = Math.toRadians(long1 - long2);
-        double a = Math.sin(latDistance / 2) * Math.sin(latDistance / 2)
-                + Math.cos(Math.toRadians(lat1)) * Math.cos(Math.toRadians(lat2))
-                * Math.sin(lngDistance / 2) * Math.sin(lngDistance / 2);
-        double c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
-        double result = RADIUS_OF_EARTH_KM * c;
-        return Math.round(result*100.0)/100.0;
-    }
+
+
 
 
 }
