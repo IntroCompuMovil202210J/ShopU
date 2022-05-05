@@ -2,11 +2,16 @@ package com.example.shopu;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.GridView;
+import android.widget.ImageButton;
 
 import com.example.shopu.adapters.EstablishmentAdapter;
 import com.example.shopu.model.Establishment;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 import java.util.ArrayList;
 
@@ -15,19 +20,24 @@ public class HomeActivity extends AppCompatActivity {
     GridView gvwEstablishments;
     EstablishmentAdapter estAdapter;
     ArrayList<Establishment> establishments;
+    ImageButton logout;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
-
         loadEstablishments();
         gvwEstablishments = findViewById(R.id.gvwEstablishments);
         estAdapter = new EstablishmentAdapter(this,establishments);
         gvwEstablishments.setAdapter(estAdapter);
 
+
+
     }
+
 
 
     public void loadEstablishments(){

@@ -7,14 +7,20 @@
     android:padding="16dp"
     tools:context=".HomeActivity">
 
-    <TextView
-        android:id="@+id/txtDireccion"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textColor="@color/black"
-        android:textSize="18dp"
-        android:drawableStart="@drawable/ic_location"
-        android:text="Ed. José Gabriel Maldonado" />
+
+        <TextView
+            android:id="@+id/txtDireccion"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:drawableStart="@drawable/ic_location"
+            android:text="Ed. José Gabriel Maldonado"
+            android:textColor="@color/black"
+            android:textSize="18dp"
+            android:layout_weight="0.8"/>
+
+
+
+
 
     <EditText
         android:layout_marginTop="25dp"
@@ -80,8 +86,8 @@
         android:layout_height="match_parent"
         android:layout_below="@+id/lytCategorias"
         android:layout_marginTop="20dp"
-        android:orientation="horizontal"
         android:numColumns="2"
+        android:orientation="horizontal"
         android:verticalSpacing="10dp">
 
     </GridView>
