@@ -1,8 +1,10 @@
 package com.example.shopu.model;
 
+import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
-public class Establishment {
+public class Establishment implements Serializable {
 
     private String name;
     private String address;
@@ -14,6 +16,7 @@ public class Establishment {
 
 
     public Establishment() {
+        this.productList = new ArrayList<Product>();
     }
 
     public Establishment(String name, String address, String score, String photo, List<Product> productList,EstablishmentCategory category) {
