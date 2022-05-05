@@ -19,32 +19,44 @@
         android:layout_height="30dp"
         android:layout_below="@+id/imgLogo"
         android:layout_centerHorizontal="true"
+        android:layout_marginBottom="15dp"
         android:background="@drawable/res_roundedbutton"
-        android:textColor="@color/black"
         android:backgroundTint="@color/piel"
-        android:layout_marginBottom="20dp"
-        android:text="Iniciar Sesion" />
+        android:text="Iniciar Sesion"
+        android:textColor="@color/black" />
 
     <Button
         android:id="@+id/btnSignin"
-        android:layout_width="154dp"
+        android:layout_width="194dp"
         android:layout_height="30dp"
         android:layout_below="@+id/btnLogin"
         android:layout_centerHorizontal="true"
+        android:layout_marginBottom="15dp"
         android:background="@drawable/res_roundedbutton"
-        android:textColor="@color/black"
         android:backgroundTint="@color/piel"
-        android:layout_marginBottom="20dp"
-        android:text="Registrarse" />
+        android:text="Registrarse"
+        android:textColor="@color/black" />
+
+    <Button
+        android:id="@+id/btnCreateDelivery"
+        android:layout_width="194dp"
+        android:layout_height="30dp"
+        android:layout_below="@+id/btnSignin"
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/res_roundedbutton"
+        android:backgroundTint="@color/piel"
+        android:text="Trabaja con nosotros"
+        android:layout_marginBottom="5dp"/>
 
     <TextView
         android:id="@+id/txtHelp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_below="@+id/btnCreateDelivery"
+
         android:gravity="center"
-        android:layout_below="@id/btnSignin"
-        android:textColor="@color/white"
-        android:text="¿Tienes problemas?" />
+        android:text="¿Tienes problemas?"
+        android:textColor="@color/white" />
 
 
 </RelativeLayout>

@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="20dp"
+    android:background="@drawable/img_fondologin"
+    tools:context=".RegisterScreenActivity">
+
+    <ImageView
+        android:id="@+id/imgLogo_loginregister"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:layout_marginBottom="20dp"
+        app:srcCompat="@drawable/img_logo" />
+
+    <EditText
+        android:id="@+id/etxtName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/imgLogo_loginregister"
+        android:layout_marginBottom="15dp"
+        android:background="@drawable/textview_border"
+        android:backgroundTint="@color/white_blur"
+        android:hint="Nombre"
+        android:inputType="text"
+        android:textAlignment="center"
+        android:textSize="18dp" />
+
+    <EditText
+        android:id="@+id/etxtLastName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/etxtName"
+        android:layout_marginBottom="15dp"
+        android:background="@drawable/textview_border"
+        android:backgroundTint="@color/white_blur"
+        android:hint="Apellido"
+        android:inputType="text"
+        android:textAlignment="center"
+        android:textSize="18dp" />
+
+    <EditText
+        android:id="@+id/etxtEmail"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/etxtLastName"
+        android:layout_marginBottom="15dp"
+        android:background="@drawable/textview_border"
+        android:backgroundTint="@color/white_blur"
+        android:hint="Correo"
+        android:inputType="textEmailAddress"
+        android:textAlignment="center"
+        android:textSize="18dp" />
+
+    <EditText
+        android:id="@+id/etxtPassword"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/etxtEmail"
+        android:layout_marginBottom="15dp"
+        android:background="@drawable/textview_border"
+        android:backgroundTint="@color/white_blur"
+        android:ems="10"
+        android:hint="Contraseña"
+        android:inputType="textPassword"
+        android:textAlignment="center"
+        android:textSize="18dp" />
+
+    <EditText
+        android:id="@+id/etxtConfirmPassword"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/etxtPassword"
+        android:layout_marginBottom="15dp"
+        android:background="@drawable/textview_border"
+        android:backgroundTint="@color/white_blur"
+        android:ems="10"
+        android:hint="Confirmar contraseña"
+        android:inputType="textPassword"
+        android:textAlignment="center"
+        android:textSize="18dp" />
+
+    <EditText
+        android:id="@+id/etxtPhone"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/etxtConfirmPassword"
+        android:layout_marginBottom="15dp"
+        android:background="@drawable/textview_border"
+        android:backgroundTint="@color/white_blur"
+        android:hint="Celular"
+        android:inputType="phone"
+        android:textAlignment="center"
+        android:textSize="18dp" />
+
+    <CheckBox
+        android:id="@+id/checkTerms"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/etxtPhone"
+        android:layout_marginBottom="20dp"
+        android:text="Acepta Terminos y Condiciones"
+        android:textColor="@color/white" />
+
+    <Button
+        android:id="@+id/btnSubmit"
+        android:layout_width="154dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/checkTerms"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="20dp"
+        android:background="@drawable/res_roundedbutton"
+        android:backgroundTint="@color/piel"
+        android:text="Registrarse como repartidor"
+        android:textColor="@color/black" />
+
+</RelativeLayout>
