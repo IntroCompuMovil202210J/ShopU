@@ -12,6 +12,7 @@ import android.content.pm.PackageManager;
 import android.location.Address;
 import android.location.Geocoder;
 import android.location.Location;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.Menu;
@@ -235,6 +236,8 @@ public class HomeActivity extends AppCompatActivity {
         });
 
     };
+
+
 
     public void loadEstablishments(){
 

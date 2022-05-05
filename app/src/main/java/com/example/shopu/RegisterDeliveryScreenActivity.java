@@ -5,16 +5,14 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.text.TextUtils;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.example.shopu.model.Cart;
 import com.example.shopu.model.Client;
+import com.example.shopu.model.DeliveryMan;
 import com.example.shopu.model.User;
 import com.example.shopu.utils.Patterns;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -22,13 +20,12 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 
-public class RegisterScreenActivity extends AppCompatActivity {
+public class RegisterDeliveryScreenActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
+
     EditText etxtName, etxtLastName, etxtEmail, etxtPassword, etxtConfirmPassword, etxtPhone;
     CheckBox checkTerms;
     Button btnSubmit;
@@ -51,10 +48,6 @@ public class RegisterScreenActivity extends AppCompatActivity {
         btnSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-
-
-
                 submit();
             }
         });
@@ -182,9 +175,9 @@ public class RegisterScreenActivity extends AppCompatActivity {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
                 if (task.isSuccessful())
-                    startActivity(new Intent(RegisterScreenActivity.this, HomeActivity.class));
+                    startActivity(new Intent(RegisterDeliveryScreenActivity.this, HomeActivity.class));
                 else
-                    Toast.makeText(RegisterScreenActivity.this, "Registro invalido", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(RegisterDeliveryScreenActivity.this, "Registro invalido", Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -203,7 +196,7 @@ public class RegisterScreenActivity extends AppCompatActivity {
                                 flag = true;
                         }
                         if (flag)
-                            Toast.makeText(RegisterScreenActivity.this, "Usuario ya registrado", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(RegisterDeliveryScreenActivity.this, "Usuario ya registrado", Toast.LENGTH_SHORT).show();
                         else
                             createFirebaseAuthUser();
                     }
