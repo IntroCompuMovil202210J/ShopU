@@ -83,7 +83,6 @@
             android:textSize="10dp"
             android:text="Alimentacion"/>
 
-
     </LinearLayout>
 
     <GridView
@@ -99,6 +98,7 @@
     </GridView>
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/navigation"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
@@ -109,4 +109,6 @@
         app:itemTextColor="@color/white"
         android:background="@drawable/res_roundednavbar"
         app:menu="@menu/bottom_nav_menu"/>
+
+
 </RelativeLayout>

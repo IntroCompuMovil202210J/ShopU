@@ -3,6 +3,7 @@ package com.example.shopu;
 import androidx.activity.result.ActivityResultCallback;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 
@@ -13,6 +14,8 @@ import android.location.Geocoder;
 import android.location.Location;
 import android.os.Bundle;
 import android.view.KeyEvent;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
@@ -27,6 +30,9 @@ import com.example.shopu.model.EstablishmentCategory;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.material.bottomnavigation.BottomNavigationMenuView;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.navigation.NavigationBarView;
 
 import org.w3c.dom.Text;
 
@@ -40,6 +46,7 @@ public class HomeActivity extends AppCompatActivity {
     private TextView txtAddress;
     private Button pharmacy,stationery,feeding,all;
     private EditText textSearch;
+    private BottomNavigationView menu;
 
     private EstablishmentAdapter estAdapter;
     private ArrayList<Establishment> establishments;
@@ -66,6 +73,7 @@ public class HomeActivity extends AppCompatActivity {
 
         textSearch = findViewById(R.id.etxtBuscar);
 
+        menu = findViewById(R.id.navigation);
 
         pharmacy.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -102,6 +110,31 @@ public class HomeActivity extends AppCompatActivity {
             }
         });
 
+        menu.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+
+                int itemClicked = item.getItemId();
+
+                switch (itemClicked){
+
+                    case R.id.search:
+                        System.out.println("IN SEARCH");
+                    case R.id.home:
+                        System.out.println("IN HOME");
+                    case R.id.offer:
+                        System.out.println("IN OFFER");
+                    case R.id.user:
+                        System.out.println("IN USER");
+                    case R.id.car:
+                        System.out.println("IN CART");
+                }
+
+                return false;
+            }
+        });
+
+
         setEditorListener();
 
         requestLocationAccessPermission();
@@ -112,9 +145,9 @@ public class HomeActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-
         findLocation();
     }
+
 
     public void requestLocationAccessPermission() {
         getSinglePermissionLocation = registerForActivityResult(
