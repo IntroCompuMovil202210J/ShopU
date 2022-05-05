@@ -106,6 +106,7 @@ public class HomeActivity extends AppCompatActivity {
         all.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 estAdapter = new EstablishmentAdapter(getApplicationContext(),establishments);
                 gvwEstablishments.setAdapter(estAdapter);
             }
@@ -114,23 +115,20 @@ public class HomeActivity extends AppCompatActivity {
         menu.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-
                 int itemClicked = item.getItemId();
 
                 switch (itemClicked){
 
                     case R.id.search:
-                        System.out.println("IN SEARCH");
-                    case R.id.home:
-                        System.out.println("IN HOME");
-                    case R.id.offer:
-                        System.out.println("IN OFFER");
-                    case R.id.user:
-                        System.out.println("IN USER");
-                    case R.id.car:
-                        System.out.println("IN CART");
-                }
+                        String name = textSearch.getText().toString();
+                        estAdapter = new EstablishmentAdapter(getApplicationContext(),filterEstablishments(establishments,name));
+                        gvwEstablishments.setAdapter(estAdapter);
 
+                    case R.id.user:
+
+                    case R.id.car:
+
+                }
                 return false;
             }
         });
@@ -139,7 +137,6 @@ public class HomeActivity extends AppCompatActivity {
         setEditorListener();
 
         requestLocationAccessPermission();
-
 
     }
 
