@@ -29,8 +29,8 @@ public class SeguimientoActivity extends AppCompatActivity {
 
         Configuration.getInstance().load(getApplicationContext(), PreferenceManager.getDefaultSharedPreferences(getApplicationContext()));
 
-        longitude = getIntent().getDoubleExtra("latitude", 0d);
-        latitude = getIntent().getDoubleExtra("longitude", 0d);
+        longitude = getIntent().getDoubleExtra("longitude", 0d);
+        latitude = getIntent().getDoubleExtra("latitude", 0d);
         userLocation = new GeoPoint(latitude,longitude);
 
         establishment = new GeoPoint(4.632890, -74.063957);
