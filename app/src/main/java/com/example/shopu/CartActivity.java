@@ -16,11 +16,17 @@ import com.example.shopu.adapters.ProductCartAdapter;
 import com.example.shopu.model.Product;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 public class CartActivity extends AppCompatActivity {
+    FirebaseAuth mAuth;
+    FirebaseDatabase db;
     Button btnOrder;
     ListView lstCartProducts;
     ProductCartAdapter adapter;
@@ -38,6 +44,9 @@ public class CartActivity extends AppCompatActivity {
         adapter = new ProductCartAdapter(this, products);
         navbar = findViewById(R.id.navbar);
         lstCartProducts.setAdapter(adapter);
+        mAuth = FirebaseAuth.getInstance();
+        db = FirebaseDatabase.getInstance();
+
         btnOrder.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -71,10 +80,21 @@ public class CartActivity extends AppCompatActivity {
         return returnList;
     }
 
-    public void order() {
+    private void order() {
         if (products != null)
-            Toast.makeText(CartActivity.this, "Orden hecha", Toast.LENGTH_SHORT).show();
+            publishOrder();
         else
             Toast.makeText(CartActivity.this, "Por favor agrega algún producto", Toast.LENGTH_SHORT).show();
+    }
+
+    private void publishOrder() {
+        Double latitude = getIntent().getDoubleExtra("latitude", 0d);
+        Double longitude = getIntent().getDoubleExtra("longitude", 0d);
+        db.getReference("orders").push().setValue(new HashMap<String, Double>() {{
+            put("clientLatitude", latitude);
+            put("clientLongitude", longitude);
+            put("deliveryMapLatitude", null);
+            put("deliveryMapLongitude", null);
+        }});
     }
 }
