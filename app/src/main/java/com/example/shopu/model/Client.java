@@ -33,6 +33,7 @@ public class Client extends User{
         Cards = cards;
     }
 
+    @Override
     public String getType(){
         return "client";
     }
