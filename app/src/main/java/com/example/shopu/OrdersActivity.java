@@ -26,10 +26,10 @@ public class OrdersActivity extends AppCompatActivity {
 
     ListView lstOrders;
     OrdersAdapter adapter;
-    private ArrayList<Location> locations;
+    ArrayList<Location> locations = new ArrayList<>();
     private double latitudeeee;
     private final double RADIUS_OF_EARTH_KM = 6371.01;
-    DatabaseReference myRef = FirebaseDatabase.getInstance().getReference("orders");
+    DatabaseReference myRef = FirebaseDatabase.getInstance().getReference();
 
 
     @Override
@@ -37,38 +37,43 @@ public class OrdersActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_orders);
 
-        loadLocations();
-
-        locations = new ArrayList<>();
         lstOrders = (ListView) findViewById(R.id.ordersList);
-        adapter = new OrdersAdapter(this,locations);
-        lstOrders.setAdapter(adapter);
-
-
 
 
     }
 
+    @Override
+    protected void onStart() {
+        super.onStart();
+        loadLocations();
+
+    }
 
     public void loadLocations() {
 
 
-        myRef.addListenerForSingleValueEvent(new ValueEventListener() {
+        myRef.child("orders").addValueEventListener(new ValueEventListener() {
             @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                for (DataSnapshot singleSnapshot : dataSnapshot.getChildren()) {
-                    Location location = singleSnapshot.getValue(Location.class);
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if(snapshot.exists()){
 
+                    for(DataSnapshot ds: snapshot.getChildren()){
+                        Location location = ds.getValue(Location.class);
+                        locations.add(location);
+                    }
 
+                    adapter = new OrdersAdapter(OrdersActivity.this,locations);
+                    lstOrders.setAdapter(adapter);
                 }
-
             }
 
             @Override
-            public void onCancelled(DatabaseError databaseError) {
-                Log.w("ERROR", "error en la consulta", databaseError.toException());
+            public void onCancelled(@NonNull DatabaseError error) {
+
             }
         });
+
+
 
 
 

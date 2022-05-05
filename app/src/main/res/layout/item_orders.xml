@@ -42,6 +42,6 @@
         android:layout_weight="0.7"
         android:background="@drawable/res_roundedbutton"
         android:backgroundTint="@color/piel"
-        android:text="Ingresar" />
+        android:text="Hacer pedido" />
 
 </LinearLayout>
