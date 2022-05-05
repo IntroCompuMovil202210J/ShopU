@@ -125,7 +125,7 @@ public class HomeActivity extends AppCompatActivity {
                         gvwEstablishments.setAdapter(estAdapter);
 
                     case R.id.user:
-
+                        startActivity(new Intent(HomeActivity.this, UserProfileActivity.class));
                     case R.id.car:
 
                 }
