@@ -2,6 +2,7 @@ package com.example.shopu;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 
@@ -9,14 +10,14 @@ import org.osmdroid.api.IMapController;
 import org.osmdroid.config.Configuration;
 import org.osmdroid.tileprovider.tilesource.TileSourceFactory;
 import org.osmdroid.util.GeoPoint;
-import org.osmdroid.views.MapController;
 import org.osmdroid.views.MapView;
+import org.osmdroid.views.overlay.Marker;
 
 public class SeguimientoActivity extends AppCompatActivity {
 
-    Double longitud;
+    Double longitude;
     Double latitude;
-
+    Marker userMarker, establishmentMarker;
     MapView map;
 
     GeoPoint userLocation,establishment;
@@ -28,12 +29,28 @@ public class SeguimientoActivity extends AppCompatActivity {
 
         Configuration.getInstance().load(getApplicationContext(), PreferenceManager.getDefaultSharedPreferences(getApplicationContext()));
 
-        userLocation = new GeoPoint(4.62762,-74.0643);
+        longitude = getIntent().getDoubleExtra("latitude", 0d);
+        latitude = getIntent().getDoubleExtra("longitude", 0d);
+        userLocation = new GeoPoint(latitude,longitude);
+
+        establishment = new GeoPoint(4.632890, -74.063957);
 
         map = findViewById(R.id.map);
         map.setTileSource(TileSourceFactory.MAPNIK);
         map.setMultiTouchControls(true);
 
+        userMarker = new Marker(map);
+        Drawable userIcon = getResources().getDrawable(R.drawable.ic_, this.getTheme());
+        userMarker.setIcon(userIcon);
+        userMarker.setPosition(userLocation);
+        userMarker.setAnchor(Marker.ANCHOR_CENTER, Marker.ANCHOR_BOTTOM);
+        map.getOverlays().add(userMarker);
+
+        establishmentMarker = new Marker(map);
+        Drawable establishmentIcon = getResources().getDrawable(R.drawable.ic_baseline_fastfood_24, this.getTheme());
+        establishmentMarker.setIcon(establishmentIcon);
+        establishmentMarker.setPosition(establishment);
+        map.getOverlays().add(establishmentMarker);
 
     }
 

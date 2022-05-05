@@ -84,8 +84,12 @@ public class CartActivity extends AppCompatActivity {
     private void order() {
 
         if (products != null){
-            publishOrder();
-            startActivity(new Intent(getApplicationContext(),SeguimientoActivity.class));
+            Double latitude = getIntent().getDoubleExtra("latitude", 0d);
+            Double longitude = getIntent().getDoubleExtra("longitude", 0d);
+            Intent i = new Intent(getApplicationContext(),SeguimientoActivity.class);
+            i.putExtra("latitude", latitude);
+            i.putExtra("longitude", longitude);
+            startActivity(i);
         }
 
         else
@@ -93,8 +97,7 @@ public class CartActivity extends AppCompatActivity {
     }
 
     private void publishOrder() {
-        Double latitude = getIntent().getDoubleExtra("latitude", 0d);
-        Double longitude = getIntent().getDoubleExtra("longitude", 0d);
+
         // db.getReference("orders").push().setValue(new Location(latitude, longitude));
     }
 
