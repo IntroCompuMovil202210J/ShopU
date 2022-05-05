@@ -1,10 +1,19 @@
 package com.example.shopu;
 
+import androidx.activity.result.ActivityResultCallback;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.Manifest;
+import android.content.ActivityNotFoundException;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -22,16 +31,29 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.io.File;
+
 public class DeliveryProfileActivity extends AppCompatActivity {
+
+    static final int CAMERA_REQUEST = 1;
+
+    ActivityResultLauncher<String> mGetContentGallery;
+    ActivityResultLauncher<Uri> mGetContentCamera;
+
+    ActivityResultLauncher<String> getSinglePermissionGallery;
+    ActivityResultLauncher<String> getSinglePermissionCamera;
+
+    Bitmap imageBitmap;
+    File file;
 
 
     private FirebaseAuth mAuth;
-    Button logOut;
+    Button logOut, DchangePic, DchangePicGal;
     EditText Dname, Dlastname,  Dphone;
     TextView score, Demail, profit;
     DatabaseReference ref;
     FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-    ImageView btnHome;
+    ImageView btnHome, DprofilePic;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,6 +68,39 @@ public class DeliveryProfileActivity extends AppCompatActivity {
         score = findViewById(R.id.score);
         profit = findViewById(R.id.profit);
         btnHome = findViewById(R.id.btn_home);
+        DchangePic = findViewById(R.id.DchangePic);
+        DchangePicGal = findViewById(R.id.DchangePicGal);
+        DprofilePic = findViewById(R.id.DprofilePic);
+
+
+        file = new File(getFilesDir(), "picFromCamera");
+
+        requestCameraPermission();
+        requestReadStoragePermission();
+        getSinglePermissionCamera.launch(Manifest.permission.CAMERA);
+
+        mGetContentGallery = registerForActivityResult(
+                new ActivityResultContracts.GetContent(),
+                new ActivityResultCallback<Uri>() {
+                    @Override
+                    public void onActivityResult(Uri uriLocal) {
+                        loadImage(uriLocal);
+                    }
+                });
+
+        DchangePicGal.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mGetContentGallery.launch("image/*");
+            }
+        });
+
+        DchangePic.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                takePicture();
+            }
+        });
 
         mAuth = FirebaseAuth.getInstance();
 
@@ -95,5 +150,64 @@ public class DeliveryProfileActivity extends AppCompatActivity {
 
             }
         });
+        getSinglePermissionGallery.launch(Manifest.permission.READ_EXTERNAL_STORAGE);
+    }
+
+    public void requestCameraPermission() {
+        getSinglePermissionCamera = registerForActivityResult(
+                new ActivityResultContracts.RequestPermission(),
+                new ActivityResultCallback<Boolean>() {
+                    @Override
+                    public void onActivityResult(Boolean result) {
+                        if (result == true) {
+
+                        } else {
+                        }
+                    }
+                });
+
+
+    }
+
+
+    public void requestReadStoragePermission() {
+        getSinglePermissionGallery = registerForActivityResult(
+                new ActivityResultContracts.RequestPermission(),
+                new ActivityResultCallback<Boolean>() {
+                    @Override
+                    public void onActivityResult(Boolean result) {
+                        if (result == true) {
+
+                        } else {
+                        }
+                    }
+                });
+
+
+
+    }
+
+    public void loadImage(Uri uri) {
+        DprofilePic.setImageURI(uri);
+    }
+
+    private void takePicture() {
+        Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        try {
+            startActivityForResult(takePictureIntent, CAMERA_REQUEST);
+        } catch (ActivityNotFoundException e) {
+            Log.e("PERMISSION_APP", e.getMessage());
+        }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        System.out.println("hereeeee");
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == CAMERA_REQUEST && resultCode == RESULT_OK) {
+            Bundle extras = data.getExtras();
+            imageBitmap = (Bitmap) extras.get("data");
+            DprofilePic.setImageBitmap(imageBitmap);
+        }
     }
 }
