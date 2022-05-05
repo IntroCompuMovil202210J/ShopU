@@ -15,13 +15,14 @@
         android:background="@drawable/res_roundedbutton"
         android:backgroundTint="@color/piel"
         android:layout_below="@id/profit"
+        android:layout_marginBottom="16dp"
         android:textSize="10dp"
         android:text="Sing Out" />
 
     <EditText
         android:id="@+id/Dname"
         android:layout_width="match_parent"
-        android:layout_marginBottom="24dp"
+        android:layout_marginBottom="12dp"
         android:layout_height="wrap_content"
         android:background="@drawable/custom_edit_text"
         android:paddingStart="12dp"
@@ -33,7 +34,7 @@
         android:layout_width="match_parent"
         android:background="@drawable/custom_edit_text"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="24dp"
+        android:layout_marginBottom="12dp"
         android:layout_marginTop="12dp"
         android:paddingStart="12dp"
         android:layout_below="@+id/Dname"
@@ -46,7 +47,7 @@
         android:background="@drawable/custom_text_view"
         android:textSize="18dp"
         android:textColor="@color/black"
-        android:layout_marginBottom="24dp"
+        android:layout_marginBottom="12dp"
         android:layout_marginTop="12dp"
         android:paddingStart="12dp"
         android:layout_below="@+id/Dlastname"
@@ -57,7 +58,7 @@
         android:layout_width="match_parent"
         android:background="@drawable/custom_edit_text"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="24dp"
+        android:layout_marginBottom="12dp"
         android:layout_marginTop="12dp"
         android:paddingStart="12dp"
         android:layout_below="@+id/Demail"
@@ -70,7 +71,7 @@
         android:textSize="18dp"
         android:textColor="@color/black"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="24dp"
+        android:layout_marginBottom="12dp"
         android:layout_marginTop="12dp"
         android:paddingStart="12dp"
         android:layout_below="@+id/Dphone"
@@ -83,12 +84,11 @@
         android:textSize="18dp"
         android:textColor="@color/black"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="24dp"
+        android:layout_marginBottom="12dp"
         android:layout_marginTop="12dp"
         android:paddingStart="12dp"
         android:layout_below="@+id/score"
         android:hint="Ganancias" />
-
 
 
     <TextView
@@ -96,6 +96,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Nombre"
+        android:layout_below="@id/DchangePic"
         android:layout_marginBottom="8dp"
         android:paddingStart="13dp"
         android:textSize="10dp"
@@ -152,17 +153,56 @@
         android:layout_below="@id/score"
         />
 
-    <com.google.android.material.bottomnavigation.BottomNavigationView
-        android:layout_width="match_parent"
+    <ImageView
+        android:layout_width="wrap_content"
+        android:gravity="center"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_marginLeft="5dp"
-        android:layout_marginRight="5dp"
-        android:layout_marginBottom="15dp"
-        android:background="@drawable/res_roundednavbar"
-        app:itemRippleColor="@color/white"
-        app:itemTextColor="@color/white"
-        app:menu="@menu/bottom_nav_menu" />
+        android:src="@drawable/ic_white_home"
+        android:padding="15dp"
+        android:id="@+id/btn_home"
+        android:background="@drawable/res_roundedbutton"
+        android:backgroundTint="@color/piel"
+        android:layout_below="@id/logOut"
+        android:layout_centerHorizontal="true"
+        />
+
+    <ImageView
+        android:id="@+id/DprofilePic"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:maxWidth="174dp"
+        android:maxHeight="174dp"
+        android:scaleType="fitCenter"
+        android:adjustViewBounds="true"
+        android:layout_marginBottom="20dp"
+        android:layout_centerHorizontal="true"
+        tools:srcCompat="@tools:sample/avatars" />
+
+
+    <Button
+        android:id="@+id/DchangePic"
+        android:layout_width="128dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/DprofilePic"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="20dp"
+        android:background="@drawable/res_roundedbutton"
+        android:backgroundTint="@color/piel"
+        android:text="Cambiar foto perfil Camara"
+        android:textSize="9dp" />
+
+    <Button
+        android:id="@+id/DchangePicGal"
+        android:layout_width="128dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/DprofilePic"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="20dp"
+        android:layout_alignParentRight="true"
+        android:background="@drawable/res_roundedbutton"
+        android:backgroundTint="@color/piel"
+        android:text="Cambiar foto perfil galeria"
+        android:textSize="9dp" />
 
 
 </RelativeLayout>

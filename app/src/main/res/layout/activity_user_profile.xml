@@ -71,6 +71,7 @@
         android:layout_height="wrap_content"
         android:hint="Nombre"
         android:layout_marginBottom="8dp"
+        android:layout_below="@id/changePic"
         android:paddingStart="13dp"
         android:textSize="10dp"
         />
@@ -106,15 +107,55 @@
         />
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/navigation"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:layout_marginLeft="5dp"
-        android:layout_marginRight="5dp"
         android:layout_marginBottom="15dp"
-        android:background="@drawable/res_roundednavbar"
+        android:layout_marginRight="5dp"
+        android:layout_marginLeft="5dp"
         app:itemRippleColor="@color/white"
         app:itemTextColor="@color/white"
-        app:menu="@menu/bottom_nav_menu" />
+        android:background="@drawable/res_roundednavbar"
+        app:menu="@menu/bottom_nav_menu"/>
+
+    <ImageView
+        android:id="@+id/profilePic"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:maxWidth="174dp"
+        android:maxHeight="174dp"
+        android:scaleType="fitCenter"
+        android:adjustViewBounds="true"
+        android:layout_marginBottom="20dp"
+        android:layout_centerHorizontal="true"
+        tools:srcCompat="@tools:sample/avatars" />
+
+
+    <Button
+        android:id="@+id/changePic"
+        android:layout_width="128dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/profilePic"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="20dp"
+        android:background="@drawable/res_roundedbutton"
+        android:backgroundTint="@color/piel"
+        android:text="Cambiar foto perfil Camara"
+        android:textSize="9dp" />
+
+    <Button
+        android:id="@+id/changePicGal"
+        android:layout_width="128dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/profilePic"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="20dp"
+        android:layout_alignParentRight="true"
+        android:background="@drawable/res_roundedbutton"
+        android:backgroundTint="@color/piel"
+        android:text="Cambiar foto perfil galeria"
+        android:textSize="9dp" />
+
 
 </RelativeLayout>
