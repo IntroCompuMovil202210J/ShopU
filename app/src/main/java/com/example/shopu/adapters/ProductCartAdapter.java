@@ -38,7 +38,7 @@ public class ProductCartAdapter extends ArrayAdapter<Product> {
         Product product = this.products.get(position);
         // Populate the data into the template view using the data object
         txtName.setText(product.getName());
-        txtPrice.setText(product.getPrice());
+        txtPrice.setText(product.getPrice().toString());
 
         // Return the completed view to render on screen
         return convertView;
