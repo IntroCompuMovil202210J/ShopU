@@ -5,21 +5,31 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:padding="16dp"
+    android:padding="8dp"
     tools:context=".DeliveryHomeActivity"
+
+
     >
+
+    <TextView
+        android:id="@+id/texto"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+
+        />
 
     <Button
 
-        android:layout_marginTop="10dp"
         android:id="@+id/btnProfile"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_below="@id/texto"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="15dp"
         android:background="@drawable/res_roundedbutton"
         android:backgroundTint="@color/piel"
         android:drawableLeft="@drawable/profile80"
         android:text="Perfil"
-        android:layout_marginBottom="15dp"
 
         />
 

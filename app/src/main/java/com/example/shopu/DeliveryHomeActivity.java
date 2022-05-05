@@ -20,7 +20,12 @@ public class DeliveryHomeActivity extends AppCompatActivity {
         btnProfile = findViewById(R.id.btnProfile);
         btnOrder = findViewById(R.id.btnOrders);
 
-
+        btnProfile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(view.getContext(),DeliveryProfileActivity.class));
+            }
+        });
 
         btnOrder.setOnClickListener(new View.OnClickListener() {
             @Override
