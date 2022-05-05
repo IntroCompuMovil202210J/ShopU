@@ -7,16 +7,19 @@ public class User {
     private String password;
     private String phone;
     private String type;
+    private Location location;
 
     public User() {
     }
+
     public User(String name, String lastName, String email, String password, String phone) {
         this.name = name;
         this.lastName = lastName;
         this.email = email;
         this.password = password;
         this.phone = phone;
-        this.type = "user";
+        this.type = type;
+        this.location = location;
     }
 
     public String getName() {
@@ -61,6 +64,14 @@ public class User {
 
     public String getType(){
         return this.type;
+    }
+
+    public Location getLocation() {
+        return location;
+    }
+
+    public void setLocation(Location location) {
+        this.location = location;
     }
 
     @Override
