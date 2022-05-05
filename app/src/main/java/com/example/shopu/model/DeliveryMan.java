@@ -31,6 +31,7 @@ public class DeliveryMan extends User{
         this.profit = profit;
     }
 
+    @Override
     public String getType(){
         return "deliveryMan";
     }
