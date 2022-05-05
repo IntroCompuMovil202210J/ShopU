@@ -51,6 +51,10 @@ public class RegisterScreenActivity extends AppCompatActivity {
         btnSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+
+
+
                 submit();
             }
         });
