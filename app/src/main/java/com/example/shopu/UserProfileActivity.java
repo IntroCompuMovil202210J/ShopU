@@ -5,14 +5,18 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.example.shopu.adapters.EstablishmentAdapter;
 import com.example.shopu.model.User;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.navigation.NavigationBarView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -27,6 +31,7 @@ public class UserProfileActivity extends AppCompatActivity {
     TextView email;
     DatabaseReference ref;
     FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+    private BottomNavigationView menu;
 
 
     @Override
@@ -39,6 +44,8 @@ public class UserProfileActivity extends AppCompatActivity {
         email = findViewById(R.id.email);
         phone = findViewById(R.id.phone);
         logOut = findViewById(R.id.logOut);
+
+        menu = findViewById(R.id.navigation);
 
         mAuth = FirebaseAuth.getInstance();
 
@@ -57,6 +64,23 @@ public class UserProfileActivity extends AppCompatActivity {
 
                     }
                 }
+            }
+        });
+
+        menu.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                int itemClicked = item.getItemId();
+
+                switch (itemClicked){
+
+
+                    case R.id.home:
+                        startActivity(new Intent(UserProfileActivity.this, HomeActivity.class));
+                    case R.id.car:
+
+                }
+                return false;
             }
         });
 
