@@ -80,8 +80,8 @@
         android:layout_height="match_parent"
         android:layout_below="@+id/lytCategorias"
         android:layout_marginTop="20dp"
-        android:orientation="horizontal"
         android:numColumns="2"
+        android:orientation="horizontal"
         android:verticalSpacing="10dp">
 
     </GridView>
@@ -90,11 +90,11 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:layout_marginBottom="15dp"
-        android:layout_marginRight="5dp"
         android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:layout_marginBottom="15dp"
+        android:background="@drawable/res_roundednavbar"
         app:itemRippleColor="@color/white"
         app:itemTextColor="@color/white"
-        android:background="@drawable/res_roundednavbar"
-        app:menu="@menu/bottom_nav_menu"/>
+        app:menu="@menu/bottom_nav_menu" />
 </RelativeLayout>
