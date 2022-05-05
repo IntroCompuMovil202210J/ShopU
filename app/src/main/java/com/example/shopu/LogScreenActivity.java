@@ -48,15 +48,8 @@ public class LogScreenActivity extends AppCompatActivity {
         btnIniciarse.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(etxtEmail.getText().toString().isEmpty() && etxtPassword.getText().toString().isEmpty() ||
-                        (etxtPassword.getText().toString().isEmpty()) || (etxtEmail.getText().toString().isEmpty())){
-                    Toast.makeText(LogScreenActivity.this, "Valores incompletos", Toast.LENGTH_SHORT).show();
-                }else{
+                if(validateEmail(etxtEmail.getText().toString()) || validatePassword(etxtPassword.getText().toString()))
                     signIn(String.valueOf(etxtEmail.getText()), String.valueOf(etxtPassword.getText()));
-
-                }
-
-
             }
         });
     }
@@ -64,9 +57,28 @@ public class LogScreenActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
-        //TODO Generar sesion para el usuario que ingresa
         updateUI(mAuth.getCurrentUser());
 
+    }
+
+    private boolean validateEmail(String email) {
+        boolean flag = true;
+        if (email.isEmpty()) {
+            etxtEmail.setError("Por favor ingresa un correo");
+            etxtEmail.requestFocus();
+            flag = false;
+        }
+        return flag;
+    }
+
+    private boolean validatePassword(String password) {
+        boolean flag = true;
+        if (password.isEmpty()) {
+            etxtPassword.setError("Por favor ingresa una contraseña");
+            etxtPassword.requestFocus();
+            flag = false;
+        }
+        return flag;
     }
 
     private void signIn(String email, String password) {
@@ -106,7 +118,7 @@ public class LogScreenActivity extends AppCompatActivity {
                 }
             });
 
-        }else {
+        } else {
             etxtEmail.setText("");
             etxtPassword.setText("");
         }
