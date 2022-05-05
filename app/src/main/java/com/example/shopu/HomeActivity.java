@@ -1,34 +1,67 @@
 package com.example.shopu;
 
+import androidx.activity.result.ActivityResultCallback;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.Manifest;
 import android.os.Bundle;
 import android.widget.GridView;
+import android.widget.Toast;
 
 import com.example.shopu.adapters.EstablishmentAdapter;
 import com.example.shopu.model.Establishment;
+import com.google.android.gms.location.FusedLocationProviderClient;
+import com.google.android.gms.location.LocationServices;
 
 import java.util.ArrayList;
 
 public class HomeActivity extends AppCompatActivity {
 
-    GridView gvwEstablishments;
-    EstablishmentAdapter estAdapter;
-    ArrayList<Establishment> establishments;
+    private GridView gvwEstablishments;
+    private EstablishmentAdapter estAdapter;
+    private ArrayList<Establishment> establishments;
+    private FusedLocationProviderClient mFusedLocationClient;
+    private ActivityResultLauncher<String> getSinglePermissionLocation;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
+        requestLocationAccessPermission();
 
-        loadEstablishments();
-        gvwEstablishments = findViewById(R.id.gvwEstablishments);
-        estAdapter = new EstablishmentAdapter(this,establishments);
-        gvwEstablishments.setAdapter(estAdapter);
+        findLocation();
 
     }
 
+    public void requestLocationAccessPermission() {
+        getSinglePermissionLocation = registerForActivityResult(
+                new ActivityResultContracts.RequestPermission(),
+                new ActivityResultCallback<Boolean>() {
+                    @Override
+                    public void onActivityResult(Boolean result) {
+                        if (result == true) {
+
+                            loadEstablishments();
+                            gvwEstablishments = findViewById(R.id.gvwEstablishments);
+                            estAdapter = new EstablishmentAdapter(getApplicationContext(),establishments);
+                            gvwEstablishments.setAdapter(estAdapter);
+
+                        } else {
+                            Toast.makeText(getApplicationContext(), "No location, no app. Bitch", Toast.LENGTH_LONG).show();
+                        }
+                    }
+                });
+
+        getSinglePermissionLocation.launch(Manifest.permission.ACCESS_FINE_LOCATION);
+        mFusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
+    }
+
+    public void findLocation(){
+
+    }
 
     public void loadEstablishments(){
 
