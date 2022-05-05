@@ -9,16 +9,20 @@ public class Establishment {
     private String Score;
     private String Photo;
     private List<Product> productList;
+    private EstablishmentCategory category;
+
+
 
     public Establishment() {
     }
 
-    public Establishment(String name, String address, String score, String photo, List<Product> productList) {
+    public Establishment(String name, String address, String score, String photo, List<Product> productList,EstablishmentCategory category) {
         this.name = name;
         this.address = address;
         Score = score;
         Photo = photo;
         this.productList = productList;
+        this.category = category;
     }
 
     public String getName() {
@@ -59,5 +63,13 @@ public class Establishment {
 
     public void setProductList(List<Product> productList) {
         this.productList = productList;
+    }
+
+    public EstablishmentCategory getCategory() {
+        return category;
+    }
+
+    public void setCategory(EstablishmentCategory category) {
+        this.category = category;
     }
 }
