@@ -199,7 +199,7 @@ public class HomeActivity extends AppCompatActivity {
                         }
                     });
         }else{
-            txtAddress.setText("we need your location to operate");
+            txtAddress.setText("Universidad Javeriana");
         }
 
     }
