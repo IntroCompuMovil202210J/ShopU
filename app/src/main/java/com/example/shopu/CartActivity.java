@@ -13,7 +13,7 @@ import android.widget.Toast;
 
 import com.example.shopu.adapters.EstablishmentAdapter;
 import com.example.shopu.adapters.ProductCartAdapter;
-import com.example.shopu.model.Location;
+//import com.example.shopu.model.Location;
 import com.example.shopu.model.Product;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
@@ -82,8 +82,12 @@ public class CartActivity extends AppCompatActivity {
     }
 
     private void order() {
-        if (products != null)
+
+        if (products != null){
             publishOrder();
+            startActivity(new Intent(getApplicationContext(),SeguimientoActivity.class));
+        }
+
         else
             Toast.makeText(CartActivity.this, "Por favor agrega algún producto", Toast.LENGTH_SHORT).show();
     }
@@ -91,6 +95,7 @@ public class CartActivity extends AppCompatActivity {
     private void publishOrder() {
         Double latitude = getIntent().getDoubleExtra("latitude", 0d);
         Double longitude = getIntent().getDoubleExtra("longitude", 0d);
-        db.getReference("orders").push().setValue(new Location(latitude, longitude));
+        // db.getReference("orders").push().setValue(new Location(latitude, longitude));
     }
+
 }
