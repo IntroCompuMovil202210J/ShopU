@@ -100,6 +100,7 @@ public class UserProfileActivity extends AppCompatActivity {
         changePic.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
                 takePicture();
             }
         });
