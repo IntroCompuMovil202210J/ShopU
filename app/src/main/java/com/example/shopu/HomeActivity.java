@@ -28,6 +28,7 @@ import android.widget.Toast;
 import android.widget.ImageButton;
 
 import com.example.shopu.adapters.EstablishmentAdapter;
+import com.example.shopu.model.Cart;
 import com.example.shopu.model.Establishment;
 import com.example.shopu.model.EstablishmentCategory;
 import com.google.android.gms.location.FusedLocationProviderClient;
@@ -130,9 +131,12 @@ public class HomeActivity extends AppCompatActivity {
                         gvwEstablishments.setAdapter(estAdapter);
 
                     case R.id.user:
-
+                        startActivity(new Intent(HomeActivity.this, UserProfileActivity.class));
                     case R.id.car:
-
+                        Intent i = new Intent(HomeActivity.this, CartActivity.class);
+                        i.putExtra("latitude", latitude);
+                        i.putExtra("longitude", longitude);
+                        startActivity(i);
                 }
                 return false;
             }

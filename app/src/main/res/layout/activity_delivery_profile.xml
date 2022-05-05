@@ -15,6 +15,7 @@
         android:background="@drawable/res_roundedbutton"
         android:backgroundTint="@color/piel"
         android:layout_below="@id/profit"
+        android:layout_marginBottom="16dp"
         android:textSize="10dp"
         android:text="Sing Out" />
 
@@ -152,17 +153,18 @@
         android:layout_below="@id/score"
         />
 
-    <com.google.android.material.bottomnavigation.BottomNavigationView
-        android:layout_width="match_parent"
+    <ImageView
+        android:layout_width="wrap_content"
+        android:gravity="center"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_marginLeft="5dp"
-        android:layout_marginRight="5dp"
-        android:layout_marginBottom="15dp"
-        android:background="@drawable/res_roundednavbar"
-        app:itemRippleColor="@color/white"
-        app:itemTextColor="@color/white"
-        app:menu="@menu/bottom_nav_menu" />
+        android:src="@drawable/ic_white_home"
+        android:padding="15dp"
+        android:id="@+id/btn_home"
+        android:background="@drawable/res_roundedbutton"
+        android:backgroundTint="@color/piel"
+        android:layout_below="@id/logOut"
+        android:layout_centerHorizontal="true"
+        />
 
 
 </RelativeLayout>

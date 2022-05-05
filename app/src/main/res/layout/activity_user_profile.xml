@@ -106,15 +106,17 @@
         />
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/navigation"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:layout_marginLeft="5dp"
-        android:layout_marginRight="5dp"
         android:layout_marginBottom="15dp"
-        android:background="@drawable/res_roundednavbar"
+        android:layout_marginRight="5dp"
+        android:layout_marginLeft="5dp"
         app:itemRippleColor="@color/white"
         app:itemTextColor="@color/white"
-        app:menu="@menu/bottom_nav_menu" />
+        android:background="@drawable/res_roundednavbar"
+        app:menu="@menu/bottom_nav_menu"/>
+
 
 </RelativeLayout>

@@ -14,6 +14,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.ShopU">
         <activity
+            android:name=".CartActivity"
+            android:exported="false" />
+        <activity
             android:name=".DeliveryProfileActivity"
             android:exported="false" />
         <activity

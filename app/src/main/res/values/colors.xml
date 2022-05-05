@@ -19,5 +19,7 @@
     <color name="morado">#4b0081</color>
     <color name="verde">#70FF8B</color>
     <color name="rojoClaro">#F3464A</color>
+    <color name="order_green">#00D335</color>
+
 
 </resources>
