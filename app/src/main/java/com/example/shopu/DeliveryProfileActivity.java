@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -30,6 +31,7 @@ public class DeliveryProfileActivity extends AppCompatActivity {
     TextView score, Demail, profit;
     DatabaseReference ref;
     FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+    ImageView btnHome;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,8 +45,17 @@ public class DeliveryProfileActivity extends AppCompatActivity {
         logOut = findViewById(R.id.logOut);
         score = findViewById(R.id.score);
         profit = findViewById(R.id.profit);
+        btnHome = findViewById(R.id.btn_home);
 
         mAuth = FirebaseAuth.getInstance();
+
+        btnHome.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(DeliveryProfileActivity.this,DeliveryHomeActivity.class));
+            }
+        });
+
 
         ref = FirebaseDatabase.getInstance().getReference("users").child(user.getUid());
         ref.get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
@@ -62,13 +73,12 @@ public class DeliveryProfileActivity extends AppCompatActivity {
                         profit.setText(usuario.getProfit().toString());
 
 
-
-
-
                     }
                 }
             }
         });
+
+
 
     }
 
