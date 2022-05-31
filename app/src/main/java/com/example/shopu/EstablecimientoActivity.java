@@ -2,22 +2,16 @@ package com.example.shopu;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import com.example.shopu.adapters.EstablishmentAdapter;
 import com.example.shopu.adapters.ProductAdapter;
 import com.example.shopu.model.Establishment;
-import com.example.shopu.model.EstablishmentCategory;
+import com.example.shopu.enums.EstablishmentCategory;
 import com.example.shopu.model.Product;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class EstablecimientoActivity extends AppCompatActivity {
 

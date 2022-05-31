@@ -1,5 +1,7 @@
 package com.example.shopu.model;
 
+import com.example.shopu.enums.Payment;
+
 import java.util.List;
 
 public class Order {

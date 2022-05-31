@@ -1,5 +1,7 @@
 package com.example.shopu.model;
 
+import com.example.shopu.enums.EstablishmentCategory;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
