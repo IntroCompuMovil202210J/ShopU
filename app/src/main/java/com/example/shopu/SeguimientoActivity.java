@@ -20,7 +20,7 @@ public class SeguimientoActivity extends AppCompatActivity {
     Marker userMarker, establishmentMarker;
     MapView map;
 
-    GeoPoint userLocation,establishment;
+    GeoPoint userLocation, establishmentLocation;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,7 +33,7 @@ public class SeguimientoActivity extends AppCompatActivity {
         latitude = getIntent().getDoubleExtra("latitude", 0d);
         userLocation = new GeoPoint(latitude,longitude);
 
-        establishment = new GeoPoint(4.632890, -74.063957);
+        establishmentLocation = new GeoPoint(4.632890, -74.063957);
 
         map = findViewById(R.id.map);
         map.setTileSource(TileSourceFactory.MAPNIK);
@@ -49,7 +49,7 @@ public class SeguimientoActivity extends AppCompatActivity {
         establishmentMarker = new Marker(map);
         Drawable establishmentIcon = getResources().getDrawable(R.drawable.ic_baseline_fastfood_24, this.getTheme());
         establishmentMarker.setIcon(establishmentIcon);
-        establishmentMarker.setPosition(establishment);
+        establishmentMarker.setPosition(establishmentLocation);
         map.getOverlays().add(establishmentMarker);
 
     }
@@ -61,12 +61,15 @@ public class SeguimientoActivity extends AppCompatActivity {
         IMapController mapController = map.getController();
         mapController.setZoom(18.0);
         mapController.setCenter(this.userLocation);
-
     }
 
     @Override
     protected void onPause() {
         super.onPause();
         map.onPause();
+    }
+
+    private void checkLocationSettings() {
+        //TODO implement
     }
 }
