@@ -168,8 +168,7 @@ public class RegisterScreenActivity extends AppCompatActivity {
         mAuth.createUserWithEmailAndPassword(etxtEmail.getText().toString(), etxtPassword.getText().toString()).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
-                if (task.isSuccessful())
-                    saveUser();
+                if (task.isSuccessful()) saveUser();
             }
         });
     }
