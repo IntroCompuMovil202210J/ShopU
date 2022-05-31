@@ -41,7 +41,6 @@ public class HomeActivity extends AppCompatActivity {
 
     private GridView gvwEstablishments;
     private TextView txtAddress;
-    private Button pharmacy,stationery,feeding,all;
     private EditText textSearch;
     private BottomNavigationView menu;
 
@@ -63,61 +62,20 @@ public class HomeActivity extends AppCompatActivity {
         txtAddress = findViewById(R.id.txtDireccion);
         gvwEstablishments = findViewById(R.id.gvwEstablishments);
 
-        pharmacy = findViewById(R.id.btnFarmacia);
-        stationery = findViewById(R.id.btnPapeleria);
-        feeding = findViewById(R.id.btnAlimentacion);
-        all = findViewById(R.id.btnAll);
-
         textSearch = findViewById(R.id.etxtBuscar);
 
         menu = findViewById(R.id.navigation);
-
-        pharmacy.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                estAdapter = new EstablishmentAdapter(getApplicationContext(),filterEstablishments(establishments,EstablishmentCategory.PHARMACY));
-                gvwEstablishments.setAdapter(estAdapter);
-            }
-
-        });
-
-        feeding.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                estAdapter = new EstablishmentAdapter(getApplicationContext(),filterEstablishments(establishments,EstablishmentCategory.FEEDING));
-                gvwEstablishments.setAdapter(estAdapter);
-
-            }
-        });
-
-        stationery.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                estAdapter = new EstablishmentAdapter(getApplicationContext(),filterEstablishments(establishments,EstablishmentCategory.STATIONERY));
-                gvwEstablishments.setAdapter(estAdapter);
-
-            }
-        });
-
-        all.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                estAdapter = new EstablishmentAdapter(getApplicationContext(),establishments);
-                gvwEstablishments.setAdapter(estAdapter);
-            }
-        });
 
         menu.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 int itemClicked = item.getItemId();
 
-                switch (itemClicked){
+                switch (itemClicked) {
 
                     case R.id.search:
                         String name = textSearch.getText().toString();
-                        estAdapter = new EstablishmentAdapter(getApplicationContext(),filterEstablishments(establishments,name));
+                        estAdapter = new EstablishmentAdapter(getApplicationContext(), filterEstablishments(establishments, name));
                         gvwEstablishments.setAdapter(estAdapter);
 
                     case R.id.user:
@@ -145,6 +103,25 @@ public class HomeActivity extends AppCompatActivity {
         findLocation();
     }
 
+    public void onAllClicked(View view) {
+        estAdapter = new EstablishmentAdapter(getApplicationContext(), establishments);
+        gvwEstablishments.setAdapter(estAdapter);
+    }
+
+    public void onFeedingClicked(View view) {
+        estAdapter = new EstablishmentAdapter(getApplicationContext(), filterEstablishments(establishments, EstablishmentCategory.FEEDING));
+        gvwEstablishments.setAdapter(estAdapter);
+    }
+
+    public void onStationeryClicked(View view) {
+        estAdapter = new EstablishmentAdapter(getApplicationContext(), filterEstablishments(establishments, EstablishmentCategory.STATIONERY));
+        gvwEstablishments.setAdapter(estAdapter);
+    }
+
+    public void onPharmacyClicked(View view) {
+        estAdapter = new EstablishmentAdapter(getApplicationContext(), filterEstablishments(establishments, EstablishmentCategory.PHARMACY));
+        gvwEstablishments.setAdapter(estAdapter);
+    }
 
     public void requestLocationAccessPermission() {
         getSinglePermissionLocation = registerForActivityResult(
@@ -155,7 +132,7 @@ public class HomeActivity extends AppCompatActivity {
                         if (result == true) {
 
                             loadEstablishments();
-                            estAdapter = new EstablishmentAdapter(getApplicationContext(),establishments);
+                            estAdapter = new EstablishmentAdapter(getApplicationContext(), establishments);
                             gvwEstablishments.setAdapter(estAdapter);
 
                         } else {
@@ -168,7 +145,7 @@ public class HomeActivity extends AppCompatActivity {
 
     }
 
-    public void findLocation(){
+    public void findLocation() {
 
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) ==
                 PackageManager.PERMISSION_GRANTED) {
@@ -187,29 +164,31 @@ public class HomeActivity extends AppCompatActivity {
                             }
                         }
                     });
-        }else{
+        } else {
             txtAddress.setText("Universidad Javeriana");
         }
 
     }
 
-    public void writeLocation(){
-        if (longitude!= 0 || latitude != 0) {
+    public void writeLocation() {
+        if (longitude != 0 || latitude != 0) {
 
             try {
-                List<Address> addresses = mGeocoder.getFromLocation(latitude,longitude, 1);
+                List<Address> addresses = mGeocoder.getFromLocation(latitude, longitude, 1);
                 if (addresses != null && !addresses.isEmpty()) {
                     Address addressResult = addresses.get(0);
                     txtAddress.setText(addressResult.getAddressLine(0));
 
-                } else {Toast.makeText(getApplicationContext(), "Dirección no encontrada", Toast.LENGTH_SHORT).show();}
+                } else {
+                    Toast.makeText(getApplicationContext(), "Dirección no encontrada", Toast.LENGTH_SHORT).show();
+                }
             } catch (IOException e) {
                 e.printStackTrace();
             }
         }
     }
 
-    public void setEditorListener(){
+    public void setEditorListener() {
 
         textSearch.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
@@ -217,34 +196,51 @@ public class HomeActivity extends AppCompatActivity {
 
                 String name;
                 if (i == EditorInfo.IME_ACTION_SEND) {
-                   name = textSearch.getText().toString();
+                    name = textSearch.getText().toString();
                     if (!name.isEmpty()) {
 
-                        estAdapter = new EstablishmentAdapter(getApplicationContext(),filterEstablishments(establishments,name));
+                        estAdapter = new EstablishmentAdapter(getApplicationContext(), filterEstablishments(establishments, name));
                         gvwEstablishments.setAdapter(estAdapter);
 
-                    } else {Toast.makeText(getApplicationContext(), "La busqueda esta vacia", Toast.LENGTH_SHORT).show();}
+                    } else {
+                        Toast.makeText(getApplicationContext(), "La busqueda esta vacia", Toast.LENGTH_SHORT).show();
+                    }
 
                 }
 
                 return false;
-            };
+            }
+
+            ;
         });
 
-    };
+    }
+
+    ;
 
 
-
-    public void loadEstablishments(){
+    public void loadEstablishments() {
 
         this.establishments = new ArrayList<>();
 
-        Establishment e1 = new Establishment(); e1.setName("El corral"); e1.setCategory(EstablishmentCategory.FEEDING);
-        Establishment e2 = new Establishment(); e2.setName("Drogas la rebaja"); e2.setCategory(EstablishmentCategory.PHARMACY);
-        Establishment e3 = new Establishment(); e3.setName("Comercial Papelera"); e3.setCategory(EstablishmentCategory.STATIONERY);
-        Establishment e4 = new Establishment(); e4.setName("Sierra Nevada"); e4.setCategory(EstablishmentCategory.FEEDING);
-        Establishment e5 = new Establishment(); e5.setName("Farmatodo"); e5.setCategory(EstablishmentCategory.PHARMACY);
-        Establishment e6 = new Establishment(); e6.setName("El triangulo"); e6.setCategory(EstablishmentCategory.STATIONERY);
+        Establishment e1 = new Establishment();
+        e1.setName("El corral");
+        e1.setCategory(EstablishmentCategory.FEEDING);
+        Establishment e2 = new Establishment();
+        e2.setName("Drogas la rebaja");
+        e2.setCategory(EstablishmentCategory.PHARMACY);
+        Establishment e3 = new Establishment();
+        e3.setName("Comercial Papelera");
+        e3.setCategory(EstablishmentCategory.STATIONERY);
+        Establishment e4 = new Establishment();
+        e4.setName("Sierra Nevada");
+        e4.setCategory(EstablishmentCategory.FEEDING);
+        Establishment e5 = new Establishment();
+        e5.setName("Farmatodo");
+        e5.setCategory(EstablishmentCategory.PHARMACY);
+        Establishment e6 = new Establishment();
+        e6.setName("El triangulo");
+        e6.setCategory(EstablishmentCategory.STATIONERY);
 
         establishments.add(e1);
         establishments.add(e2);
@@ -261,13 +257,13 @@ public class HomeActivity extends AppCompatActivity {
 
     }
 
-    public ArrayList<Establishment> filterEstablishments(List<Establishment> establishments, EstablishmentCategory category){
+    public ArrayList<Establishment> filterEstablishments(List<Establishment> establishments, EstablishmentCategory category) {
 
         ArrayList<Establishment> toReturn = new ArrayList<>();
 
-        for(Establishment e : establishments){
+        for (Establishment e : establishments) {
 
-            if(e.getCategory() == category){
+            if (e.getCategory() == category) {
                 toReturn.add(e);
             }
 
@@ -276,13 +272,13 @@ public class HomeActivity extends AppCompatActivity {
         return toReturn;
     }
 
-    public ArrayList<Establishment> filterEstablishments(List<Establishment> establishments, String filter){
+    public ArrayList<Establishment> filterEstablishments(List<Establishment> establishments, String filter) {
 
         ArrayList<Establishment> toReturn = new ArrayList<>();
 
-        for(Establishment e : establishments){
+        for (Establishment e : establishments) {
 
-            if(e.getName().contains(filter)){
+            if (e.getName().contains(filter)) {
                 toReturn.add(e);
             }
 

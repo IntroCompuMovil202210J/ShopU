@@ -51,6 +51,7 @@
             android:layout_height="30dp"
             android:layout_weight="0.1"
             android:textSize="10dp"
+            android:onClick="onAllClicked"
             android:text="todo" />
 
         <Button
@@ -62,6 +63,7 @@
             android:layout_height="30dp"
             android:layout_weight="1"
             android:textSize="10dp"
+            android:onClick="onStationeryClicked"
             android:text="Papeleria"/>
 
         <Button
@@ -73,6 +75,7 @@
             android:layout_height="30dp"
             android:layout_weight="1"
             android:textSize="10dp"
+            android:onClick="onPharmacyClicked"
             android:text="Farmacia"/>
 
         <Button
@@ -84,6 +87,7 @@
             android:layout_height="30dp"
             android:layout_weight="1"
             android:textSize="10dp"
+            android:onClick="onFeedingClicked"
             android:text="Alimentacion"/>
 
     </LinearLayout>
