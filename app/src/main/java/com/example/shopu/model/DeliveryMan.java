@@ -1,5 +1,7 @@
 package com.example.shopu.model;
 
+import com.example.shopu.enums.UserType;
+
 public class DeliveryMan extends User{
 
     private Double Score;
@@ -9,10 +11,10 @@ public class DeliveryMan extends User{
         super();
     }
 
-    public DeliveryMan(String name, String lastName, String email, String password, String phone,Double Score, Long profit) {
+    public DeliveryMan(String name, String lastName, String email, String password, String phone) {
         super(name, lastName, email, password, phone);
-        this.Score = Score;
-        this.profit = profit;
+        this.Score = 0d;
+        this.profit = 0L;
     }
 
     public Double getScore() {
@@ -33,7 +35,7 @@ public class DeliveryMan extends User{
 
     @Override
     public String getType(){
-        return "deliveryMan";
+        return UserType.DELIVERY_MAN.toString();
     }
 
 }

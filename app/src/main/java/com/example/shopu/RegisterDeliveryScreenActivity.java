@@ -5,12 +5,14 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.example.shopu.enums.UserType;
 import com.example.shopu.model.Client;
 import com.example.shopu.model.DeliveryMan;
 import com.example.shopu.model.User;
@@ -33,7 +35,7 @@ public class RegisterDeliveryScreenActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_register);
+        setContentView(R.layout.activity_register_delivery_screen);
 
         etxtName = findViewById(R.id.etxtName);
         etxtLastName = findViewById(R.id.etxtLastName);
@@ -44,16 +46,9 @@ public class RegisterDeliveryScreenActivity extends AppCompatActivity {
         checkTerms = findViewById(R.id.checkTerms);
         btnSubmit = findViewById(R.id.btnSubmit);
         mAuth = FirebaseAuth.getInstance();
-
-        btnSubmit.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                submit();
-            }
-        });
     }
 
-    private void submit() {
+    public void submit(View view) {
         boolean validName = validateName(etxtName.getText().toString());
         boolean validLastName = validateLastName(etxtLastName.getText().toString());
         boolean validEmail = validateEmail(etxtEmail.getText().toString());
@@ -149,37 +144,42 @@ public class RegisterDeliveryScreenActivity extends AppCompatActivity {
         return flag;
     }
 
-    private Client createUserObject() {
-        return new Client(etxtName.getText().toString(),
+    private User createUserObject() {
+        User user = new User(etxtName.getText().toString(),
                 etxtLastName.getText().toString(),
                 etxtEmail.getText().toString(),
                 etxtPassword.getText().toString(),
-                etxtPhone.getText().toString(),null,null,null);
+                etxtPhone.getText().toString());
+        user.setType(UserType.DELIVERY_MAN.toString());
+        return user;
     }
 
     private void createFirebaseAuthUser() {
         mAuth.createUserWithEmailAndPassword(etxtEmail.getText().toString(), etxtPassword.getText().toString()).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
-                if (task.isSuccessful())
-                    saveUser();
+                if (task.isSuccessful()) saveUser();
             }
         });
     }
 
     private void saveUser() {
-        User Client = createUserObject();
+        User deliveryMan = createUserObject();
         FirebaseDatabase.getInstance().getReference("users")
                 .child(mAuth.getCurrentUser().getUid())
-                .setValue(Client).addOnCompleteListener(new OnCompleteListener<Void>() {
-            @Override
-            public void onComplete(@NonNull Task<Void> task) {
-                if (task.isSuccessful())
-                    startActivity(new Intent(RegisterDeliveryScreenActivity.this, HomeActivity.class));
-                else
-                    Toast.makeText(RegisterDeliveryScreenActivity.this, "Registro invalido", Toast.LENGTH_SHORT).show();
-            }
-        });
+                .setValue(deliveryMan).addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        if (task.isSuccessful()) {
+                            Log.i("📁 USER SAVED", deliveryMan.toString());
+                            startActivity(new Intent(RegisterDeliveryScreenActivity.this, DeliveryHomeActivity.class));
+                        }
+                        else {
+                            Log.i("📁 USER NOT SAVED", deliveryMan.toString());
+                            Toast.makeText(RegisterDeliveryScreenActivity.this, "Registro invalido", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
     }
 
     private void validateIfUsersAlreadyExists() {
@@ -188,7 +188,7 @@ public class RegisterDeliveryScreenActivity extends AppCompatActivity {
             @Override
             public void onComplete(@NonNull Task<DataSnapshot> task) {
                 boolean flag = false;
-                if (task.isSuccessful())
+                if (task.isSuccessful()) {
                     if (task.getResult().exists()) {
                         for (DataSnapshot snapshot : task.getResult().getChildren()) {
                             User user = snapshot.getValue(User.class);
@@ -197,9 +197,9 @@ public class RegisterDeliveryScreenActivity extends AppCompatActivity {
                         }
                         if (flag)
                             Toast.makeText(RegisterDeliveryScreenActivity.this, "Usuario ya registrado", Toast.LENGTH_SHORT).show();
-                        else
-                            createFirebaseAuthUser();
+                        else createFirebaseAuthUser();
                     }
+                } else createFirebaseAuthUser();
             }
         });
     }

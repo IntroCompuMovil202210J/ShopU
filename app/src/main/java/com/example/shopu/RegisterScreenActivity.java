@@ -47,20 +47,9 @@ public class RegisterScreenActivity extends AppCompatActivity {
         checkTerms = findViewById(R.id.checkTerms);
         btnSubmit = findViewById(R.id.btnSubmit);
         mAuth = FirebaseAuth.getInstance();
-
-        btnSubmit.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-
-
-
-                submit();
-            }
-        });
     }
 
-    private void submit() {
+    public void submit(View view) {
         boolean validName = validateName(etxtName.getText().toString());
         boolean validLastName = validateLastName(etxtLastName.getText().toString());
         boolean validEmail = validateEmail(etxtEmail.getText().toString());
@@ -161,32 +150,34 @@ public class RegisterScreenActivity extends AppCompatActivity {
                 etxtLastName.getText().toString(),
                 etxtEmail.getText().toString(),
                 etxtPassword.getText().toString(),
-                etxtPhone.getText().toString(),null,null,null);
+                etxtPhone.getText().toString(), null, null, null);
     }
 
     private void createFirebaseAuthUser() {
         mAuth.createUserWithEmailAndPassword(etxtEmail.getText().toString(), etxtPassword.getText().toString()).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
-                if (task.isSuccessful())
-                    saveUser();
+                if (task.isSuccessful()) saveUser();
             }
         });
     }
 
     private void saveUser() {
-        User Client = createUserObject();
+        User client = createUserObject();
         FirebaseDatabase.getInstance().getReference("users")
                 .child(mAuth.getCurrentUser().getUid())
-                .setValue(Client).addOnCompleteListener(new OnCompleteListener<Void>() {
-            @Override
-            public void onComplete(@NonNull Task<Void> task) {
-                if (task.isSuccessful())
-                    startActivity(new Intent(RegisterScreenActivity.this, HomeActivity.class));
-                else
-                    Toast.makeText(RegisterScreenActivity.this, "Registro invalido", Toast.LENGTH_SHORT).show();
-            }
-        });
+                .setValue(client).addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        if (task.isSuccessful()) {
+                            Log.i("📁 USER SAVED", client.toString());
+                            startActivity(new Intent(RegisterScreenActivity.this, HomeActivity.class));
+                        } else {
+                            Log.i("📁 USER NOT SAVED", client.toString());
+                            Toast.makeText(RegisterScreenActivity.this, "Registro invalido", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
     }
 
     private void validateIfUsersAlreadyExists() {
@@ -195,7 +186,7 @@ public class RegisterScreenActivity extends AppCompatActivity {
             @Override
             public void onComplete(@NonNull Task<DataSnapshot> task) {
                 boolean flag = false;
-                if (task.isSuccessful())
+                if (task.isSuccessful()) {
                     if (task.getResult().exists()) {
                         for (DataSnapshot snapshot : task.getResult().getChildren()) {
                             User user = snapshot.getValue(User.class);
@@ -204,9 +195,9 @@ public class RegisterScreenActivity extends AppCompatActivity {
                         }
                         if (flag)
                             Toast.makeText(RegisterScreenActivity.this, "Usuario ya registrado", Toast.LENGTH_SHORT).show();
-                        else
-                            createFirebaseAuthUser();
+                        else createFirebaseAuthUser();
                     }
+                } else createFirebaseAuthUser();
             }
         });
     }

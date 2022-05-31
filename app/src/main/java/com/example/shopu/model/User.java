@@ -1,5 +1,7 @@
 package com.example.shopu.model;
 
+import com.example.shopu.enums.UserType;
+
 public class User {
     private String name;
     private String lastName;
@@ -18,8 +20,6 @@ public class User {
         this.email = email;
         this.password = password;
         this.phone = phone;
-        this.type = type;
-        this.location = location;
     }
 
     public String getName() {
@@ -62,8 +62,12 @@ public class User {
         this.phone = phone;
     }
 
-    public String getType(){
-        return this.type;
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
     }
 
     public Location getLocation() {
