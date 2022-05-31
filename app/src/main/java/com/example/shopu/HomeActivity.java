@@ -6,6 +6,8 @@ import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.Manifest;
 import android.content.pm.PackageManager;
@@ -39,30 +41,14 @@ import java.util.List;
 
 public class HomeActivity extends AppCompatActivity {
 
-    private GridView gvwEstablishments;
-    private TextView txtAddress;
-    private EditText textSearch;
     private BottomNavigationView menu;
-
-    private EstablishmentAdapter estAdapter;
-    private ArrayList<Establishment> establishments;
-    private FusedLocationProviderClient mFusedLocationClient;
-    private ActivityResultLauncher<String> getSinglePermissionLocation;
-    Geocoder mGeocoder;
-
-    private Double latitude = 0d;
-    private Double longitude = 0d;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
-
-        txtAddress = findViewById(R.id.txtDireccion);
-        gvwEstablishments = findViewById(R.id.gvwEstablishments);
-
-        textSearch = findViewById(R.id.etxtBuscar);
+        replaceFragment(new HomeFragment());
 
         menu = findViewById(R.id.navigation);
 
@@ -72,219 +58,28 @@ public class HomeActivity extends AppCompatActivity {
                 int itemClicked = item.getItemId();
 
                 switch (itemClicked) {
+                    case R.id.home:
+                        replaceFragment(new HomeFragment());
+                        break;
 
                     case R.id.search:
-                        String name = textSearch.getText().toString();
-                        estAdapter = new EstablishmentAdapter(getApplicationContext(), filterEstablishments(establishments, name));
-                        gvwEstablishments.setAdapter(estAdapter);
+                        break;
 
                     case R.id.user:
-                        startActivity(new Intent(HomeActivity.this, UserProfileActivity.class));
+                        break;
+
                     case R.id.car:
-                        Intent i = new Intent(HomeActivity.this, CartActivity.class);
-                        i.putExtra("latitude", latitude);
-                        i.putExtra("longitude", longitude);
-                        startActivity(i);
+                        break;
                 }
                 return false;
             }
         });
-
-
-        setEditorListener();
-
-        requestLocationAccessPermission();
-
     }
 
-    @Override
-    protected void onResume() {
-        super.onResume();
-        findLocation();
-    }
-
-    public void onAllClicked(View view) {
-        estAdapter = new EstablishmentAdapter(getApplicationContext(), establishments);
-        gvwEstablishments.setAdapter(estAdapter);
-    }
-
-    public void onFeedingClicked(View view) {
-        estAdapter = new EstablishmentAdapter(getApplicationContext(), filterEstablishments(establishments, EstablishmentCategory.FEEDING));
-        gvwEstablishments.setAdapter(estAdapter);
-    }
-
-    public void onStationeryClicked(View view) {
-        estAdapter = new EstablishmentAdapter(getApplicationContext(), filterEstablishments(establishments, EstablishmentCategory.STATIONERY));
-        gvwEstablishments.setAdapter(estAdapter);
-    }
-
-    public void onPharmacyClicked(View view) {
-        estAdapter = new EstablishmentAdapter(getApplicationContext(), filterEstablishments(establishments, EstablishmentCategory.PHARMACY));
-        gvwEstablishments.setAdapter(estAdapter);
-    }
-
-    public void requestLocationAccessPermission() {
-        getSinglePermissionLocation = registerForActivityResult(
-                new ActivityResultContracts.RequestPermission(),
-                new ActivityResultCallback<Boolean>() {
-                    @Override
-                    public void onActivityResult(Boolean result) {
-                        if (result == true) {
-
-                            loadEstablishments();
-                            estAdapter = new EstablishmentAdapter(getApplicationContext(), establishments);
-                            gvwEstablishments.setAdapter(estAdapter);
-
-                        } else {
-                            Toast.makeText(getApplicationContext(), "No location, no app. Bitch", Toast.LENGTH_LONG).show();
-                        }
-                    }
-                });
-
-        getSinglePermissionLocation.launch(Manifest.permission.ACCESS_FINE_LOCATION);
-
-    }
-
-    public void findLocation() {
-
-        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) ==
-                PackageManager.PERMISSION_GRANTED) {
-
-            mFusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
-            mGeocoder = new Geocoder(getBaseContext());
-
-            mFusedLocationClient.getLastLocation().addOnSuccessListener(this,
-                    new OnSuccessListener<Location>() {
-                        @Override
-                        public void onSuccess(Location location) {
-                            if (location != null) {
-                                longitude = location.getLongitude();
-                                latitude = location.getLatitude();
-                                writeLocation();
-                            }
-                        }
-                    });
-        } else {
-            txtAddress.setText("Universidad Javeriana");
-        }
-
-    }
-
-    public void writeLocation() {
-        if (longitude != 0 || latitude != 0) {
-
-            try {
-                List<Address> addresses = mGeocoder.getFromLocation(latitude, longitude, 1);
-                if (addresses != null && !addresses.isEmpty()) {
-                    Address addressResult = addresses.get(0);
-                    txtAddress.setText(addressResult.getAddressLine(0));
-
-                } else {
-                    Toast.makeText(getApplicationContext(), "Dirección no encontrada", Toast.LENGTH_SHORT).show();
-                }
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-    }
-
-    public void setEditorListener() {
-
-        textSearch.setOnEditorActionListener(new TextView.OnEditorActionListener() {
-            @Override
-            public boolean onEditorAction(TextView textView, int i, KeyEvent keyEvent) {
-
-                String name;
-                if (i == EditorInfo.IME_ACTION_SEND) {
-                    name = textSearch.getText().toString();
-                    if (!name.isEmpty()) {
-
-                        estAdapter = new EstablishmentAdapter(getApplicationContext(), filterEstablishments(establishments, name));
-                        gvwEstablishments.setAdapter(estAdapter);
-
-                    } else {
-                        Toast.makeText(getApplicationContext(), "La busqueda esta vacia", Toast.LENGTH_SHORT).show();
-                    }
-
-                }
-
-                return false;
-            }
-
-            ;
-        });
-
-    }
-
-    ;
-
-
-    public void loadEstablishments() {
-
-        this.establishments = new ArrayList<>();
-
-        Establishment e1 = new Establishment();
-        e1.setName("El corral");
-        e1.setCategory(EstablishmentCategory.FEEDING);
-        Establishment e2 = new Establishment();
-        e2.setName("Drogas la rebaja");
-        e2.setCategory(EstablishmentCategory.PHARMACY);
-        Establishment e3 = new Establishment();
-        e3.setName("Comercial Papelera");
-        e3.setCategory(EstablishmentCategory.STATIONERY);
-        Establishment e4 = new Establishment();
-        e4.setName("Sierra Nevada");
-        e4.setCategory(EstablishmentCategory.FEEDING);
-        Establishment e5 = new Establishment();
-        e5.setName("Farmatodo");
-        e5.setCategory(EstablishmentCategory.PHARMACY);
-        Establishment e6 = new Establishment();
-        e6.setName("El triangulo");
-        e6.setCategory(EstablishmentCategory.STATIONERY);
-
-        establishments.add(e1);
-        establishments.add(e2);
-        establishments.add(e3);
-        establishments.add(e4);
-        establishments.add(e5);
-        establishments.add(e6);
-        establishments.add(e1);
-        establishments.add(e2);
-        establishments.add(e3);
-        establishments.add(e4);
-        establishments.add(e5);
-        establishments.add(e5);
-
-    }
-
-    public ArrayList<Establishment> filterEstablishments(List<Establishment> establishments, EstablishmentCategory category) {
-
-        ArrayList<Establishment> toReturn = new ArrayList<>();
-
-        for (Establishment e : establishments) {
-
-            if (e.getCategory() == category) {
-                toReturn.add(e);
-            }
-
-        }
-
-        return toReturn;
-    }
-
-    public ArrayList<Establishment> filterEstablishments(List<Establishment> establishments, String filter) {
-
-        ArrayList<Establishment> toReturn = new ArrayList<>();
-
-        for (Establishment e : establishments) {
-
-            if (e.getName().contains(filter)) {
-                toReturn.add(e);
-            }
-
-        }
-
-        return toReturn;
+    private void replaceFragment(Fragment fragment) {
+        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+        transaction.replace(R.id.fragment_layout, fragment);
+        transaction.commit();
     }
 
 }
