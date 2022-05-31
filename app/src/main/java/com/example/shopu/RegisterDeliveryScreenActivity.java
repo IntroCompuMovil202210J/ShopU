@@ -158,11 +158,7 @@ public class RegisterDeliveryScreenActivity extends AppCompatActivity {
         mAuth.createUserWithEmailAndPassword(etxtEmail.getText().toString(), etxtPassword.getText().toString()).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
-                if (task.isSuccessful()) {
-                    saveUser();
-                    Log.i("📁 SAVING USER", "SAVED");
-                }
-                else Log.i("📁 SAVING USER", "NOT SAVED");
+                if (task.isSuccessful()) saveUser();
             }
         });
     }
@@ -174,10 +170,14 @@ public class RegisterDeliveryScreenActivity extends AppCompatActivity {
                 .setValue(deliveryMan).addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
-                        if (task.isSuccessful())
+                        if (task.isSuccessful()) {
+                            Log.i("📁 USER SAVED", deliveryMan.toString());
                             startActivity(new Intent(RegisterDeliveryScreenActivity.this, DeliveryHomeActivity.class));
-                        else
+                        }
+                        else {
+                            Log.i("📁 USER NOT SAVED", deliveryMan.toString());
                             Toast.makeText(RegisterDeliveryScreenActivity.this, "Registro invalido", Toast.LENGTH_SHORT).show();
+                        }
                     }
                 });
     }

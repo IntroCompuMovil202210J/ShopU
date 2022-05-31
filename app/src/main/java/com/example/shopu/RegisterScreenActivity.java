@@ -175,16 +175,20 @@ public class RegisterScreenActivity extends AppCompatActivity {
     }
 
     private void saveUser() {
-        User Client = createUserObject();
+        User client = createUserObject();
         FirebaseDatabase.getInstance().getReference("users")
                 .child(mAuth.getCurrentUser().getUid())
-                .setValue(Client).addOnCompleteListener(new OnCompleteListener<Void>() {
+                .setValue(client).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
-                if (task.isSuccessful())
+                if (task.isSuccessful()) {
+                    Log.i("📁 USER SAVED", client.toString());
                     startActivity(new Intent(RegisterScreenActivity.this, HomeActivity.class));
-                else
+                }
+                else {
+                    Log.i("📁 USER NOT SAVED", client.toString());
                     Toast.makeText(RegisterScreenActivity.this, "Registro invalido", Toast.LENGTH_SHORT).show();
+                }
             }
         });
     }
