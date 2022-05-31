@@ -195,7 +195,7 @@ public class RegisterScreenActivity extends AppCompatActivity {
             @Override
             public void onComplete(@NonNull Task<DataSnapshot> task) {
                 boolean flag = false;
-                if (task.isSuccessful())
+                if (task.isSuccessful()) {
                     if (task.getResult().exists()) {
                         for (DataSnapshot snapshot : task.getResult().getChildren()) {
                             User user = snapshot.getValue(User.class);
@@ -207,6 +207,7 @@ public class RegisterScreenActivity extends AppCompatActivity {
                         else
                             createFirebaseAuthUser();
                     }
+                } else createFirebaseAuthUser();
             }
         });
     }

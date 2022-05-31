@@ -1,5 +1,7 @@
 package com.example.shopu.model;
 
+import com.example.shopu.enums.UserType;
+
 import java.util.List;
 
 public class Client extends User{
@@ -39,7 +41,7 @@ public class Client extends User{
 
     @Override
     public String getType(){
-        return "client";
+        return UserType.CLIENT.toString();
     }
 
 }

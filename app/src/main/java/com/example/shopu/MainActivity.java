@@ -111,9 +111,9 @@ public class MainActivity extends AppCompatActivity {
                     if (task.isSuccessful()){
 
                         if(task.getResult().exists()){
-                            User usuario = task.getResult().getValue(User.class);
+                            User user = task.getResult().getValue(User.class);
 
-                            if(usuario.getType().equals("deliveryMan"))
+                            if(user.getType().equals("deliveryMan"))
                                 startActivity(new Intent(MainActivity.this,DeliveryHomeActivity.class));
                             else
                                 startActivity(new Intent(MainActivity.this,HomeActivity.class));

@@ -13,6 +13,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.example.shopu.enums.UserType;
 import com.example.shopu.model.User;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -105,14 +106,12 @@ public class LogScreenActivity extends AppCompatActivity {
                 @Override
                 public void onComplete(@NonNull Task<DataSnapshot> task) {
                     if (task.isSuccessful()){
-
                         if(task.getResult().exists()){
-                            User usuario = task.getResult().getValue(User.class);
-
-                            if(usuario.getType().equals("deliveryMan"))
-                                startActivity(new Intent(LogScreenActivity.this,DeliveryHomeActivity.class));
+                            User value = task.getResult().getValue(User.class);
+                            if(value.getType().equals("DELIVERY_MAN"))
+                                startActivity(new Intent(LogScreenActivity.this, DeliveryHomeActivity.class));
                             else
-                                startActivity(new Intent(LogScreenActivity.this,HomeActivity.class));
+                                startActivity(new Intent(LogScreenActivity.this, HomeActivity.class));
                         }
                     }
                 }

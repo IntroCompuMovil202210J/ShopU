@@ -29,8 +29,15 @@
         <entry key="..\:/Users/davis/OneDrive/Escritorio/Documentos/universidad/semestres/9o/movil/proyecto/ShopU/app/src/main/res/layout/activity_main.xml" value="0.23229166666666667" />
         <entry key="..\:/Users/davis/OneDrive/Escritorio/Documents/universidad/semestres/9o/movil/proyecto/source/app/src/main/res/drawable-v24/ic_offer_background.xml" value="0.1905" />
         <entry key="..\:/Users/davis/OneDrive/Escritorio/Documents/universidad/semestres/9o/movil/proyecto/source/app/src/main/res/drawable/res_roundednavbar.xml" value="0.1905" />
+        <entry key="..\:/Users/davis/OneDrive/Escritorio/Documents/universidad/semestres/9o/movil/proyecto/source/app/src/main/res/layout/activity_cart.xml" value="0.25" />
+        <entry key="..\:/Users/davis/OneDrive/Escritorio/Documents/universidad/semestres/9o/movil/proyecto/source/app/src/main/res/layout/activity_delivery_home.xml" value="0.26145833333333335" />
+        <entry key="..\:/Users/davis/OneDrive/Escritorio/Documents/universidad/semestres/9o/movil/proyecto/source/app/src/main/res/layout/activity_delivery_map.xml" value="0.25" />
         <entry key="..\:/Users/davis/OneDrive/Escritorio/Documents/universidad/semestres/9o/movil/proyecto/source/app/src/main/res/layout/activity_log_screen.xml" value="0.25" />
+        <entry key="..\:/Users/davis/OneDrive/Escritorio/Documents/universidad/semestres/9o/movil/proyecto/source/app/src/main/res/layout/activity_register_delivery_screen.xml" value="0.26145833333333335" />
+        <entry key="..\:/Users/davis/OneDrive/Escritorio/Documents/universidad/semestres/9o/movil/proyecto/source/app/src/main/res/layout/activity_seguimiento.xml" value="0.25" />
         <entry key="..\:/Users/davis/OneDrive/Escritorio/Documents/universidad/semestres/9o/movil/proyecto/source/app/src/main/res/layout/activity_sigin_screen.xml" value="0.25" />
+        <entry key="..\:/Users/davis/OneDrive/Escritorio/Documents/universidad/semestres/9o/movil/proyecto/source/app/src/main/res/layout/activity_user_profile.xml" value="0.25" />
+        <entry key="..\:/Users/davis/OneDrive/Escritorio/Documents/universidad/semestres/9o/movil/proyecto/source/app/src/main/res/layout/item_cart_restaurant.xml" value="0.25" />
         <entry key="..\:/Users/davis/OneDrive/Escritorio/Documents/universidad/semestres/9o/movil/proyecto/source/app/src/main/res/menu/bottom_nav_menu.xml" value="0.25" />
         <entry key="..\:/Users/willi/Documents/ShopU-main/app/src/main/res/layout/activity_delivery_home.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/willi/Documents/ShopU-main/app/src/main/res/layout/activity_delivery_profile.xml" value="0.36666666666666664" />
@@ -46,7 +53,6 @@
         <entry key="..\:/Users/willi/Documents/ShopU-main/app/src/main/res/layout/adapter_order.xml" value="0.25" />
         <entry key="..\:/Users/willi/Documents/ShopU-main/app/src/main/res/layout/item_establishment.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/willi/Documents/ShopU-main/app/src/main/res/layout/item_orders.xml" value="0.36666666666666664" />
-        <entry key="..\:/Users/willi/Documents/ShopU-main/app/src/main/res/layout/item_product.xml" value="0.24537037037037038" />
         <entry key="..\:/Users/willi/Documents/ShopU-main/app/src/main/res/layout/item_products.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/willi/Documents/ShopU-main/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.311" />
         <entry key="..\:/Users/willi/Documents/ShopU-main/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.196" />
