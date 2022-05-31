@@ -114,6 +114,7 @@
         android:background="@drawable/res_roundedbutton"
         android:backgroundTint="@color/piel"
         android:text="Registrarse"
+        android:onClick="submit"
         android:textColor="@color/black" />
 
 </RelativeLayout>

@@ -47,20 +47,9 @@ public class RegisterScreenActivity extends AppCompatActivity {
         checkTerms = findViewById(R.id.checkTerms);
         btnSubmit = findViewById(R.id.btnSubmit);
         mAuth = FirebaseAuth.getInstance();
-
-        btnSubmit.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-
-
-
-                submit();
-            }
-        });
     }
 
-    private void submit() {
+    public void submit(View view) {
         boolean validName = validateName(etxtName.getText().toString());
         boolean validLastName = validateLastName(etxtLastName.getText().toString());
         boolean validEmail = validateEmail(etxtEmail.getText().toString());
@@ -161,7 +150,7 @@ public class RegisterScreenActivity extends AppCompatActivity {
                 etxtLastName.getText().toString(),
                 etxtEmail.getText().toString(),
                 etxtPassword.getText().toString(),
-                etxtPhone.getText().toString(),null,null,null);
+                etxtPhone.getText().toString(), null, null, null);
     }
 
     private void createFirebaseAuthUser() {
@@ -178,18 +167,17 @@ public class RegisterScreenActivity extends AppCompatActivity {
         FirebaseDatabase.getInstance().getReference("users")
                 .child(mAuth.getCurrentUser().getUid())
                 .setValue(client).addOnCompleteListener(new OnCompleteListener<Void>() {
-            @Override
-            public void onComplete(@NonNull Task<Void> task) {
-                if (task.isSuccessful()) {
-                    Log.i("📁 USER SAVED", client.toString());
-                    startActivity(new Intent(RegisterScreenActivity.this, HomeActivity.class));
-                }
-                else {
-                    Log.i("📁 USER NOT SAVED", client.toString());
-                    Toast.makeText(RegisterScreenActivity.this, "Registro invalido", Toast.LENGTH_SHORT).show();
-                }
-            }
-        });
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        if (task.isSuccessful()) {
+                            Log.i("📁 USER SAVED", client.toString());
+                            startActivity(new Intent(RegisterScreenActivity.this, HomeActivity.class));
+                        } else {
+                            Log.i("📁 USER NOT SAVED", client.toString());
+                            Toast.makeText(RegisterScreenActivity.this, "Registro invalido", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
     }
 
     private void validateIfUsersAlreadyExists() {
@@ -207,8 +195,7 @@ public class RegisterScreenActivity extends AppCompatActivity {
                         }
                         if (flag)
                             Toast.makeText(RegisterScreenActivity.this, "Usuario ya registrado", Toast.LENGTH_SHORT).show();
-                        else
-                            createFirebaseAuthUser();
+                        else createFirebaseAuthUser();
                     }
                 } else createFirebaseAuthUser();
             }
