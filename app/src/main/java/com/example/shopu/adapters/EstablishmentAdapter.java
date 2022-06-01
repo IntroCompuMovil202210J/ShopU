@@ -69,8 +69,6 @@ public class EstablishmentAdapter extends ArrayAdapter<Establishment> {
             }
         });
 
-
-        // Return the completed view to render on screen
         return convertView;
     }
 

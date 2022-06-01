@@ -8,59 +8,60 @@
 
     <ImageView
         android:id="@+id/imgProduct"
-        android:layout_width="300px"
-        android:layout_height="300px"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
         android:layout_weight="1"
         app:srcCompat="@drawable/ic_offer_foreground" />
 
-    <TextView
-        android:layout_marginTop="30px"
-        android:id="@+id/txtNameP"
-        android:layout_width="260dp"
-        android:layout_height="wrap_content"
-        android:textStyle="bold"
+    <View
+        android:id="@+id/verticalSeparator"
+        android:layout_width="1dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="25dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
         android:layout_toRightOf="@id/imgProduct"
-        android:text="TextView" />
+        android:background="@color/piel" />
+
+    <TextView
+        android:id="@+id/txtNameP"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_toRightOf="@id/verticalSeparator"
+        android:text="TextView"
+        android:textStyle="bold" />
 
     <TextView
         android:padding="10px"
         android:id="@+id/txtDescriptionP"
-        android:layout_width="260dp"
+        android:layout_width="150dp"
         android:layout_height="wrap_content"
         android:layout_below="@id/txtNameP"
-        android:layout_toRightOf="@id/imgProduct"
-
+        android:layout_toRightOf="@id/verticalSeparator"
         android:textSize="10dp"
         android:text="TextView" />
 
+    <TextView
+        android:id="@+id/txtPriceP"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/verticalSeparator"
+        android:layout_below="@id/txtDescriptionP"
+        android:textStyle="bold"
+        android:text="TextView" />
 
     <Button
         android:id="@+id/btnAdd"
         android:layout_width="30dp"
         android:layout_height="30dp"
-        android:layout_below="@id/txtPriceP"
-        android:layout_toRightOf="@id/imgProduct"
+        android:layout_toEndOf="@id/txtDescriptionP"
+        android:layout_alignBottom="@id/txtDescriptionP"
+        android:layout_toRightOf="@id/verticalSeparator"
         android:background="@drawable/res_roundedbutton"
         android:backgroundTint="@color/piel"
-        android:layout_marginTop="10px"
         android:text="+"
-        android:textSize="20dp"
-
-        />
-
-    <TextView
-        android:id="@+id/txtPriceP"
-        android:layout_width="260dp"
-        android:layout_height="wrap_content"
-        android:layout_toRightOf="@id/imgProduct"
-        android:layout_below="@id/txtDescriptionP"
-        android:textStyle="bold"
-        android:text="TextView" />
-
-
-
-
-
+        android:textSize="20dp" />
 
 
 </RelativeLayout>

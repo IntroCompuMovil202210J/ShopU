@@ -1,116 +1,105 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".EstablecimientoActivity"
-    android:background="@color/grayBackground_Andres"
-    android:padding="10dp">
+    tools:context=".EstablecimientoActivity">
 
-
-    <ImageView
-        android:id="@+id/imgTopside"
-        android:layout_width="338dp"
-        android:layout_height="243dp"
-        android:layout_margin="24dp"
-        android:layout_marginTop="16dp"
-        android:background="@drawable/res_roundedbutton"
-        android:backgroundTint="@color/piel"
-        android:scaleType="fitCenter"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.493"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
 
     <RelativeLayout
 
         android:id="@+id/rlyItemlist"
-        android:layout_width="356dp"
-        android:layout_height="491dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:layout_margin="20dp"
         android:background="@drawable/res_roundedbutton"
         android:backgroundTint="@color/white"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.49"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.704"
-        android:padding="20dp">
+        android:padding="10dp"
+        android:elevation="20dp"
+        android:outlineAmbientShadowColor="@color/piel">
+
+        <TextView
+            android:id="@+id/txtName"
+            android:layout_marginTop="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:text="Establishment"
+            android:textColor="@color/black"
+            android:textSize="17sp"
+            android:textStyle="bold" />
+
+        <LinearLayout
+            android:id="@+id/scoreContainer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@id/txtName"
+            android:layout_marginTop="10dp">
+
+            <ImageView
+                android:id="@+id/imageStar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/txtName"
+                android:layout_marginTop="-1dp"
+                android:src="@drawable/ic_star_establishment" />
+
+            <TextView
+                android:id="@+id/scoreEstablishment"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@id/imageStar"
+                android:layout_toEndOf="@id/imageStar"
+                android:layout_marginLeft="3dp"
+                android:text="Score"
+                android:textSize="10dp"/>
+        </LinearLayout>
+
+
+        <TextView
+            android:id="@+id/txtSectionName"
+            android:layout_width="100dp"
+            android:layout_height="25dp"
+            android:layout_below="@id/scoreContainer"
+            android:layout_centerInParent="true"
+            android:layout_marginTop="30dp"
+            android:layout_marginBottom="19dp"
+            android:background="@drawable/res_roundedbutton"
+            android:backgroundTint="@color/white"
+            android:text="Productos"
+            android:textAlignment="center"
+            android:textColor="@color/black"
+            android:textSize="15sp"
+            android:textStyle="bold" />
+
+        <View
+            android:id="@+id/separator"
+            android:layout_width="200dp"
+            android:layout_height="1dp"
+            android:layout_below="@id/txtSectionName"
+            android:layout_centerHorizontal="true"
+            android:background="@color/piel"/>
 
         <ListView
             android:id="@+id/lvwEstProducts"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="match_parent"
+            android:layout_below="@id/separator"
+            android:layout_marginTop="10dp"
+            android:divider="@color/piel"
+            android:dividerHeight="1dp">
+
+        </ListView>
+
+
+
 
     </RelativeLayout>
 
-    <EditText
-        android:id="@+id/editText"
-        android:layout_width="284dp"
-        android:layout_height="34dp"
-        android:layout_marginStart="28dp"
-        android:layout_marginBottom="16dp"
-        android:background="@drawable/res_roundedbutton"
-        android:backgroundTint="@color/piel"
-        android:paddingLeft="10dp"
-        android:hint="buscar..."
-        android:textColor="@color/white"
-        android:textSize="13sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"/>
-
-    <Button
-        android:layout_width="34dp"
-        android:layout_height="34dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginBottom="16dp"
-        android:background="@drawable/res_roundedbutton"
-        android:backgroundTint="@color/piel"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/editText" />
 
 
-    <TextView
-        android:id="@+id/txtName"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
-        android:layout_marginEnd="60dp"
-        android:layout_marginBottom="72dp"
-
-        android:text="name..."
-        android:textColor="@color/black"
-        android:textSize="17sp"
-        android:textStyle="bold"
-
-        app:layout_constraintBottom_toTopOf="@+id/rlyItemlist"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.903"/>
 
 
-    <TextView
-        android:id="@+id/txtSectionName"
-        android:layout_width="100dp"
-        android:layout_height="25dp"
-        android:layout_marginTop="104dp"
-        android:layout_marginBottom="19dp"
-        android:background="@drawable/res_roundedbutton"
-        android:backgroundTint="@color/white"
-        android:text="Productos"
-        android:textAlignment="center"
-        android:textColor="@color/black"
-        android:textSize="15sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/rlyItemlist"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.536"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0"/>
-
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+</FrameLayout>

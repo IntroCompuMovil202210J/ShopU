@@ -32,11 +32,11 @@ public class EstablecimientoActivity extends AppCompatActivity {
 
         lvwEstProduct = findViewById(R.id.lvwEstProducts);
         txtName = findViewById(R.id.txtName);
+        System.out.println( "aAAAAAAAAAAAAAAAAAAAAAAA");
         loadProducts();
 
         productAdapter = new ProductAdapter(getApplicationContext(),products);
         lvwEstProduct.setAdapter(productAdapter);
-
 
     }
 

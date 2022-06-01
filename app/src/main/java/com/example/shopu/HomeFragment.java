@@ -65,6 +65,7 @@ public class HomeFragment extends Fragment {
     private String mParam2;
 
     public HomeFragment() {
+        // Required empty public constructor
     }
 
     /**
@@ -108,6 +109,7 @@ public class HomeFragment extends Fragment {
         pharmacy = root.findViewById(R.id.btnFarmacia);
         feeding = root.findViewById(R.id.btnAlimentacion);
         gvwEstablishments = root.findViewById(R.id.gvwEstablishments);
+
 
         all.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -201,21 +203,27 @@ public class HomeFragment extends Fragment {
         Establishment e1 = new Establishment();
         e1.setName("El corral");
         e1.setCategory(EstablishmentCategory.FEEDING);
+        e1.setScore("3.1");
         Establishment e2 = new Establishment();
         e2.setName("Drogas la rebaja");
         e2.setCategory(EstablishmentCategory.PHARMACY);
+        e2.setScore("3.2");
         Establishment e3 = new Establishment();
         e3.setName("Comercial Papelera");
         e3.setCategory(EstablishmentCategory.STATIONERY);
+        e3.setScore("4.5");
         Establishment e4 = new Establishment();
         e4.setName("Sierra Nevada");
         e4.setCategory(EstablishmentCategory.FEEDING);
+        e4.setScore("4.5");
         Establishment e5 = new Establishment();
         e5.setName("Farmatodo");
         e5.setCategory(EstablishmentCategory.PHARMACY);
+        e5.setScore("4.5");
         Establishment e6 = new Establishment();
         e6.setName("El triangulo");
         e6.setCategory(EstablishmentCategory.STATIONERY);
+        e6.setScore("4.5");
 
         establishments.add(e1);
         establishments.add(e2);

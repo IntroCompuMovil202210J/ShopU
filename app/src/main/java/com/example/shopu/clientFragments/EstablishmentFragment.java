@@ -30,7 +30,7 @@ public class EstablishmentFragment extends Fragment {
 
     private Establishment establishment;
     ListView lvwEstProduct;
-    TextView txtName;
+    TextView txtName,txtScore;
 
 
     ArrayList<Product> products;
@@ -65,6 +65,7 @@ public class EstablishmentFragment extends Fragment {
 
         lvwEstProduct = root.findViewById(R.id.lvwEstProducts);
         txtName = root.findViewById(R.id.txtName);
+        txtScore = root.findViewById(R.id.scoreEstablishment);
         loadProducts();
 
         productAdapter = new ProductAdapter(getContext(),products);
@@ -77,6 +78,9 @@ public class EstablishmentFragment extends Fragment {
     public void loadProducts(){
 
         txtName.setText(establishment.getName());
+
+        txtScore.setText(establishment.getScore());
+
         this.products = new ArrayList<>();
         if(establishment.getCategory() == EstablishmentCategory.FEEDING){
 
