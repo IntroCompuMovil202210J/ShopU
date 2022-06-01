@@ -62,8 +62,8 @@ public class OrdersActivity extends AppCompatActivity {
                         locations.add(location);
                     }
 
-                    adapter = new OrdersAdapter(OrdersActivity.this,locations);
-                    lstOrders.setAdapter(adapter);
+//                    adapter = new OrdersAdapter(OrdersActivity.this,locations);
+//                    lstOrders.setAdapter(adapter);
                 }
             }
 

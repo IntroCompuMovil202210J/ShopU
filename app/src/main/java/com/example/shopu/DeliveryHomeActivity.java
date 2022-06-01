@@ -1,8 +1,11 @@
 package com.example.shopu;
 
 import androidx.activity.result.ActivityResultLauncher;
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.Manifest;
 import android.content.Intent;
@@ -10,13 +13,18 @@ import android.content.pm.PackageManager;
 import android.location.Geocoder;
 import android.location.Location;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 
+import com.example.shopu.deliveryFragments.DeliveryProfileFragment;
+import com.example.shopu.deliveryFragments.OrderListFragment;
 import com.example.shopu.model.Order;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.navigation.NavigationBarView;
 
 public class DeliveryHomeActivity extends AppCompatActivity {
 
@@ -25,6 +33,8 @@ public class DeliveryHomeActivity extends AppCompatActivity {
 
     Double latitude;
     Double longitude;
+
+    private BottomNavigationView menu;
 
     private FusedLocationProviderClient mFusedLocationClient;
     private ActivityResultLauncher<String> getSinglePermissionLocation;
@@ -35,26 +45,26 @@ public class DeliveryHomeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_delivery_home);
 
-        btnProfile = findViewById(R.id.btnProfile);
-        btnOrder = findViewById(R.id.btnOrders);
+        menu = findViewById(R.id.navigation_menu_delivery);
 
-        btnProfile.setOnClickListener(new View.OnClickListener() {
+        menu.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
             @Override
-            public void onClick(View view) {
-                startActivity(new Intent(view.getContext(),DeliveryProfileActivity.class));
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                int itemClicked = item.getItemId();
+
+                switch (itemClicked) {
+                    case R.id.ordersList:
+                        replaceFragment(new OrderListFragment());
+                        break;
+
+                    case R.id.profile:
+                        replaceFragment(new DeliveryProfileFragment());
+                        break;
+
+                }
+                return false;
             }
         });
-
-        btnOrder.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent i = new Intent(view.getContext(), OrdersActivity.class);
-                i.putExtra("latitude",latitude);
-                i.putExtra("Longitude",longitude);
-                startActivity(new Intent(view.getContext(),OrdersActivity.class));
-            }
-        });
-
 
     }
 
@@ -73,11 +83,16 @@ public class DeliveryHomeActivity extends AppCompatActivity {
                             if (location != null) {
                                 longitude = location.getLongitude();
                                 latitude = location.getLatitude();
-
                             }
                         }
                     });
         }
 
+    }
+
+    private void replaceFragment(Fragment fragment) {
+        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+        transaction.replace(R.id.fragmentContainerView, fragment);
+        transaction.commit();
     }
 }

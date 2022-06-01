@@ -7,48 +7,54 @@ import java.util.List;
 public class Order {
 
     private String id;
-    private List<Product> products;
-    private DeliveryMan deliveryMan;
-    private Client client;
+    private String products;
+    private String deliveryMan;
     private Payment payment;
     private Boolean completed;
-    private ChatMessage chat;
+    private Double longitude;
+    private Double latitude;
 
     public Order() {
     }
 
-    public Order(List<Product> products, DeliveryMan deliveryMan, Client client, Payment payment, Boolean completed, ChatMessage chat, String id) {
+    public Order(String products, String deliveryMan, Payment payment, Boolean completed, String id) {
         this.products = products;
         this.deliveryMan = deliveryMan;
-        this.client = client;
         this.payment = payment;
         this.completed = completed;
-        this.chat = chat;
         this.id = id;
     }
 
-    public List<Product> getProducts() {
+    public Double getLongitude() {
+        return longitude;
+    }
+
+    public void setLongitude(Double longitude) {
+        this.longitude = longitude;
+    }
+
+    public Double getLatitude() {
+        return latitude;
+    }
+
+    public void setLatitude(Double latitude) {
+        this.latitude = latitude;
+    }
+
+    public String getProducts() {
         return products;
     }
 
-    public void setProducts(List<Product> products) {
+    public void setProducts(String products) {
         this.products = products;
     }
 
-    public DeliveryMan getDeliveryMan() {
+    public String getDeliveryMan() {
         return deliveryMan;
     }
 
-    public void setDeliveryMan(DeliveryMan deliveryMan) {
+    public void setDeliveryMan(String deliveryMan) {
         this.deliveryMan = deliveryMan;
-    }
-
-    public Client getClient() {
-        return client;
-    }
-
-    public void setClient(Client client) {
-        this.client = client;
     }
 
     public Payment getPayment() {
@@ -67,13 +73,6 @@ public class Order {
         this.completed = completed;
     }
 
-    public ChatMessage getChat() {
-        return chat;
-    }
-
-    public void setChat(ChatMessage chat) {
-        this.chat = chat;
-    }
 
     public String getId() {
         return id;

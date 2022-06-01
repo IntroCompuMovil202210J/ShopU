@@ -2,6 +2,7 @@ package com.example.shopu.adapters;
 
         import android.content.Context;
         import android.database.Cursor;
+        import android.location.Geocoder;
         import android.util.Log;
         import android.view.LayoutInflater;
         import android.view.View;
@@ -20,20 +21,21 @@ package com.example.shopu.adapters;
         import com.google.firebase.database.FirebaseDatabase;
         import com.google.firebase.database.ValueEventListener;
 
+        import java.io.IOException;
         import java.util.ArrayList;
         import java.util.List;
 
-public class OrdersAdapter extends ArrayAdapter<Location> {
+public class OrdersAdapter extends ArrayAdapter<Order> {
 
     List<Order> orders;
-    List<Location> locations;
+    Geocoder mGeocoder= new Geocoder(getContext());
 
     private final double RADIUS_OF_EARTH_KM = 6371.01;
 
-    public OrdersAdapter(Context context, List<Location> orders) {
+    public OrdersAdapter(Context context, List<Order> orders) {
         super(context, 0, orders);
 
-        this.locations = orders;
+        this.orders = orders;
     }
 
     @Override
@@ -47,13 +49,21 @@ public class OrdersAdapter extends ArrayAdapter<Location> {
         // Lookup view for data population
         TextView txtOrden = (TextView) convertView.findViewById(R.id.txtOrder);
         TextView txtDirec = (TextView) convertView.findViewById(R.id.txtDirection);
+        TextView txtItems = convertView.findViewById(R.id.txtItems);
         Button boton = (Button) convertView.findViewById(R.id.selectOrder);
 
-        Location order = this.locations.get(position);
+        Order order = this.orders.get(position);
         // Populate the data into the template view using the data object
         txtOrden.setText("orden");
-        txtDirec.setText(order.getLatitude().toString() +" - " + order.getLongitude().toString());
 
+//        try {
+//            txtDirec.setText(mGeocoder.getFromLocation(order.getLatitude(),order.getLongitude(),1).get(0).getAddressLine(0));
+            txtDirec.setText(order.getLatitude() + "-"+ order.getLongitude());
+//        }
+//        catch (IOException e) {
+//            e.printStackTrace();
+//       }
+        txtItems.setText(order.getProducts());
 
         boton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -62,8 +72,6 @@ public class OrdersAdapter extends ArrayAdapter<Location> {
             }
         });
 
-
-        // Return the completed view to render on screen
         return convertView;
     }
 
