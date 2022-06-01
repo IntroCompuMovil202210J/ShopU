@@ -3,6 +3,7 @@ package com.example.shopu.adapters;
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
+import android.os.Bundle;
 import android.os.Parcelable;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,10 +14,15 @@ import android.widget.CursorAdapter;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.FragmentTransaction;
+
 import com.example.shopu.EstablecimientoActivity;
 import com.example.shopu.HomeActivity;
 import com.example.shopu.LogScreenActivity;
 import com.example.shopu.R;
+import com.example.shopu.clientFragments.EstablishmentFragment;
 import com.example.shopu.model.Establishment;
 
 import java.util.ArrayList;
@@ -52,10 +58,13 @@ public class EstablishmentAdapter extends ArrayAdapter<Establishment> {
             @Override
             public void onClick(View v) {
 
-                Intent i = new Intent(getContext(),EstablecimientoActivity.class);
-                i.putExtra("EstabSended", establishment);
-                i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                getContext().startActivity(i);
+                FragmentTransaction transaction = ((FragmentActivity)getContext()).getSupportFragmentManager().beginTransaction();
+                Fragment establishmentFragment = new EstablishmentFragment();
+                Bundle bundle = new Bundle();
+                bundle.putSerializable("establishment",establishment);
+                establishmentFragment.setArguments(bundle);
+                transaction.replace(R.id.fragment_layout, establishmentFragment);
+                transaction.commit();
 
             }
         });
