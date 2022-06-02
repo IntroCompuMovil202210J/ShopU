@@ -6,14 +6,13 @@ import androidx.core.content.ContextCompat;
 
 import android.Manifest;
 import android.content.pm.PackageManager;
-import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.location.Location;
 import android.os.Bundle;
-import android.os.StrictMode;
 import android.preference.PreferenceManager;
 import android.util.Log;
 
+import com.example.shopu.model.Client;
 import com.example.shopu.model.DeliveryMan;
 import com.example.shopu.model.Order;
 import com.example.shopu.model.User;
@@ -30,8 +29,6 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import org.osmdroid.api.IMapController;
-import org.osmdroid.bonuspack.routing.OSRMRoadManager;
-import org.osmdroid.bonuspack.routing.Road;
 import org.osmdroid.bonuspack.routing.RoadManager;
 import org.osmdroid.config.Configuration;
 import org.osmdroid.tileprovider.tilesource.TileSourceFactory;
@@ -40,29 +37,26 @@ import org.osmdroid.views.MapView;
 import org.osmdroid.views.overlay.Marker;
 import org.osmdroid.views.overlay.Polyline;
 
-import java.util.ArrayList;
-
-public class DeliveryTrackOrderActivity extends AppCompatActivity {
+public class ClientMapActivity extends AppCompatActivity {
     private final double RADIUS_OF_EARTH_KM = 6371.01;
     private FusedLocationProviderClient fusedLocationClient;
     private LocationCallback locationCallback;
     private LocationRequest locationRequest;
     FirebaseDatabase database;
     FirebaseAuth auth;
-    Double currentUserLatitude = 0d, currentUserLongitude = 0d, establishmentLatitude = 0d, establishmentLongitude = 0d;
+    Double currentUserLatitude = 0d, currentUserLongitude = 0d, deliveryLatitude = 0d, deliveryLongitude = 0d;
     MapView map;
     String orderId;
-    DeliveryMan currentUser;
-    Marker currentUserMarker, establishmentMarker;
-    GeoPoint userPoint, establishmentPoint;
-    RoadManager roadManager;
-    Polyline roadOverlay;
+    Client currentUser;
+    String deliveryManId;
+    Marker currentUserMarker, deliveryManMarker;
+    GeoPoint userPoint, deliveryManPoint;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_delivery_track_order);
+        setContentView(R.layout.activity_client_map);
         Configuration.getInstance().load(getApplicationContext(), PreferenceManager.getDefaultSharedPreferences(getApplicationContext()));
         database = FirebaseDatabase.getInstance();
         auth = FirebaseAuth.getInstance();
@@ -72,17 +66,14 @@ public class DeliveryTrackOrderActivity extends AppCompatActivity {
         map = findViewById(R.id.map);
         map.setTileSource(TileSourceFactory.MAPNIK);
         map.setMultiTouchControls(true);
-        roadManager = new OSRMRoadManager(this, "ANDROID");
-        StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
-        StrictMode.setThreadPolicy(policy);
         orderId = getIntent().getStringExtra("order");
-        getOrderEstablishmentLocation();
     }
 
     @Override
     protected void onStart() {
         super.onStart();
         setCurrentUser();
+        setDeliveryMan();
     }
 
     @Override
@@ -112,11 +103,9 @@ public class DeliveryTrackOrderActivity extends AppCompatActivity {
                                 R.drawable.ic_
                         );
                         placeMarker(currentUserMarker);
-                        drawRoute(new GeoPoint(currentUserLatitude, currentUserLongitude), establishmentPoint);
                     } else {
                         currentUserMarker.setPosition(new GeoPoint(currentUserLatitude, currentUserLongitude));
                         setCurrentUser();
-                        drawRoute(new GeoPoint(currentUserLatitude, currentUserLongitude), establishmentPoint);
                     }
                 }
             }
@@ -130,7 +119,6 @@ public class DeliveryTrackOrderActivity extends AppCompatActivity {
                 .setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
         return locationRequest;
     }
-
 
     private void startLocationUpdates() {
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
@@ -149,7 +137,7 @@ public class DeliveryTrackOrderActivity extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if (snapshot.getKey().equals(auth.getCurrentUser().getUid())) {
-                    currentUser = snapshot.getValue(DeliveryMan.class);
+                    currentUser = snapshot.getValue(Client.class);
                     currentUserLatitude = currentUser.getLatitude();
                     currentUserLongitude = currentUser.getLongitude();
                     IMapController mapController = map.getController();
@@ -184,42 +172,30 @@ public class DeliveryTrackOrderActivity extends AppCompatActivity {
         map.getOverlays().add(marker);
     }
 
-    public double distance(double lat1, double long1, double lat2, double long2) {
-        double latDistance = Math.toRadians(lat1 - lat2);
-        double lngDistance = Math.toRadians(long1 - long2);
-        double a = Math.sin(latDistance / 2) * Math.sin(latDistance / 2)
-                + Math.cos(Math.toRadians(lat1)) * Math.cos(Math.toRadians(lat2))
-                * Math.sin(lngDistance / 2) * Math.sin(lngDistance / 2);
-        double c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
-        double result = RADIUS_OF_EARTH_KM * c;
-        return Math.round(result*100.0)/100.0;
-    }
-
-    private void moveMainMarker(GeoPoint p) {
-        if (currentUserMarker != null) {
-            map.getOverlays().remove(currentUserMarker);
-        }
-        currentUserMarker = createMarker(p, "location", null, R.drawable.ic_);
-        map.getOverlays().add(currentUserMarker);
-    }
-
-    private void drawRoute(GeoPoint start, GeoPoint finish){
-        ArrayList<GeoPoint> routePoints = new ArrayList<>();
-        routePoints.add(start);
-        routePoints.add(finish);
-        Road road = roadManager.getRoad(routePoints);
-        if(map!=null){
-            if(roadOverlay!=null){
-                map.getOverlays().remove(roadOverlay);
+    private void getDeliveryManLocation() {
+        DatabaseReference ref = database.getReference("users").child(deliveryManId);
+        ref.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if (snapshot.getKey().equals(deliveryManId)) {
+                    if (snapshot.getValue() != null) {
+                        Log.i("DeliveryMan", snapshot.toString());
+                        DeliveryMan deliveryMan = snapshot.getValue(DeliveryMan.class);
+                        deliveryLatitude = deliveryMan.getLatitude();
+                        deliveryLongitude = deliveryMan.getLongitude();
+                        deliveryManPoint = new GeoPoint(deliveryLatitude, deliveryLongitude);
+                    }
+                }
             }
-            roadOverlay = RoadManager.buildRoadOverlay(road);
-            roadOverlay.getOutlinePaint().setColor(Color.MAGENTA);
-            roadOverlay.getOutlinePaint().setStrokeWidth(10);
-            map.getOverlays().add(roadOverlay);
-        }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
     }
 
-    private void getOrderEstablishmentLocation() {
+    private void setDeliveryMan() {
         DatabaseReference ref = database.getReference("orders").child(orderId);
         ref.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -227,11 +203,11 @@ public class DeliveryTrackOrderActivity extends AppCompatActivity {
                 if (snapshot.getKey().equals(orderId)) {
                     Order order = snapshot.getValue(Order.class);
                     if (order != null) {
-                        establishmentLatitude = order.getLatitude();
-                        establishmentLongitude = order.getLongitude();
-                        establishmentPoint = new GeoPoint(establishmentLatitude, establishmentLongitude);
-                        establishmentMarker = createMarker(establishmentPoint, "Establishment", "Establishment", R.drawable.ic_baseline_fastfood_24);
-                        placeMarker(establishmentMarker);
+                        deliveryManId = order.getDeliveryMan();
+                        getDeliveryManLocation();
+                        deliveryManPoint = new GeoPoint(deliveryLatitude, deliveryLongitude);
+                        deliveryManMarker = createMarker(deliveryManPoint, "Delivery", "Delivery", R.drawable.ic_person_foreground);
+                        placeMarker(deliveryManMarker);
                     }
                 }
             }

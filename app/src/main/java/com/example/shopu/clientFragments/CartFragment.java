@@ -14,6 +14,7 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.example.shopu.ClientMapActivity;
 import com.example.shopu.FCMSend;
 import com.example.shopu.HomeActivity;
 import com.example.shopu.R;
@@ -93,7 +94,6 @@ public class CartFragment extends Fragment {
         btnOrder.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 String orderId = String.valueOf(Math.floor(Math.random()*(100000-1000+1)+1000));
                 Order order = createOrder(orderId.substring(0,orderId.length()-2));
                 FirebaseDatabase.getInstance().getReference("orders")
@@ -102,14 +102,16 @@ public class CartFragment extends Fragment {
                             @Override
                             public void onComplete(@NonNull Task<Void> task) {
                                 if (task.isSuccessful()) {
-                                    System.out.println("Done");
+                                    Intent intent = new Intent(getContext(), ClientMapActivity.class);
+                                    intent.putExtra("order", orderId.substring(0,orderId.length()-2));
+                                    startActivity(intent);
                                 } else {
                                     Toast.makeText(getContext(), "Registro invalido", Toast.LENGTH_SHORT).show();
                                 }
                             }
                         });
                 FCMSend.pushNotification(getContext(),
-                        "cpG4sUm7SD-ghWpStppY50:APA91bGwJQQ5t9V09v_lGMsVkUuRUULWC07mSDb1tMkNlOHAB0v8WQLADS8AQW68aMx7eKM1j5LGDl63KLK22WG699LLVxrPU7mp6aocz_Ggz-xB6KD5SBsBNZCjM_hiSFOPNmkk6-b1",
+                        "ee8TlwcGQwG9kODJyETm8Q:APA91bF3TdK4vv8_URAKZMN56VfsMmwWQydg0YHfietnBpwRUA7vwJlM9aDVLeFsu3IXCZiOlDlrtqt8nunHe64Z-t6gXgj4AOjnuFAvBU58Fz4-MljoZD_4xSyqZ0YZ1SBzX2apkLEl",
                         "Orden Creada",
                         "Se ha creado una nueva orden");
                 System.out.println("ORDENANDO ...");

@@ -13,6 +13,7 @@ package com.example.shopu.adapters;
         import androidx.annotation.NonNull;
 
         import com.example.shopu.DeliveryTrackOrderActivity;
+        import com.example.shopu.FCMSend;
         import com.example.shopu.R;
         import com.example.shopu.model.Order;
         import com.google.firebase.auth.FirebaseAuth;
@@ -78,6 +79,10 @@ public class OrdersAdapter extends ArrayAdapter<Order> {
                 Intent intent = new Intent(mContext, DeliveryTrackOrderActivity.class);
                 intent.putExtra("order", orderId);
                 mContext.startActivity(intent);
+                FCMSend.pushNotification(getContext(),
+                        "6sxnDcpHAANA:APA91bFhG7HJyKqn7mRlsKSTBg064fSwKfC4lfUpw_rjfbrYhBylfAYAT5VATI9mCLabeDjlpQjG2CvjYW4r5dDFe1FOOipINVZgmBD-1K09JDer8NIZDQD0kaRb1D6zFPh0CoFvr6vu",
+                        "Orden aceptada por un repartidor",
+                        "Se ha creado una nueva orden");
             }
         });
     }
