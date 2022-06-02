@@ -1,6 +1,7 @@
 package com.example.shopu.adapters;
 
         import android.content.Context;
+        import android.content.Intent;
         import android.database.Cursor;
         import android.location.Geocoder;
         import android.util.Log;
@@ -11,6 +12,8 @@ package com.example.shopu.adapters;
         import android.widget.Button;
         import android.widget.CursorAdapter;
         import android.widget.TextView;
+
+        import com.example.shopu.DeliveryTrackOrderActivity;
         import com.example.shopu.R;
         import com.example.shopu.model.Establishment;
         import com.example.shopu.model.Location;
@@ -27,6 +30,7 @@ package com.example.shopu.adapters;
 
 public class OrdersAdapter extends ArrayAdapter<Order> {
 
+    Context context;
     List<Order> orders;
     Geocoder mGeocoder= new Geocoder(getContext());
 
@@ -65,17 +69,19 @@ public class OrdersAdapter extends ArrayAdapter<Order> {
 //       }
         txtItems.setText(order.getProducts());
 
-        boton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-            }
-        });
 
         return convertView;
     }
 
-
+    private void updateUi(Button button) {
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(context, DeliveryTrackOrderActivity.class);
+                context.startActivity(intent);
+            }
+        });
+    }
 
 
 
