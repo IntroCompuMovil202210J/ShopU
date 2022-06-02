@@ -28,6 +28,7 @@ import android.widget.Toast;
 
 import com.example.shopu.adapters.EstablishmentAdapter;
 import com.example.shopu.clientFragments.CartFragment;
+import com.example.shopu.clientFragments.ProfileFragment;
 import com.example.shopu.model.Cart;
 import com.example.shopu.model.Establishment;
 import com.example.shopu.enums.EstablishmentCategory;
@@ -74,10 +75,9 @@ public class HomeActivity extends AppCompatActivity {
                         replaceFragment(new HomeFragment());
                         break;
 
-                    case R.id.search:
-                        break;
 
                     case R.id.user:
+                        replaceFragment(new ProfileFragment());
                         break;
 
                     case R.id.car:

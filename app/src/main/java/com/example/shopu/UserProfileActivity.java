@@ -65,15 +65,6 @@ public class UserProfileActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_profile);
 
-        name = findViewById(R.id.name);
-        lastname = findViewById(R.id.lastname);
-        email = findViewById(R.id.email);
-        phone = findViewById(R.id.phone);
-        logOut = findViewById(R.id.logOut);
-        profilePic = findViewById(R.id.profilePic);
-        changePic = findViewById(R.id.changePic);
-        changePicGal = findViewById(R.id.changePicGal);
-
 
         file = new File(getFilesDir(), "picFromCamera");
 

@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="32dp"
+    tools:context=".UserProfileActivity">
+
+
+    <EditText
+        android:id="@+id/name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/hintName"
+        android:layout_marginBottom="24dp"
+        android:background="@drawable/custom_edit_text"
+        android:hint="Nombre"
+        android:paddingStart="12dp" />
+
+    <EditText
+        android:id="@+id/lastname"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/name"
+        android:layout_marginTop="12dp"
+        android:layout_marginBottom="24dp"
+        android:background="@drawable/custom_edit_text"
+        android:hint="Apellido"
+        android:paddingStart="12dp" />
+
+    <TextView
+        android:id="@+id/email"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/lastname"
+        android:layout_marginTop="12dp"
+        android:layout_marginBottom="24dp"
+        android:background="@drawable/custom_text_view"
+        android:hint="E-mail"
+        android:paddingStart="12dp"
+        android:textColor="@color/black"
+        android:textSize="18dp" />
+
+    <EditText
+        android:id="@+id/phone"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/email"
+        android:layout_marginTop="12dp"
+        android:layout_marginBottom="24dp"
+        android:background="@drawable/custom_edit_text"
+        android:hint="Celular"
+        android:paddingStart="12dp" />
+
+    <TextView
+        android:id="@+id/hintName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/changePicGal"
+        android:layout_marginBottom="8dp"
+        android:hint="Nombre"
+        android:paddingStart="13dp"
+        android:textSize="10dp" />
+    <TextView
+        android:id="@+id/hintLastName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Apellido"
+        android:paddingStart="13dp"
+        android:textSize="10dp"
+        android:layout_marginBottom="8dp"
+        android:layout_below="@+id/name"
+        />
+    <TextView
+        android:id="@+id/hintEmail"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="E-mail"
+        android:paddingStart="13dp"
+        android:textSize="10dp"
+        android:layout_marginBottom="4dp"
+        android:layout_below="@+id/lastname"
+        />
+    <TextView
+        android:id="@+id/hintphone"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Celular"
+        android:paddingStart="13dp"
+        android:textSize="10dp"
+        android:layout_marginBottom="4dp"
+        android:layout_below="@id/email"
+        />
+
+    <ImageView
+        android:id="@+id/profilePic"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="20dp"
+        android:adjustViewBounds="true"
+        android:maxWidth="174dp"
+        android:maxHeight="174dp"
+        android:scaleType="centerCrop"
+        tools:srcCompat="@drawable/ic_profile_foreground" />
+
+
+    <Button
+        android:id="@+id/changePicGal"
+        android:layout_width="125dp"
+        android:layout_height="20dp"
+        android:layout_below="@id/profilePic"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="16dp"
+        android:layout_marginRight="139dp"
+        android:layout_marginBottom="20dp"
+        android:background="@drawable/res_roundedbutton"
+        android:backgroundTint="@color/piel"
+        android:text="Cambiar foto"
+        android:textSize="9dp" />
+
+    <Button
+        android:id="@+id/saveButtonClient"
+        android:layout_width="100dp"
+        android:layout_height="24dp"
+        android:layout_below="@id/phone"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/res_roundedbutton"
+        android:backgroundTint="@color/piel"
+        android:text="Guardar"
+        android:textSize="10dp" />
+
+    <Button
+        android:id="@+id/logOut"
+        android:layout_width="100dp"
+        android:layout_height="24dp"
+        android:layout_below="@id/saveButtonClient"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/res_roundedbutton"
+        android:backgroundTint="@color/piel"
+        android:text="Sing out"
+        android:textSize="10dp" />
+
+
+
+
+</RelativeLayout>
