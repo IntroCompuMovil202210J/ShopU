@@ -47,6 +47,7 @@ public class MainActivity extends AppCompatActivity {
     private BiometricPrompt.PromptInfo promptInfo;
 
     DatabaseReference myRef;
+    FirebaseAuth mAuth = FirebaseAuth.getInstance();
     public static final String PATH_USERS="users/";
 
 
@@ -75,9 +76,9 @@ public class MainActivity extends AppCompatActivity {
                 public void onAuthenticationError(int errorCode,
                                                   @NonNull CharSequence errString) {
                     super.onAuthenticationError(errorCode, errString);
-                    Toast.makeText(getApplicationContext(),
-                            "Authentication error: " + errString, Toast.LENGTH_SHORT)
-                            .show();
+                    //Toast.makeText(getApplicationContext(), "Authentication error: " + errString, Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), "Porfavor vuelve a iniciar sesión", Toast.LENGTH_SHORT).show();
+                    mAuth.signOut();
                 }
 
                 @Override
@@ -86,6 +87,22 @@ public class MainActivity extends AppCompatActivity {
                     super.onAuthenticationSucceeded(result);
                     Toast.makeText(getApplicationContext(),
                             "Authentication succeeded!", Toast.LENGTH_SHORT).show();
+                    myRef.get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+                        @Override
+                        public void onComplete(@NonNull Task<DataSnapshot> task) {
+                            if (task.isSuccessful()){
+
+                                if(task.getResult().exists()){
+                                    User user = task.getResult().getValue(User.class);
+
+                                    if(user.getType().equals("DELIVERY_MAN"))
+                                        startActivity(new Intent(MainActivity.this,DeliveryHomeActivity.class));
+                                    if(user.getType().equals("CLIENT"))
+                                        startActivity(new Intent(MainActivity.this,HomeActivity.class));
+                                }
+                            }
+                        }
+                    });
                 }
 
                 @Override
@@ -105,22 +122,6 @@ public class MainActivity extends AppCompatActivity {
 
             biometricPrompt.authenticate(promptInfo);
 
-            myRef.get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
-                @Override
-                public void onComplete(@NonNull Task<DataSnapshot> task) {
-                    if (task.isSuccessful()){
-
-                        if(task.getResult().exists()){
-                            User user = task.getResult().getValue(User.class);
-
-                            if(user.getType().equals("deliveryMan"))
-                                startActivity(new Intent(MainActivity.this,DeliveryHomeActivity.class));
-                            else
-                                startActivity(new Intent(MainActivity.this,HomeActivity.class));
-                        }
-                    }
-                }
-            });
 
         }
 
