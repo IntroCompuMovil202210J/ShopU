@@ -95,8 +95,8 @@ public class CartFragment extends Fragment {
             @Override
             public void onClick(View v) {
 
-                Order order = createOrder();
                 String orderId = String.valueOf(Math.floor(Math.random()*(100000-1000+1)+1000));
+                Order order = createOrder(orderId.substring(0,orderId.length()-2));
                 FirebaseDatabase.getInstance().getReference("orders")
                         .child(orderId.substring(0,orderId.length()-2))
                         .setValue(order).addOnCompleteListener(new OnCompleteListener<Void>() {
@@ -120,7 +120,7 @@ public class CartFragment extends Fragment {
         return root;
     }
 
-    public Order createOrder(){
+    public Order createOrder(String id){
         Order order = new Order();
         String products = "";
 
@@ -132,7 +132,7 @@ public class CartFragment extends Fragment {
         order.setId(mAuth.getCurrentUser().getUid());
         order.setProducts(products);
         order.setDeliveryMan("Not Set");
-
+        order.setId(id);
         order.setLatitude(4.736593);
         order.setLongitude(-74.087583);
 
