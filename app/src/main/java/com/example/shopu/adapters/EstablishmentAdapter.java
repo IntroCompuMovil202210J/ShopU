@@ -65,7 +65,6 @@ public class EstablishmentAdapter extends ArrayAdapter<Establishment> {
                 fragment.setArguments(bundle);
                 transaction.replace(R.id.fragment_layout, fragment);
                 transaction.commit();
-
             }
         });
 

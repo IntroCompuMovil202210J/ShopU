@@ -81,7 +81,7 @@ public class HomeActivity extends AppCompatActivity {
                         break;
 
                     case R.id.car:
-                        replaceFragment(new CartFragment());
+                        replaceFragment(new chatFragment());
                         break;
                 }
                 return false;
@@ -94,7 +94,5 @@ public class HomeActivity extends AppCompatActivity {
         transaction.replace(R.id.fragment_layout, fragment);
         transaction.commit();
     }
-
-
 
 }
