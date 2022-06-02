@@ -8,15 +8,25 @@ public class Message {
     String senderName;
     String message;
     String senderId;
+    String time;
     Uri senderUri;
 
     public Message(){}
 
-    public Message(String senderName, String message, Uri senderUri,String senderId) {
+    public Message(String senderName, String message, Uri senderUri,String senderId,String time) {
         this.senderName = senderName;
         this.message = message;
         this.senderUri = senderUri;
         this.senderId = senderId;
+        this.time = time;
+    }
+
+    public String getTime() {
+        return time;
+    }
+
+    public void setTime(String time) {
+        this.time = time;
     }
 
     public String getChat() {

@@ -31,6 +31,7 @@ import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -148,7 +149,8 @@ public class chatFragment extends Fragment {
         a.setMessage(txtMessage.getText().toString());
         a.setSenderName(myUser.getName());
 
-
+        String time = LocalTime.now().toString();
+        a.setTime(time.substring(0,time.length()-4));
         FirebaseDatabase.getInstance().getReference("chats").push().setValue(a);
 
     }

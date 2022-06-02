@@ -38,8 +38,7 @@ public class ChatMessageAdapter extends ArrayAdapter<Message> {
 
 
     List<Message> messages;
-    StorageReference storageRef;
-    Uri img;
+
     public ChatMessageAdapter(Context context, ArrayList<Message> messages) {
         super(context, 0, messages);
 
@@ -55,39 +54,18 @@ public class ChatMessageAdapter extends ArrayAdapter<Message> {
             convertView = LayoutInflater.from(getContext()).inflate(R.layout.item_chat_message, parent, false);
         }
 
-        this.storageRef = FirebaseStorage.getInstance().getReference("/");
-
         TextView txtName = (TextView) convertView.findViewById(R.id.chatUserName);
         TextView txtMessage = convertView.findViewById(R.id.chatMessage);
-        ImageView image = convertView.findViewById(R.id.senderImage);
+        TextView txtTime = convertView.findViewById(R.id.txtTime);
 
         Message message = this.messages.get(position);
 
         txtName.setText(message.getSenderName());
         txtMessage.setText(message.getMessage());
+        txtTime.setText(message.getTime());
 
-        try {
-            File localFile = File.createTempFile("images", "jpeg");
-            StorageReference imageRef = storageRef.child(message.getSenderId());
 
-            imageRef.getFile(localFile)
-                    .addOnSuccessListener(new OnSuccessListener<FileDownloadTask.TaskSnapshot>() {
-                        @Override
-                        public void onSuccess(FileDownloadTask.TaskSnapshot taskSnapshot) {
 
-                            img = (Uri.fromFile(localFile));
-                            image.setImageURI(img);
-                        }
-                    }).addOnFailureListener(new OnFailureListener() {
-                        @Override
-                        public void onFailure(@NonNull Exception exception) {
-
-                        }
-                    });
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
 
         return convertView;
     }

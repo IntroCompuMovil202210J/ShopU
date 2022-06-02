@@ -10,7 +10,9 @@
         android:id="@+id/chatDisplay"
         android:layout_width="match_parent"
         android:layout_height="530dp"
-        android:layout_below="@id/containerSender"/>
+        android:layout_below="@id/containerSender"
+        android:stackFromBottom="true"
+        android:transcriptMode="normal"/>
 
     <LinearLayout
         android:id="@+id/containerSender"
@@ -18,7 +20,8 @@
         android:layout_height="40dp"
         android:orientation="horizontal"
         android:layout_marginTop="20dp"
-        android:paddingHorizontal="10dp">
+        android:paddingHorizontal="10dp"
+        >
 
         <EditText
             android:id="@+id/newMessageTxt"
