@@ -64,7 +64,7 @@ public class DeliveryProfileFragment extends Fragment {
     ImageView DprofilePic;
     Uri img;
 
-    Geocoder mGeocoder= new Geocoder(getContext());
+
 
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
@@ -110,7 +110,7 @@ public class DeliveryProfileFragment extends Fragment {
         score = root.findViewById(R.id.score);
         profit = root.findViewById(R.id.profit);
         btnSave = root.findViewById(R.id.btn_home);
-        DchangePic = root.findViewById(R.id.DchangePic);
+
         DchangePicGal = root.findViewById(R.id.DchangePicGal);
         DprofilePic = root.findViewById(R.id.DprofilePic);
 
