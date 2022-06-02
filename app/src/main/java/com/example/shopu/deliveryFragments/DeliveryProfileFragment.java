@@ -226,7 +226,7 @@ public class DeliveryProfileFragment extends Fragment {
 
        ref = FirebaseDatabase.getInstance().getReference("users").child(user.getUid()).child("name");
        ref.setValue(Dname.getText().toString());
-       ref = FirebaseDatabase.getInstance().getReference("users").child(user.getUid()).child("lastname");
+       ref = FirebaseDatabase.getInstance().getReference("users").child(user.getUid()).child("lastName");
        ref.setValue(Dlastname.getText().toString());
        ref = FirebaseDatabase.getInstance().getReference("users").child(user.getUid()).child("phone");
        ref.setValue(Dphone.getText().toString());

@@ -2,6 +2,7 @@ package com.example.shopu.model;
 
 import com.example.shopu.enums.UserType;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Client extends User{
@@ -14,11 +15,10 @@ public class Client extends User{
         super();
     }
 
-    public Client(String name, String lastName, String email, String password, String phone, Cart cart, List<Card> cards, Location location) {
-        super(name, lastName, email, password, phone);
-        this.cart = cart;
-        Cards = cards;
-        super.setLocation(location);
+    public Client(String Token, String name, String lastName, String email, String password, String phone, Double latitude, Double longitude) {
+        super(Token, name, lastName, email, password, phone, latitude, longitude);
+        this.cart = cart = new Cart();
+        Cards = new ArrayList<>();
     }
 
     public Cart getCart() {

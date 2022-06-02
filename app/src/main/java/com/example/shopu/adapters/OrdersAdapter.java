@@ -2,35 +2,31 @@ package com.example.shopu.adapters;
 
         import android.content.Context;
         import android.content.Intent;
-        import android.database.Cursor;
         import android.location.Geocoder;
-        import android.util.Log;
         import android.view.LayoutInflater;
         import android.view.View;
         import android.view.ViewGroup;
         import android.widget.ArrayAdapter;
         import android.widget.Button;
-        import android.widget.CursorAdapter;
         import android.widget.TextView;
+
+        import androidx.annotation.NonNull;
 
         import com.example.shopu.DeliveryTrackOrderActivity;
         import com.example.shopu.R;
-        import com.example.shopu.model.Establishment;
-        import com.example.shopu.model.Location;
         import com.example.shopu.model.Order;
+        import com.google.firebase.auth.FirebaseAuth;
         import com.google.firebase.database.DataSnapshot;
         import com.google.firebase.database.DatabaseError;
         import com.google.firebase.database.DatabaseReference;
         import com.google.firebase.database.FirebaseDatabase;
         import com.google.firebase.database.ValueEventListener;
 
-        import java.io.IOException;
-        import java.util.ArrayList;
         import java.util.List;
 
 public class OrdersAdapter extends ArrayAdapter<Order> {
 
-    Context context;
+    Context mContext;
     List<Order> orders;
     Geocoder mGeocoder= new Geocoder(getContext());
 
@@ -38,7 +34,7 @@ public class OrdersAdapter extends ArrayAdapter<Order> {
 
     public OrdersAdapter(Context context, List<Order> orders) {
         super(context, 0, orders);
-
+        this.mContext = context;
         this.orders = orders;
     }
 
@@ -68,17 +64,20 @@ public class OrdersAdapter extends ArrayAdapter<Order> {
 //            e.printStackTrace();
 //       }
         txtItems.setText(order.getProducts());
-
+        updateUi(boton, order.getId());
 
         return convertView;
     }
 
-    private void updateUi(Button button) {
+    private void updateUi(Button button, String orderId) {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(context, DeliveryTrackOrderActivity.class);
-                context.startActivity(intent);
+                DatabaseReference ref = FirebaseDatabase.getInstance().getReference("orders").child(orderId).child("deliveryMan");
+                ref.setValue(FirebaseAuth.getInstance().getCurrentUser().getUid());
+                Intent intent = new Intent(mContext, DeliveryTrackOrderActivity.class);
+                intent.putExtra("order", orderId);
+                mContext.startActivity(intent);
             }
         });
     }

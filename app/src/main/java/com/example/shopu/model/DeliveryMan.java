@@ -11,10 +11,8 @@ public class DeliveryMan extends User{
         super();
     }
 
-    public DeliveryMan(String name, String lastName, String email, String password, String phone) {
-        super(name, lastName, email, password, phone);
-        this.Score = 0d;
-        this.profit = 0L;
+    public DeliveryMan(String token, String name, String lastName, String email, String password, String phone, Double latitude, Double longitude) {
+        super(token, name, lastName, email, password, phone, latitude, longitude);
     }
 
     public Double getScore() {
@@ -33,9 +31,25 @@ public class DeliveryMan extends User{
         this.profit = profit;
     }
 
+    public void setLatitude(Double latitude) {
+        super.setLatitude(latitude);
+    }
+
+    public void setLongitude(Double longitude) {
+        super.setLongitude(longitude);
+    }
+
+    public void setToken(String token) {
+        super.setToken(token);
+    }
+
     @Override
     public String getType(){
         return UserType.DELIVERY_MAN.toString();
     }
 
+    @Override
+    public String toString() {
+        return getLatitude() + " - " + getLongitude();
+    }
 }

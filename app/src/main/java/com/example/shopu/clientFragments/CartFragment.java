@@ -50,7 +50,6 @@ public class CartFragment extends Fragment {
     Button btnOrder;
     ListView lstCartProducts;
     ProductCartAdapter adapter;
-    BottomNavigationView navbar;
 
     View root;
 

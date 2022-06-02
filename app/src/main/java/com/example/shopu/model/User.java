@@ -3,23 +3,36 @@ package com.example.shopu.model;
 import com.example.shopu.enums.UserType;
 
 public class User {
+    private String Token;
     private String name;
     private String lastName;
     private String email;
     private String password;
     private String phone;
     private String type;
-    private Location location;
+    private Double latitude;
+    private Double longitude;
 
     public User() {
     }
 
-    public User(String name, String lastName, String email, String password, String phone) {
+    public User(String token, String name, String lastName, String email, String password, String phone, Double latitude, Double longitude) {
+        this.Token = token;
         this.name = name;
         this.lastName = lastName;
         this.email = email;
         this.password = password;
         this.phone = phone;
+        this.latitude = latitude;
+        this.longitude = longitude;
+    }
+
+    public String getToken() {
+        return Token;
+    }
+
+    public void setToken(String token) {
+        Token = token;
     }
 
     public String getName() {
@@ -70,12 +83,20 @@ public class User {
         this.type = type;
     }
 
-    public Location getLocation() {
-        return location;
+    public Double getLatitude() {
+        return latitude;
     }
 
-    public void setLocation(Location location) {
-        this.location = location;
+    public void setLatitude(Double latitude) {
+        this.latitude = latitude;
+    }
+
+    public Double getLongitude() {
+        return longitude;
+    }
+
+    public void setLongitude(Double longitude) {
+        this.longitude = longitude;
     }
 
     @Override

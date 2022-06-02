@@ -182,7 +182,7 @@ public class ProfileFragment extends Fragment {
 
         ref = FirebaseDatabase.getInstance().getReference("users").child(user.getUid()).child("name");
         ref.setValue(userName.getText().toString());
-        ref = FirebaseDatabase.getInstance().getReference("users").child(user.getUid()).child("lastname");
+        ref = FirebaseDatabase.getInstance().getReference("users").child(user.getUid()).child("lastName");
         ref.setValue(userLastname.getText().toString());
         ref = FirebaseDatabase.getInstance().getReference("users").child(user.getUid()).child("phone");
         ref.setValue(userPhone.getText().toString());
