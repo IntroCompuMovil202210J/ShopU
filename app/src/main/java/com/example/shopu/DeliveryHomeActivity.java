@@ -1,9 +1,12 @@
 package com.example.shopu;
 
+import androidx.activity.result.ActivityResultCallback;
 import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
@@ -16,28 +19,44 @@ import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
+import com.example.shopu.adapters.EstablishmentAdapter;
 import com.example.shopu.deliveryFragments.DeliveryProfileFragment;
 import com.example.shopu.deliveryFragments.OrderListFragment;
 import com.example.shopu.model.Order;
 import com.google.android.gms.location.FusedLocationProviderClient;
+import com.google.android.gms.location.LocationCallback;
+import com.google.android.gms.location.LocationRequest;
+import com.google.android.gms.location.LocationResult;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 public class DeliveryHomeActivity extends AppCompatActivity {
 
     Button btnProfile;
     Button btnOrder;
 
-    Double latitude;
-    Double longitude;
+    private Double latitude = 0d;
+    private Double longitude = 0d;
 
     private BottomNavigationView menu;
 
     private FusedLocationProviderClient mFusedLocationClient;
+    private LocationCallback mLocationCallback;
+    private LocationRequest mLocationRequest;
     private ActivityResultLauncher<String> getSinglePermissionLocation;
+
+    private FirebaseAuth mAuth;
+    FirebaseDatabase database;
+    DatabaseReference myRef;
+
     Geocoder mGeocoder;
 
     @Override
@@ -46,6 +65,28 @@ public class DeliveryHomeActivity extends AppCompatActivity {
         setContentView(R.layout.activity_delivery_home);
 
         menu = findViewById(R.id.navigation_menu_delivery);
+
+        database = FirebaseDatabase.getInstance();
+
+        mFusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
+
+        mLocationCallback = new LocationCallback() {
+            @Override
+            public void onLocationResult(LocationResult locationResult) {
+                Location location = locationResult.getLastLocation();
+
+                if (location != null) {
+
+                    latitude = location.getLatitude();
+                    longitude = location.getLongitude();
+                    updateLocation();
+
+                }
+            }
+        };
+
+        requestLocationAccessPermission();
+
 
         menu.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
             @Override
@@ -60,35 +101,85 @@ public class DeliveryHomeActivity extends AppCompatActivity {
                     case R.id.profile:
                         replaceFragment(new DeliveryProfileFragment());
                         break;
-
                 }
+
                 return false;
             }
         });
 
     }
 
-    public void findLocation(){
-
-        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) ==
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) ==
                 PackageManager.PERMISSION_GRANTED) {
 
-            mFusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
-            mGeocoder = new Geocoder(getBaseContext());
+            mLocationRequest = createLocationRequest();
+            mFusedLocationClient.requestLocationUpdates(mLocationRequest, mLocationCallback, null);
 
-            mFusedLocationClient.getLastLocation().addOnSuccessListener(this,
-                    new OnSuccessListener<Location>() {
-                        @Override
-                        public void onSuccess(Location location) {
-                            if (location != null) {
-                                longitude = location.getLongitude();
-                                latitude = location.getLatitude();
-                            }
-                        }
-                    });
+        }else{
+
         }
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        stopLocationUpdates();
+    }
+
+    private LocationRequest createLocationRequest(){
+        LocationRequest locationRequest = LocationRequest.create()
+                .setInterval(1000)
+                .setFastestInterval(1000)
+                .setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
+        return locationRequest;
+    }
+
+    private void startLocationUpdates(){
+        if(ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) ==
+                PackageManager.PERMISSION_GRANTED){
+
+            mFusedLocationClient.requestLocationUpdates(mLocationRequest, mLocationCallback, null);
+
+        }
+    }
+
+    private void stopLocationUpdates(){
+        mFusedLocationClient.removeLocationUpdates(mLocationCallback);
+    }
+
+    public void requestLocationAccessPermission() {
+        getSinglePermissionLocation = registerForActivityResult(
+                new ActivityResultContracts.RequestPermission(),
+                new ActivityResultCallback<Boolean>() {
+                    @Override
+                    public void onActivityResult(Boolean result) {
+                        if (result) {
+
+                        } else {
+                            Toast.makeText(getApplicationContext(), "No location, no app. Bitch", Toast.LENGTH_LONG).show();
+                        }
+                    }
+                });
+
+        getSinglePermissionLocation.launch(Manifest.permission.ACCESS_FINE_LOCATION);
 
     }
+    public void updateLocation(){
+
+        mAuth = FirebaseAuth.getInstance();
+        FirebaseUser user = mAuth.getCurrentUser();
+
+        myRef = database.getReference("users/"+ user.getUid() + "/longitude");
+        myRef.setValue(longitude);
+
+        myRef = database.getReference("users/"+ user.getUid() + "/latitude");
+        myRef.setValue(latitude);
+
+    }
+
 
     private void replaceFragment(Fragment fragment) {
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();

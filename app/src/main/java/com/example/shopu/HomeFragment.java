@@ -2,12 +2,16 @@ package com.example.shopu;
 
 import android.Manifest;
 import android.content.Context;
+import android.content.pm.PackageManager;
 import android.location.Geocoder;
+import android.location.Location;
 import android.os.Bundle;
 
 import androidx.activity.result.ActivityResultCallback;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
 import android.preference.PreferenceManager;
@@ -25,7 +29,16 @@ import com.example.shopu.clientFragments.EstablishmentFragment;
 import com.example.shopu.enums.EstablishmentCategory;
 import com.example.shopu.model.Establishment;
 import com.google.android.gms.location.FusedLocationProviderClient;
+import com.google.android.gms.location.LocationCallback;
+import com.google.android.gms.location.LocationRequest;
+import com.google.android.gms.location.LocationResult;
+import com.google.android.gms.location.LocationServices;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import org.osmdroid.config.Configuration;
 
@@ -46,13 +59,18 @@ public class HomeFragment extends Fragment {
     private TextView txtAddress;
     private EditText textSearch;
 
+    private FirebaseAuth mAuth;
+    FirebaseDatabase database;
+    DatabaseReference myRef;
+
     private EstablishmentAdapter estAdapter;
     private ArrayList<Establishment> establishments;
     private FusedLocationProviderClient mFusedLocationClient;
+    private LocationCallback mLocationCallback;
+    private LocationRequest mLocationRequest;
     private ActivityResultLauncher<String> getSinglePermissionLocation;
 
     Fragment establishmentFragment;
-    Geocoder mGeocoder;
 
     private Double latitude = 0d;
     private Double longitude = 0d;
@@ -71,15 +89,6 @@ public class HomeFragment extends Fragment {
         // Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment HomeFragment.
-     */
-    // TODO: Rename and change types and number of parameters
     public static HomeFragment newInstance(String param1, String param2) {
         HomeFragment fragment = new HomeFragment();
         Bundle args = new Bundle();
@@ -99,6 +108,29 @@ public class HomeFragment extends Fragment {
     }
 
     @Override
+    public void onResume() {
+        super.onResume();
+
+        if (ContextCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_FINE_LOCATION) ==
+                PackageManager.PERMISSION_GRANTED) {
+
+            mLocationRequest = createLocationRequest();
+            mFusedLocationClient.requestLocationUpdates(mLocationRequest, mLocationCallback, null);
+
+        }else{
+        }
+
+
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+
+        stopLocationUpdates();
+    }
+
+    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         root = inflater.inflate(R.layout.fragment_home, container, false);
 
@@ -114,11 +146,12 @@ public class HomeFragment extends Fragment {
         feeding = root.findViewById(R.id.btnAlimentacion);
         gvwEstablishments = root.findViewById(R.id.gvwEstablishments);
 
+        database = FirebaseDatabase.getInstance();
 
         all.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-               onAllClicked();
+                onAllClicked();
             }
         });
         feeding.setOnClickListener(new View.OnClickListener() {
@@ -140,27 +173,82 @@ public class HomeFragment extends Fragment {
             }
         });
 
+        // location updates //
+
+        mFusedLocationClient = LocationServices.getFusedLocationProviderClient(getContext());
+
+        mLocationCallback = new LocationCallback() {
+            @Override
+            public void onLocationResult(LocationResult locationResult) {
+                Location location = locationResult.getLastLocation();
+
+                if (location != null) {
+
+                    latitude = location.getLatitude();
+                    longitude = location.getLongitude();
+                    updateLocation();
+
+                }
+            }
+        };
+
         requestLocationAccessPermission();
+
         return root;
     }
 
+    private LocationRequest createLocationRequest(){
+        LocationRequest locationRequest = LocationRequest.create()
+                .setInterval(1000)
+                .setFastestInterval(1000)
+                .setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
+        return locationRequest;
+    }
+
+    private void startLocationUpdates(){
+        if(ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_FINE_LOCATION) ==
+                PackageManager.PERMISSION_GRANTED){
+
+            mFusedLocationClient.requestLocationUpdates(mLocationRequest, mLocationCallback, null);
+
+        }
+    }
+
+    private void stopLocationUpdates(){
+        mFusedLocationClient.removeLocationUpdates(mLocationCallback);
+    }
+
+
+    public void updateLocation(){
+
+        mAuth = FirebaseAuth.getInstance();
+        FirebaseUser user = mAuth.getCurrentUser();
+
+        myRef = database.getReference("users/"+ user.getUid() + "/longitude");
+        myRef.setValue(longitude);
+
+        myRef = database.getReference("users/"+ user.getUid() + "/latitude");
+        myRef.setValue(latitude);
+
+    }
+
     public void onAllClicked() {
-        estAdapter = new EstablishmentAdapter(root.getContext(), establishments,establishmentFragment);
+        estAdapter = new EstablishmentAdapter(root.getContext(), establishments, establishmentFragment);
         gvwEstablishments.setAdapter(estAdapter);
     }
 
     private void onFeedingClicked() {
-        estAdapter = new EstablishmentAdapter(root.getContext(), filterEstablishments(establishments, EstablishmentCategory.FEEDING),establishmentFragment);
+        estAdapter = new EstablishmentAdapter(root.getContext(), filterEstablishments(establishments, EstablishmentCategory.FEEDING), establishmentFragment);
         gvwEstablishments.setAdapter(estAdapter);
     }
 
     public void onStationeryClicked() {
-        estAdapter = new EstablishmentAdapter(root.getContext(), filterEstablishments(establishments, EstablishmentCategory.STATIONERY),establishmentFragment);
+        estAdapter = new EstablishmentAdapter(root.getContext(), filterEstablishments(establishments, EstablishmentCategory.STATIONERY), establishmentFragment);
         gvwEstablishments.setAdapter(estAdapter);
     }
 
     public void onPharmacyClicked() {
-        estAdapter = new EstablishmentAdapter(root.getContext(), filterEstablishments(establishments, EstablishmentCategory.PHARMACY),establishmentFragment);
+        estAdapter = new EstablishmentAdapter(root.getContext(), filterEstablishments(establishments, EstablishmentCategory.PHARMACY), establishmentFragment);
         gvwEstablishments.setAdapter(estAdapter);
     }
 
@@ -187,7 +275,7 @@ public class HomeFragment extends Fragment {
                         if (result) {
 
                             loadEstablishments();
-                            estAdapter = new EstablishmentAdapter(root.getContext(), establishments,establishmentFragment);
+                            estAdapter = new EstablishmentAdapter(root.getContext(), establishments, establishmentFragment);
                             gvwEstablishments.setAdapter(estAdapter);
 
                         } else {

@@ -45,15 +45,24 @@ public class HomeActivity extends AppCompatActivity {
 
     private BottomNavigationView menu;
     Fragment cartFragment;
+    private FusedLocationProviderClient mFusedLocationClient;
+
+    Double latitude;
+    Double longitude;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
-        replaceFragment(new HomeFragment());
+
 
         menu = findViewById(R.id.navigation);
+
+        mFusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
+
+
+        replaceFragment(new HomeFragment());
 
         menu.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
             @Override
@@ -85,5 +94,7 @@ public class HomeActivity extends AppCompatActivity {
         transaction.replace(R.id.fragment_layout, fragment);
         transaction.commit();
     }
+
+
 
 }

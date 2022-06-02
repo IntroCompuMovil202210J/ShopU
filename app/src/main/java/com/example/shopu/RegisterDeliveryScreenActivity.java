@@ -145,11 +145,14 @@ public class RegisterDeliveryScreenActivity extends AppCompatActivity {
     }
 
     private User createUserObject() {
-        User user = new User(etxtName.getText().toString(),
+        DeliveryMan user = new DeliveryMan(etxtName.getText().toString(),
                 etxtLastName.getText().toString(),
                 etxtEmail.getText().toString(),
                 etxtPassword.getText().toString(),
                 etxtPhone.getText().toString());
+
+        user.setProfit(0l);
+        user.setScore(3d);
         user.setType(UserType.DELIVERY_MAN.toString());
         return user;
     }
