@@ -42,6 +42,7 @@ import com.google.firebase.database.FirebaseDatabase;
 
 import org.osmdroid.config.Configuration;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -118,8 +119,8 @@ public class HomeFragment extends Fragment {
             mFusedLocationClient.requestLocationUpdates(mLocationRequest, mLocationCallback, null);
 
         }else{
-        }
 
+        }
 
     }
 
@@ -139,6 +140,7 @@ public class HomeFragment extends Fragment {
         Configuration.getInstance().load(context, PreferenceManager.getDefaultSharedPreferences(context));
 
         txtAddress = root.findViewById(R.id.txtDireccion);
+
         textSearch = root.findViewById(R.id.etxtBuscar);
         all = root.findViewById(R.id.btnAll);
         paper = root.findViewById(R.id.btnPapeleria);
@@ -187,6 +189,14 @@ public class HomeFragment extends Fragment {
                     latitude = location.getLatitude();
                     longitude = location.getLongitude();
                     updateLocation();
+
+//                    try {
+//
+//                        txtAddress.setText(new Geocoder(getContext()).getFromLocation(latitude,longitude,1).get(0).getAddressLine(0));
+//
+//                    } catch (IOException e) {
+//                        e.printStackTrace();
+//                    }
 
                 }
             }

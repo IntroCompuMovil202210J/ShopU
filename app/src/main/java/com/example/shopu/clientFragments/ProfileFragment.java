@@ -1,11 +1,9 @@
-package com.example.shopu.deliveryFragments;
+package com.example.shopu.clientFragments;
 
 import android.Manifest;
-import android.content.ActivityNotFoundException;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.graphics.Bitmap;
-import android.location.Geocoder;
+import android.media.Image;
 import android.net.Uri;
 import android.os.Bundle;
 
@@ -16,8 +14,6 @@ import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
-import android.provider.MediaStore;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -29,6 +25,7 @@ import android.widget.TextView;
 import com.example.shopu.MainActivity;
 import com.example.shopu.R;
 import com.example.shopu.model.DeliveryMan;
+import com.example.shopu.model.User;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -45,26 +42,29 @@ import com.google.firebase.storage.StorageReference;
 import java.io.File;
 import java.io.IOException;
 
-
-public class DeliveryProfileFragment extends Fragment {
+/**
+ * A simple {@link Fragment} subclass.
+ * Use the {@link ProfileFragment#newInstance} factory method to
+ * create an instance of this fragment.
+ */
+public class ProfileFragment extends Fragment {
 
 
     ActivityResultLauncher<String> mGetContentGallery;
     ActivityResultLauncher<String> getSinglePermissionGallery;
 
     StorageReference storageRef;
-
-    private FirebaseAuth mAuth;
-    Button logOut, DchangePic, DchangePicGal;
-    EditText Dname, Dlastname,  Dphone;
-    TextView score, Demail, profit;
     DatabaseReference ref;
+    private FirebaseAuth mAuth;
     FirebaseUser user;
-    Button btnSave;
-    ImageView DprofilePic;
     Uri img;
 
-    Geocoder mGeocoder= new Geocoder(getContext());
+    Button changePic,signOut,save;
+    TextView userEmail;
+    EditText userPhone,userName,userLastname;
+    ImageView imagePic;
+
+    View root;
 
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
@@ -72,14 +72,12 @@ public class DeliveryProfileFragment extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    View root;
-
-    public DeliveryProfileFragment() {
+    public ProfileFragment() {
+        // Required empty public constructor
     }
 
-
-    public static DeliveryProfileFragment newInstance(String param1, String param2) {
-        DeliveryProfileFragment fragment = new DeliveryProfileFragment();
+    public static ProfileFragment newInstance(String param1, String param2) {
+        ProfileFragment fragment = new ProfileFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -99,26 +97,24 @@ public class DeliveryProfileFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        // Inflate the layout for this fragment
+        root = inflater.inflate(R.layout.fragment_profile, container, false);
 
-        root = inflater.inflate(R.layout.fragment_delivery_profile, container, false);
+        changePic = root.findViewById(R.id.changePicGal);
+        signOut = root.findViewById(R.id.logOut);
+        save = root.findViewById(R.id.saveButtonClient);
 
-        Dname = root.findViewById(R.id.Dname);
-        Dlastname = root.findViewById(R.id.Dlastname);
-        Demail = root.findViewById(R.id.Demail);
-        Dphone = root.findViewById(R.id.Dphone);
-        logOut = root.findViewById(R.id.logOut);
-        score = root.findViewById(R.id.score);
-        profit = root.findViewById(R.id.profit);
-        btnSave = root.findViewById(R.id.btn_home);
-        DchangePic = root.findViewById(R.id.DchangePic);
-        DchangePicGal = root.findViewById(R.id.DchangePicGal);
-        DprofilePic = root.findViewById(R.id.DprofilePic);
+        userEmail = root.findViewById(R.id.email);
+        userName = root.findViewById(R.id.name);
+        userPhone = root.findViewById(R.id.phone);
+        userLastname = root.findViewById(R.id.lastname);
+        imagePic = root.findViewById(R.id.profilePic);
 
         requestReadStoragePermission();
 
         loadData();
 
-        logOut.setOnClickListener(new View.OnClickListener() {
+        signOut.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
@@ -128,14 +124,7 @@ public class DeliveryProfileFragment extends Fragment {
             }
         });
 
-        btnSave.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                saveData();
-            }
-        });
-
-        DchangePicGal.setOnClickListener(new View.OnClickListener() {
+        changePic.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 getSinglePermissionGallery.launch(Manifest.permission.READ_EXTERNAL_STORAGE);
@@ -161,12 +150,45 @@ public class DeliveryProfileFragment extends Fragment {
                     }
                 });
 
+        save.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                saveData();
+            }
+        });
 
         return root;
     }
 
     public void loadImage(Uri uri) {
-        DprofilePic.setImageURI(uri);
+        imagePic.setImageURI(uri);
+    }
+
+    public void requestReadStoragePermission() {
+        getSinglePermissionGallery = registerForActivityResult(
+                new ActivityResultContracts.RequestPermission(),
+                new ActivityResultCallback<Boolean>() {
+                    @Override
+                    public void onActivityResult(Boolean result) {
+                        if (result == true) {
+
+                        } else {
+                        }
+                    }
+                });
+    }
+
+    public void saveData(){
+
+        ref = FirebaseDatabase.getInstance().getReference("users").child(user.getUid()).child("name");
+        ref.setValue(userName.getText().toString());
+        ref = FirebaseDatabase.getInstance().getReference("users").child(user.getUid()).child("lastname");
+        ref.setValue(userLastname.getText().toString());
+        ref = FirebaseDatabase.getInstance().getReference("users").child(user.getUid()).child("phone");
+        ref.setValue(userPhone.getText().toString());
+
+        storageRef = FirebaseStorage.getInstance().getReference(user.getUid()+"/");
+        storageRef.putFile(img);
     }
 
     public void loadData(){
@@ -183,13 +205,12 @@ public class DeliveryProfileFragment extends Fragment {
 
                     if(task.getResult().exists()){
 
-                        DeliveryMan usuario = task.getResult().getValue(DeliveryMan.class);
-                        Dname.setText(usuario.getName());
-                        Dlastname.setText(usuario.getLastName());
-                        Demail.setText(usuario.getEmail());
-                        Dphone.setText(usuario.getPhone());
-                        score.setText(usuario.getScore().toString());
-                        profit.setText(usuario.getProfit().toString());
+                        User usuario = task.getResult().getValue(User.class);
+
+                        userName.setText(usuario.getName());
+                        userLastname.setText(usuario.getLastName());
+                        userEmail.setText(usuario.getEmail());
+                        userPhone.setText(usuario.getPhone());
 
                     }
                 }
@@ -207,8 +228,7 @@ public class DeliveryProfileFragment extends Fragment {
                         public void onSuccess(FileDownloadTask.TaskSnapshot taskSnapshot) {
 
                             img = (Uri.fromFile(localFile));
-                            DprofilePic.setImageURI(img);
-
+                            imagePic.setImageURI(img);
                         }
                     }).addOnFailureListener(new OnFailureListener() {
                         @Override
@@ -221,34 +241,4 @@ public class DeliveryProfileFragment extends Fragment {
             e.printStackTrace();
         }
     }
-
-    public void saveData(){
-
-       ref = FirebaseDatabase.getInstance().getReference("users").child(user.getUid()).child("name");
-       ref.setValue(Dname.getText().toString());
-       ref = FirebaseDatabase.getInstance().getReference("users").child(user.getUid()).child("lastname");
-       ref.setValue(Dlastname.getText().toString());
-       ref = FirebaseDatabase.getInstance().getReference("users").child(user.getUid()).child("phone");
-       ref.setValue(Dphone.getText().toString());
-
-        storageRef = FirebaseStorage.getInstance().getReference(user.getUid()+"/");
-        storageRef.putFile(img);
-    }
-
-
-    public void requestReadStoragePermission() {
-        getSinglePermissionGallery = registerForActivityResult(
-                new ActivityResultContracts.RequestPermission(),
-                new ActivityResultCallback<Boolean>() {
-                    @Override
-                    public void onActivityResult(Boolean result) {
-                        if (result == true) {
-
-                        } else {
-                        }
-                    }
-                });
-    }
-
-
 }
