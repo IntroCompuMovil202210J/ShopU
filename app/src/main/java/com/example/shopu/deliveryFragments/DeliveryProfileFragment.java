@@ -5,6 +5,7 @@ import android.content.ActivityNotFoundException;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
+import android.location.Geocoder;
 import android.net.Uri;
 import android.os.Bundle;
 
@@ -63,7 +64,7 @@ public class DeliveryProfileFragment extends Fragment {
     ImageView DprofilePic;
     Uri img;
 
-
+    Geocoder mGeocoder= new Geocoder(getContext());
 
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
