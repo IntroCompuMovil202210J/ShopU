@@ -14,6 +14,7 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.example.shopu.FCMSend;
 import com.example.shopu.HomeActivity;
 import com.example.shopu.R;
 import com.example.shopu.RegisterScreenActivity;
@@ -108,6 +109,10 @@ public class CartFragment extends Fragment {
                                 }
                             }
                         });
+                FCMSend.pushNotification(getContext(),
+                        "cpG4sUm7SD-ghWpStppY50:APA91bGwJQQ5t9V09v_lGMsVkUuRUULWC07mSDb1tMkNlOHAB0v8WQLADS8AQW68aMx7eKM1j5LGDl63KLK22WG699LLVxrPU7mp6aocz_Ggz-xB6KD5SBsBNZCjM_hiSFOPNmkk6-b1",
+                        "Orden Creada",
+                        "Se ha creado una nueva orden");
                 System.out.println("ORDENANDO ...");
             }
         });
