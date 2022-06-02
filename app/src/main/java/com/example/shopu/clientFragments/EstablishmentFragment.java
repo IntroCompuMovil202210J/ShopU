@@ -28,6 +28,7 @@ import java.util.ArrayList;
 public class EstablishmentFragment extends Fragment {
 
 
+
     private Establishment establishment;
     ListView lvwEstProduct;
     TextView txtName,txtScore;
@@ -54,6 +55,9 @@ public class EstablishmentFragment extends Fragment {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
            this.establishment = (Establishment)getArguments().getSerializable("establishment");
+           Bundle bundle = new Bundle();
+           bundle.putString("data","Datos enviados");
+           this.setArguments(bundle);
         }
     }
 

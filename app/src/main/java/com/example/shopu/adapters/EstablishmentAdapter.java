@@ -31,8 +31,8 @@ import java.util.List;
 public class EstablishmentAdapter extends ArrayAdapter<Establishment> {
 
     List<Establishment> establishments;
-
-    public EstablishmentAdapter(Context context, ArrayList<Establishment> establishments) {
+    Fragment fragment;
+    public EstablishmentAdapter(Context context, ArrayList<Establishment> establishments , Fragment fragment) {
         super(context, 0, establishments);
 
         this.establishments = establishments;
@@ -59,11 +59,11 @@ public class EstablishmentAdapter extends ArrayAdapter<Establishment> {
             public void onClick(View v) {
 
                 FragmentTransaction transaction = ((FragmentActivity)getContext()).getSupportFragmentManager().beginTransaction();
-                Fragment establishmentFragment = new EstablishmentFragment();
+                fragment = new EstablishmentFragment();
                 Bundle bundle = new Bundle();
                 bundle.putSerializable("establishment",establishment);
-                establishmentFragment.setArguments(bundle);
-                transaction.replace(R.id.fragment_layout, establishmentFragment);
+                fragment.setArguments(bundle);
+                transaction.replace(R.id.fragment_layout, fragment);
                 transaction.commit();
 
             }

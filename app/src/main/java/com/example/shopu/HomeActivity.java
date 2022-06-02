@@ -27,6 +27,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.shopu.adapters.EstablishmentAdapter;
+import com.example.shopu.clientFragments.CartFragment;
+import com.example.shopu.model.Cart;
 import com.example.shopu.model.Establishment;
 import com.example.shopu.enums.EstablishmentCategory;
 import com.google.android.gms.location.FusedLocationProviderClient;
@@ -42,6 +44,7 @@ import java.util.List;
 public class HomeActivity extends AppCompatActivity {
 
     private BottomNavigationView menu;
+    Fragment cartFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,6 +72,7 @@ public class HomeActivity extends AppCompatActivity {
                         break;
 
                     case R.id.car:
+                        replaceFragment(new CartFragment());
                         break;
                 }
                 return false;

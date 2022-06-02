@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp"
+    tools:context=".CartActivity">
+
+    <TextView
+        android:id="@+id/txtTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:drawableStart="@drawable/ic_black_shopping_cart"
+        android:text="Tu Carrito"
+        android:textAlignment="center"
+        android:textColor="@color/black"
+        android:textSize="18dp"
+        android:textStyle="bold" />
+
+    <View
+        android:id="@+id/sepCartTitle"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/categorias"
+        android:layout_below="@+id/txtTitle"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="16dp"/>
+
+    <ListView
+        android:id="@+id/lstCartProducts"
+        android:layout_width="match_parent"
+        android:layout_height="400dp"
+        android:layout_below="@+id/sepCartTitle"
+        android:layout_marginBottom="16dp" />
+
+    <View
+        android:id="@+id/sepOrderButton"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_below="@id/lstCartProducts"
+        android:background="@color/categorias" />
+
+    <Button
+        android:id="@+id/btnOrder"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/sepOrderButton"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/res_roundedbutton"
+        android:backgroundTint="@color/order_green"
+        android:textColor="@color/white"
+        android:textStyle="bold"
+        android:text="Ordenar" />
+
+
+
+</RelativeLayout>

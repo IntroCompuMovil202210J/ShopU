@@ -5,8 +5,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
+
 import com.example.shopu.R;
+import com.example.shopu.clientFragments.CartFragment;
+import com.example.shopu.clientFragments.EstablishmentFragment;
 import com.example.shopu.model.Product;
 
 import java.util.ArrayList;
@@ -32,8 +37,16 @@ public class ProductAdapter extends ArrayAdapter<Product> {
         TextView txtName = (TextView) convertView.findViewById(R.id.txtNameP);
         TextView txtDescrip =(TextView) convertView.findViewById(R.id.txtDescriptionP);
         TextView txtPrice = (TextView) convertView.findViewById(R.id.txtPriceP);
-
+        Button add = convertView.findViewById(R.id.btnAdd);
         Product product = this.products.get(position);
+
+        add.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                CartFragment.itemsToCart.add(product);
+                Toast.makeText(getContext(),"Se agrego un(a) "+product.getName(),Toast.LENGTH_SHORT).show();
+            }
+        });
 
         txtName.setText(product.getName());
         txtDescrip.setText(product.getDescription());

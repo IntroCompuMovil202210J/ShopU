@@ -22,15 +22,19 @@
         <entry key="..\:/Users/anfeg/Desktop/ShopU/app/src/main/res/drawable-v24/ic_home_background.xml" value="0.16" />
         <entry key="..\:/Users/anfeg/Desktop/ShopU/app/src/main/res/drawable-v24/ic_home_foreground.xml" value="0.16" />
         <entry key="..\:/Users/anfeg/Desktop/ShopU/app/src/main/res/drawable/ic_baseline_person_24.xml" value="0.16" />
+        <entry key="..\:/Users/anfeg/Desktop/ShopU/app/src/main/res/layout/activity_cart.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/anfeg/Desktop/ShopU/app/src/main/res/layout/activity_delivery_home.xml" value="0.33" />
         <entry key="..\:/Users/anfeg/Desktop/ShopU/app/src/main/res/layout/activity_delivery_profile.xml" value="0.346875" />
         <entry key="..\:/Users/anfeg/Desktop/ShopU/app/src/main/res/layout/activity_establecimiento.xml" value="0.3078125" />
         <entry key="..\:/Users/anfeg/Desktop/ShopU/app/src/main/res/layout/activity_home.xml" value="0.3255208333333333" />
         <entry key="..\:/Users/anfeg/Desktop/ShopU/app/src/main/res/layout/activity_orders.xml" value="0.346875" />
+        <entry key="..\:/Users/anfeg/Desktop/ShopU/app/src/main/res/layout/fragment_cart.xml" value="0.33" />
         <entry key="..\:/Users/anfeg/Desktop/ShopU/app/src/main/res/layout/fragment_delivery_profile.xml" value="0.25" />
         <entry key="..\:/Users/anfeg/Desktop/ShopU/app/src/main/res/layout/fragment_establishment.xml" value="0.33" />
         <entry key="..\:/Users/anfeg/Desktop/ShopU/app/src/main/res/layout/fragment_home.xml" value="0.3632246376811594" />
         <entry key="..\:/Users/anfeg/Desktop/ShopU/app/src/main/res/layout/fragment_order_list.xml" value="0.3632246376811594" />
+        <entry key="..\:/Users/anfeg/Desktop/ShopU/app/src/main/res/layout/item_cart_restaurant.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/anfeg/Desktop/ShopU/app/src/main/res/layout/item_establishment.xml" value="0.2536231884057971" />
         <entry key="..\:/Users/anfeg/Desktop/ShopU/app/src/main/res/layout/item_orders.xml" value="0.33967391304347827" />
         <entry key="..\:/Users/anfeg/Desktop/ShopU/app/src/main/res/layout/item_product.xml" value="0.33" />
         <entry key="..\:/Users/anfeg/Desktop/ShopU/app/src/main/res/menu/bottom_delivery_nav_menu.xml" value="0.32447916666666665" />

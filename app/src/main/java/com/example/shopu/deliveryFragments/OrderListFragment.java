@@ -97,6 +97,7 @@ public class OrderListFragment extends Fragment {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if (snapshot.exists()) {
 
+                    orders.clear();
                     for (DataSnapshot ds : snapshot.getChildren()) {
 
                         Order order = ds.getValue(Order.class);
@@ -117,7 +118,5 @@ public class OrderListFragment extends Fragment {
         });
 
     }
-
-
 
 }

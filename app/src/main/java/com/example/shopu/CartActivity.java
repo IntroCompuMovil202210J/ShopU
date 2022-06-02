@@ -26,8 +26,7 @@ import java.util.HashMap;
 import java.util.List;
 
 public class CartActivity extends AppCompatActivity {
-    FirebaseAuth mAuth;
-    FirebaseDatabase db;
+
     Button btnOrder;
     ListView lstCartProducts;
     ProductCartAdapter adapter;
@@ -43,10 +42,7 @@ public class CartActivity extends AppCompatActivity {
         btnOrder = findViewById(R.id.btnOrder);
         lstCartProducts = (ListView) findViewById(R.id.lstCartProducts);
         adapter = new ProductCartAdapter(this, products);
-        navbar = findViewById(R.id.navbar);
         lstCartProducts.setAdapter(adapter);
-        mAuth = FirebaseAuth.getInstance();
-        db = FirebaseDatabase.getInstance();
 
         btnOrder.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -58,8 +54,8 @@ public class CartActivity extends AppCompatActivity {
         navbar.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                int itemClicked = item.getItemId();
 
+                int itemClicked = item.getItemId();
                 switch (itemClicked){
 
                     case R.id.home:
@@ -73,11 +69,13 @@ public class CartActivity extends AppCompatActivity {
     }
 
     private ArrayList<Product> loadProducts() {
+
         ArrayList<Product> returnList = new ArrayList<>();
         returnList.add(new Product("Hamburguesa", null, 20000));
         returnList.add(new Product("Hamburguesa", null, 20000));
         returnList.add(new Product("Hamburguesa", null, 20000));
         returnList.add(new Product("Hamburguesa", null, 20000));
+
         return returnList;
     }
 

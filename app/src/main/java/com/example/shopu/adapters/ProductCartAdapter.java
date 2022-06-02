@@ -5,11 +5,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 
 import com.example.shopu.R;
+import com.example.shopu.clientFragments.CartFragment;
 import com.example.shopu.model.Establishment;
 import com.example.shopu.model.Product;
 
@@ -34,9 +36,17 @@ public class ProductCartAdapter extends ArrayAdapter<Product> {
         // Lookup view for data population
         TextView txtPrice = (TextView) convertView.findViewById(R.id.txtPrice);
         TextView txtName = (TextView) convertView.findViewById(R.id.txtName);
+        Button remove = convertView.findViewById(R.id.buttonRemove);
 
         Product product = this.products.get(position);
-        // Populate the data into the template view using the data object
+
+        remove.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                CartFragment.itemsToCart.remove(position);
+            }
+        });
+
         txtName.setText(product.getName());
         txtPrice.setText(product.getPrice().toString());
 

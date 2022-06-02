@@ -21,6 +21,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.shopu.adapters.EstablishmentAdapter;
+import com.example.shopu.clientFragments.EstablishmentFragment;
 import com.example.shopu.enums.EstablishmentCategory;
 import com.example.shopu.model.Establishment;
 import com.google.android.gms.location.FusedLocationProviderClient;
@@ -49,6 +50,8 @@ public class HomeFragment extends Fragment {
     private ArrayList<Establishment> establishments;
     private FusedLocationProviderClient mFusedLocationClient;
     private ActivityResultLauncher<String> getSinglePermissionLocation;
+
+    Fragment establishmentFragment;
     Geocoder mGeocoder;
 
     private Double latitude = 0d;
@@ -99,6 +102,7 @@ public class HomeFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         root = inflater.inflate(R.layout.fragment_home, container, false);
 
+
         Context context = getActivity().getApplicationContext();
         Configuration.getInstance().load(context, PreferenceManager.getDefaultSharedPreferences(context));
 
@@ -141,22 +145,22 @@ public class HomeFragment extends Fragment {
     }
 
     public void onAllClicked() {
-        estAdapter = new EstablishmentAdapter(root.getContext(), establishments);
+        estAdapter = new EstablishmentAdapter(root.getContext(), establishments,establishmentFragment);
         gvwEstablishments.setAdapter(estAdapter);
     }
 
     private void onFeedingClicked() {
-        estAdapter = new EstablishmentAdapter(root.getContext(), filterEstablishments(establishments, EstablishmentCategory.FEEDING));
+        estAdapter = new EstablishmentAdapter(root.getContext(), filterEstablishments(establishments, EstablishmentCategory.FEEDING),establishmentFragment);
         gvwEstablishments.setAdapter(estAdapter);
     }
 
     public void onStationeryClicked() {
-        estAdapter = new EstablishmentAdapter(root.getContext(), filterEstablishments(establishments, EstablishmentCategory.STATIONERY));
+        estAdapter = new EstablishmentAdapter(root.getContext(), filterEstablishments(establishments, EstablishmentCategory.STATIONERY),establishmentFragment);
         gvwEstablishments.setAdapter(estAdapter);
     }
 
     public void onPharmacyClicked() {
-        estAdapter = new EstablishmentAdapter(root.getContext(), filterEstablishments(establishments, EstablishmentCategory.PHARMACY));
+        estAdapter = new EstablishmentAdapter(root.getContext(), filterEstablishments(establishments, EstablishmentCategory.PHARMACY),establishmentFragment);
         gvwEstablishments.setAdapter(estAdapter);
     }
 
@@ -169,7 +173,6 @@ public class HomeFragment extends Fragment {
             if (e.getCategory() == category) {
                 toReturn.add(e);
             }
-
         }
 
         return toReturn;
@@ -182,8 +185,9 @@ public class HomeFragment extends Fragment {
                     @Override
                     public void onActivityResult(Boolean result) {
                         if (result) {
+
                             loadEstablishments();
-                            estAdapter = new EstablishmentAdapter(root.getContext(), establishments);
+                            estAdapter = new EstablishmentAdapter(root.getContext(), establishments,establishmentFragment);
                             gvwEstablishments.setAdapter(estAdapter);
 
                         } else {
