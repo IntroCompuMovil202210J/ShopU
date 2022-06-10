@@ -170,7 +170,7 @@ public class HomeActivity extends AppCompatActivity {
                             gvwEstablishments.setAdapter(estAdapter);
 
                         } else {
-                            Toast.makeText(getApplicationContext(), "No location, no app. Bitch", Toast.LENGTH_LONG).show();
+                            Toast.makeText(getApplicationContext(), "Por favor da acceso a la localizacion", Toast.LENGTH_LONG).show();
                         }
                     }
                 });
